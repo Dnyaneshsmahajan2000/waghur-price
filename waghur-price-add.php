@@ -53,8 +53,10 @@ include 'header.php';
                                             <div>
                                                 <label for="placeholderInput" class="form-label"> Labour<span
                                                         class="text-danger">*</span></label>
+                                                        
                                                 <input type="number" step="0.01" class="form-control" name="labour"
                                                     placeholder="Enter lobour value" required>
+                                
                                             </div>
                                         </div>
 
@@ -98,7 +100,7 @@ include 'header.php';
                                 <!--end col-->
                                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 mt-4">
 
-                                    <button type="submit" class="btn btn-primary" style="">Submit</button>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </div>
 
