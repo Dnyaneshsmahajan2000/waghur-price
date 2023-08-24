@@ -115,6 +115,7 @@ $waghur_price=$database->select("waghur_price","*");
                                                                         data-bs-target="#deleteRecordModal"
                                                                         onClick="location.href = 'waghur-price-delete.php?wp_id=<?php echo $value['wp_id']; ?>';">Delete</button>
                                                             </div>
+                                                            
                                                            
                                                         </div>
                                                     </td>

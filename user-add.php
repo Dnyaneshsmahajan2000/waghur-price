@@ -45,9 +45,9 @@ include 'header.php';
                                     
                                 <div class="col-md-4">
                                         <div class="form-group">
-                                            <label> Name <span class="text-danger"></span></label>
-                                            <input type="text" name="name" id="name" class="form-control"
-                                                placeholder="Enter Your Name" required="">
+                                            <label> Name Of work <span class="text-danger"></span></label>
+                                            <input type="text" name="name_of_work" id="name" class="form-control"
+                                                placeholder="Enter Name of Work" required="">
                                         </div>
                                     </div>
                                     
@@ -55,8 +55,8 @@ include 'header.php';
 
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="group">Mobile No</label>
-                                            <input type="text" name="mobile_no" id="mobile_no" class="form-control"
+                                            <label for="group">Name of Agency</label>
+                                            <input type="text" name="name_of_agency" id="mobile_no" class="form-control"
                                                 placeholder="Entre Mobile No" required="">
                                         </div>
                                     </div>

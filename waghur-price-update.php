@@ -1,11 +1,22 @@
 <?php
 include 'header.php';
-//$class = $db->select("class", "*", ['deleted' => 0]);
-//$student_id = $_REQUEST['student_id'];
-//$category = $db->select("category", "*");
-//$division = $db->select("divisions", "*");
-?>
 
+$database = new Database();
+
+if (isset($_GET['wp_id']) && is_numeric($_GET['wp_id'])) {
+    $wp_id = $_GET['wp_id'];
+    $waghur_price = $database->get("waghur_price", "*", ["wp_id" => $wp_id]);
+
+    if (!$waghur_price) {
+        echo "Record not found.";
+        exit;
+    }
+} else {
+    echo "Invalid request.";
+    exit;
+}
+
+?>
 
 
 <div class="vertical-overlay"></div>
@@ -25,7 +36,7 @@ include 'header.php';
                 </div>
             </div>
             <!-- end page title -->
-            <form action="waghur-price-save.php" method="POST" enctype="multipart/form-data">
+            <form action="waghur-price-update-save.php" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
@@ -34,12 +45,14 @@ include 'header.php';
                                     <div class="row gy-4">
                                         <div>
                                             <div class="card-header bg-primary bg-primary">
-                                                <h5 class="text-white">Waghur Price</h5>
+                                                <h5 class="text-white"> Edit Waghur Price</h5>
                                             </div>
                                         </div>
                                         <!--<div class="row gutters">-->
                                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
                                             <!-- <div class="col-xxl-3 col-md-6"> -->
+                                            <input type="hidden" name="wp_id"
+                                                value="<?php echo $waghur_price['wp_id']; ?>">
                                             <div>
                                                 <label for="placeholderInput" class="form-label"> Month <span
                                                         class="text-danger">*</span></label>
@@ -53,8 +66,9 @@ include 'header.php';
                                             <div>
                                                 <label for="placeholderInput" class="form-label"> Labour<span
                                                         class="text-danger">*</span></label>
-                                                <input type="number" step="0.01" class="form-control" name="labour"
-                                                    placeholder="Enter lobour value" required>
+                                                <input type="text" class="form-control" id="labour" name="labour"
+                                                    value="<?php echo $waghur_price['labour']; ?>">
+
                                             </div>
                                         </div>
 
@@ -63,8 +77,9 @@ include 'header.php';
                                             <div>
                                                 <label for="placeholderInput" class="form-label"> Material <span
                                                         class="text-danger">*</span></label>
-                                                <input type="number" step="0.01" class="form-control" name="material"
-                                                    placeholder="Enter Material value" required>
+                                                <input type="text" class="form-control" id="material" name="material"
+                                                    value="<?php echo $waghur_price['material']; ?>">
+
                                             </div>
                                         </div>
 
@@ -72,24 +87,27 @@ include 'header.php';
                                             <div>
                                                 <label for="placeholderInput" class="form-label">POL<span
                                                         class="text-danger">*</span></label>
-                                                <input type="number" step="0.01" class="form-control" name="pol"
-                                                    placeholder="Enter POL value" required>
+                                                <input type="text" class="form-control" id="pol" name="pol"
+                                                    value="<?php echo $waghur_price['pol']; ?>">
+
                                             </div>
                                         </div>
                                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
                                             <div>
                                                 <label for="placeholderInput" class="form-label">Steel<span
                                                         class="text-danger">*</span></label>
-                                                <input type="number" step="0.01" class="form-control" name="steel"
-                                                    placeholder="Enter steel value" required>
+                                                <input type="text" class="form-control" id="steel" name="steel"
+                                                    value="<?php echo $waghur_price['steel']; ?>">
+
                                             </div>
                                         </div>
                                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
                                             <div>
                                                 <label for="placeholderInput" class="form-label">Cement<span
                                                         class="text-danger">*</span></label>
-                                                <input type="number" step="0.01" class="form-control" name="cement"
-                                                    placeholder="Enter cement value" required>
+                                                <input type="text" class="form-control" id="cement" name="cement"
+                                                    value="<?php echo $waghur_price['cement']; ?>">
+
                                             </div>
                                         </div>
 
@@ -98,7 +116,7 @@ include 'header.php';
                                 <!--end col-->
                                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 mt-4">
 
-                                    <button type="submit" class="btn btn-primary" style="">Submit</button>
+                                    <button type="submit" class="btn btn-primary" style="">Update</button>
                                 </div>
                             </div>
 

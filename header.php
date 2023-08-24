@@ -242,6 +242,28 @@ if($user['type']=='Admin'){
                                     </ul>
                                 </div>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link menu-link" href="#customers3" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="customers">
+                                    <i class=" ri-user-3-fill"></i> <span data-key="t-authentication">Price Escalation</span>
+                                </a>
+                                <div class="collapse menu-dropdown" id="customers3">
+                                    <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link collapsed" data-bs-target="#forms-nav" href="user-add.php">
+                                            <span>User Add</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link collapsed" data-bs-target="#forms-nav" href="users.php">
+                                            <span>Manage Users</span>
+                                        </a>
+                                    </li>
+
+                                        
+                                    </ul>
+                                </div>
+                            </li>
                             <?php }?>
                     
                             <li class="nav-item">
