@@ -44,7 +44,7 @@ include 'header.php';
                                                 <label for="placeholderInput" class="form-label"> Month <span
                                                         class="text-danger">*</span></label>
                                                 <input type="month" class="form-control" name="month"
-                                                       placeholder="Enter month" required>
+                                                       value="<?php echo date('Y-m'); ?>"placeholder="Enter month" required>
                                             </div>
                                         </div>
                                         <!-- <div class="col-xxl-3 col-md-6"> -->
