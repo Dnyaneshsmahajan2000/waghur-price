@@ -194,7 +194,7 @@ if (!isset($_SESSION['user_login'])) {
                         <ul class="navbar-nav" id="navbar-nav">
                            <li class="nav-item">
                                 <a class="nav-link menu-link" href="#customers" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="customers">
-                                    <i class=" ri-user-3-fill"></i> <span data-key="t-authentication">Masters</span>
+                                    <i class=" ri-user-3-fill"></i> <span data-key="t-authentication">Waghur Price</span>
                                 </a>
                                 <div class="collapse menu-dropdown" id="customers">
                                     <ul class="nav nav-sm flex-column">
@@ -202,8 +202,15 @@ if (!isset($_SESSION['user_login'])) {
 
                                     <li class="nav-item">
                                         <a class="nav-link collapsed" data-bs-target="#forms-nav"
-                                            href="add-subcategory.php">
-                                            <span>Category Level 3</span>
+                                            href="waghur-price-add.php">
+                                            <span>Add Price</span>
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="nav-item">
+                                        <a class="nav-link collapsed" data-bs-target="#forms-nav"
+                                            href="view-price.php">
+                                            <span>View Price</span>
                                         </a>
                                     </li>
                                     </ul>
