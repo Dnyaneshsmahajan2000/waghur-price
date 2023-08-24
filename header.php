@@ -1,11 +1,11 @@
 <?php
 session_start();
 include './inc/database.php';
-$user = $_SESSION['user'];
+$user = $_SESSION['user_login'];
 
 $db = $database = new Database();
 $id=$user['id'];
-if (!isset($_SESSION['user'])) {
+if (!isset($_SESSION['user_login'])) {
 
     header("location:login.php");
 

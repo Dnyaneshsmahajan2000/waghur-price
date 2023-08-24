@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
         if ($admin['is_deleted'] == 0) { {
 
                 //echo "admin";
-                $_SESSION['user'] = $admin;
+                $_SESSION['user_login'] = $admin;
                
                 header("location:home.php");
             }

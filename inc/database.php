@@ -47,7 +47,7 @@ class Database
 
                 $options = array(
                     'database_type' => 'mysql',
-                    'database_name' => 'akashenterprises',
+                    'database_name' => 'waghur_price',
                     'server' => 'localhost',
                     'username' => 'root',
                     'password' => '',
