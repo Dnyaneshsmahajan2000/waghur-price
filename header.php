@@ -199,18 +199,6 @@ if (!isset($_SESSION['user_login'])) {
                                 <div class="collapse menu-dropdown" id="customers">
                                     <ul class="nav nav-sm flex-column">
 
-                                    <li class="nav-item">
-                                        <a class="nav-link collapsed" data-bs-target="#forms-nav" href="add-group.php">
-                                            <span>Category Level 1</span>
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a class="nav-link collapsed" data-bs-target="#forms-nav"
-                                            href="add-category.php">
-                                            <span>Category Level 2</span>
-                                        </a>
-                                    </li>
 
                                     <li class="nav-item">
                                         <a class="nav-link collapsed" data-bs-target="#forms-nav"
@@ -248,96 +236,7 @@ if($user['type']=='Admin'){
                                 </div>
                             </li>
                             <?php }?>
-                        <li class="nav-item">
-                                <a class="nav-link menu-link" href="#customers4" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="customers">
-                                    <i class=" ri-user-3-fill"></i> <span data-key="t-authentication">Transacations</span>
-                                </a>
-                                <div class="collapse menu-dropdown" id="customers4">
-                                    <ul class="nav nav-sm flex-column">
-
-                                    <li class="nav-item">
-                                        <a class="nav-link collapsed" data-bs-target="#forms-nav" href="transacations-add.php">
-                                            <span>Add Transacation</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link collapsed" data-bs-target="#forms-nav" href="income-view.php">
-                                            <span>Income view</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link collapsed" data-bs-target="#forms-nav" href="expense-view.php">
-                                            <span>Expense View</span>
-                                        </a>
-                                    </li>
-                                   
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link menu-link" href="#customers5" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="customers">
-                                    <i class=" ri-user-3-fill"></i> <span data-key="t-authentication">Transfer</span>
-                                </a>
-                                <div class="collapse menu-dropdown" id="customers5">
-                                    <ul class="nav nav-sm flex-column">
-
-                                    <li class="nav-item">
-                                        <a class="nav-link collapsed" data-bs-target="#forms-nav" href="add-transfer.php">
-                                            <span>Transfer Add</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link collapsed" data-bs-target="#forms-nav" href="transfer-view.php">
-                                            <span>Transfer View</span>
-                                        </a>
-                                    </li>
-
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link menu-link" href="#customers6" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="customers">
-                                    <i class=" ri-user-3-fill"></i> <span data-key="t-authentication">Report</span>
-                                </a>
-                                <div class="collapse menu-dropdown" id="customers6">
-                                    <ul class="nav nav-sm flex-column">
-
-                                    <li class="nav-item">
-                                        <a class="nav-link collapsed" data-bs-target="#forms-nav"
-                                            href="report.php">
-                                            <span> Report</span>
-                                        </a>
-                                    </li>
-                               <?php if($user['type']=='Admin'){
-                                   ?> <li class="nav-item">
-                                        <a class="nav-link collapsed" data-bs-target="#forms-nav"
-                                            href="users-balance-report.php">
-                                            <span>Users Balance Report</span>
-                                        </a>
-                                    </li>
-                                   <?php } ?>
-                                    <li class="nav-item">
-                                        <a class="nav-link collapsed" data-bs-target="#forms-nav"
-                                            href="balance-report.php">
-                                            <span>Balance Report</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link collapsed" data-bs-target="#forms-nav"
-                                            href="transfer-report.php">
-                                            <span>Transfer Report</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link collapsed" data-bs-target="#forms-nav"
-                                            href="report-user-transacations.php">
-                                            <span>User Transacations Report</span>
-                                        </a>
-                                    </li>
-                                    
-                                    </ul>
-                                </div>
-                            </li>
+                    
                             <li class="nav-item">
                                 <a class="nav-link menu-link" href="#sidebarAuth" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarAuth">
                                     <i class="ri-settings-3-fill"></i> <span data-key="t-authentication">SETTINGS</span>
