@@ -25,7 +25,7 @@ include 'header.php';
                 </div>
             </div>
             <!-- end page title -->
-            <form action="student-admission-save.php" method="POST" enctype="multipart/form-data">
+            <form action="waghur-price-save.php" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
