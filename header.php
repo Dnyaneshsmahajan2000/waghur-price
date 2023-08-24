@@ -209,7 +209,7 @@ if (!isset($_SESSION['user_login'])) {
                                     
                                     <li class="nav-item">
                                         <a class="nav-link collapsed" data-bs-target="#forms-nav"
-                                            href="view-price.php">
+                                            href="waghur-price-view.php">
                                             <span>View Price</span>
                                         </a>
                                     </li>

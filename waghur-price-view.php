@@ -1,6 +1,7 @@
 <?php
 include 'header.php';
-
+$database= new Database();
+$waghur_price=$database->select("waghur_price","*");
 ?>
 <div class="main-content">
 
@@ -25,21 +26,14 @@ include 'header.php';
                                 <div class="row g-4 mb-3">
                                     <div class="col-sm-auto">
                                         <div>
-                                            <button type="button" onclick="location.href = 'student-admission.php';"
+                                            <button type="button" onclick="location.href = 'waghur-price-add.php';"
                                                     class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn"
                                                     data-bs-target="#showModal"><i
                                                     class="ri-add-line align-bottom me-1"></i> Add</button>
                                             
                                         </div>
                                     </div>
-                                    <div class="col-sm">
-                                        <div class="d-flex justify-content-sm-end">
-                                            <div class="search-box ms-2">
-                                                <input type="text" class="form-control search" placeholder="Search...">
-                                                <i class="ri-search-line search-icon"></i>
-                                            </div>
-                                        </div>
-                                    </div>
+                                 
                                 </div>
                                 <?php
                                 // $students = $db->select('admission', "*");
@@ -57,13 +51,14 @@ include 'header.php';
                                                 </th>
                                                 <th class="sort" data-sort="student_id">Sr. No.
                                                     &nbsp;&nbsp;&nbsp;&nbsp;</th>
-                                                <th class="sort" data-sort="student_name">Student Name</th>
-                                                <th class="sort" data-sort="class_id">Class Id&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <th class="sort" data-sort="month">Month-(1)</th>
+                                                <th class="sort" data-sort="labour">Labour-(2)&nbsp;&nbsp;&nbsp;&nbsp;
                                                 </th>
-                                                <th class="sort" data-sort="division_id">Division
-                                                    Id&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                                                <th class="sort" data-sort="gr-no">Gr-No&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                                                <th class="sort" data-sort="gender">Gender&nbsp;&nbsp;</th>
+                                                <th class="sort" data-sort="material">Material-(3)&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                                <th class="sort" data-sort="pol">POL-(4)&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                                <th class="sort" data-sort="steel">Steel-(5)&nbsp;&nbsp;</th>
+                                                <th class="sort" data-sort="cement">Cement-(6)&nbsp;&nbsp;</th>
+
                                                 <th class="sort" data-sort="action">Action</th>
                                             </tr>
                                         </thead>
@@ -71,9 +66,7 @@ include 'header.php';
                                             <tr>
                                                 <?php
                                                 $count = 1;
-                                                foreach ($admission as $value) {
-                                                    $class = $database->get("class", "*", ['class_id' => $value['class_id']]);
-                                                    $division = $database->get("divisions", "*", ['division_id' => $value['division_id']]);
+                                                foreach ($waghur_price as $value) {
                                                     ?>
                                                     <th scope="row">
                                                         <div class="form-check">
@@ -88,20 +81,23 @@ include 'header.php';
                                                         <?php echo $count++; ?>
                                                     </td>
                                                     <td class="customer_name">
-                                                        <?php echo $value['last_name'] . " " . $value['first_name'] . " " . $value['middle_name']; ?>
+                                                        <?php echo  $value['month']; ?>
                                                     </td>
 
                                                     <td class="customer_name">
-                                                        <?php echo $class['name']; ?>
+                                                        <?php echo $value['labour']; ?>
                                                     </td>
                                                     <td class="customer_name">
-                                                        <?php echo $division['division']; ?>
+                                                        <?php echo $value['material']; ?>
                                                     </td>
                                                     <td class="customer_name">
-                                                        <?php echo $value['gr_no']; ?>
+                                                        <?php echo $value['pol']; ?>
                                                     </td>
                                                     <td class="customer_name">
-                                                        <?php echo $value['gender']; ?>
+                                                        <?php echo $value['steel']; ?>
+                                                    </td>
+                                                    <td class="customer_name">
+                                                        <?php echo $value['cement']; ?>
                                                     </td>
 
 
@@ -109,7 +105,7 @@ include 'header.php';
                                                         <div class="d-flex gap-2">
                                                             <div class="edit">
                                                                 <button class="btn btn-sm btn-success edit-item-btn"
-                                                                        onClick="location.href = 'student-update.php?gr_id=<?php echo $value['gr_id']; ?>';"
+                                                                        onClick="location.href = 'waghur-price-update.php?wp_id=<?php echo $value['wp_id']; ?>';"
                                                                         data-bs-toggle="modal"
                                                                         data-bs-target="#showModal">Edit</button>
                                                             </div>
@@ -117,14 +113,9 @@ include 'header.php';
                                                                 <button class="btn btn-sm btn-danger remove-item-btn"
                                                                         data-bs-toggle="modal"
                                                                         data-bs-target="#deleteRecordModal"
-                                                                        onClick="location.href = 'student-delete.php?gr_id=<?php echo $value['gr_id']; ?>';">Delete</button>
+                                                                        onClick="location.href = 'waghur-price-delete.php?wp_id=<?php echo $value['wp_id']; ?>';">Delete</button>
                                                             </div>
-                                                            <div class="remove">
-                                                                <button class="btn btn-sm btn-primary remove-item-btn"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#deleteRecordModal"
-                                                                        onClick="location.href = 'student-view.php?gr_id=<?php echo $value['gr_id']; ?>';">View</button>
-                                                            </div>
+                                                           
                                                         </div>
                                                     </td>
 
