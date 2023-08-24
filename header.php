@@ -144,14 +144,14 @@ if (!isset($_SESSION['user_login'])) {
                                     <img class="rounded-circle header-profile-user" src="assets/images/users/user-dummy-img.jpg"
                                 alt="Header Avatar">
                                  <span class="text-start ms-xl-2">
-                                            <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text"> <?php echo $_SESSION['user']['name']; ?></span>
-                                            <span class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text"><?php echo ucwords($_SESSION['user']['type']); ?></span>
+                                            <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text"> <?php echo $_SESSION['user_login']['name']; ?></span>
+                                            <span class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text"><?php echo ucwords($_SESSION['user_login']['type']); ?></span>
                                         </span>
                                     </span>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <!-- item-->
-                                    <h6 class="dropdown-header">Welcome To <?php echo $_SESSION['user']['name']; ?></h6>
+                                    <h6 class="dropdown-header">Welcome To <?php echo $_SESSION['user_login']['name']; ?></h6>
                                         <a class="dropdown-item" href="logout.php"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-logout">Logout</span></a>
                                 </div>
                             </div>
