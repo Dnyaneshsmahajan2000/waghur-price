@@ -53,7 +53,7 @@ include 'header.php';
                                                 <label for="placeholderInput" class="form-label"> Labour<span
                                                         class="text-danger">*</span></label>
                                                 <input type="number" class="form-control" name="labour"
-                                                       placeholder="Enter lobour value" required>
+                                                min="0" step="0.01"        placeholder="Enter lobour value" required>
                                             </div>
                                         </div>
 
