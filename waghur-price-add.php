@@ -66,8 +66,7 @@ include 'header.php';
                                                        placeholder="Enter Material value" required>
                                             </div>
                                         </div>
-                                    </div>
-
+                                 
                                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
                                             <div>
                                                 <label for="placeholderInput" class="form-label">POL<span
@@ -93,15 +92,15 @@ include 'header.php';
                                         </div>
                                     </div>
                                     <!--end col-->
-                                    
-]                                           
+                                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 mt-4">
+
+<button type="submit" class="btn btn-primary"
+        style="">Submit</button>
+</div>
+                                </div>
                                            
 
-                                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 mt-4">
-
-                                                    <button type="submit" class="btn btn-primary"
-                                                            style="">Submit</button>
-                                                </div>
+                                               
 
                                             </div>
 
@@ -123,53 +122,6 @@ include 'header.php';
 
                 </div> <!-- container-fluid -->
         </div><!-- End Page-content -->
-        <script>
-            $(document).ready(function () {
-                $("#cat_id").on('change', function () {
-                    $("#class_id").load("getclasses.php", {cat_id: $(this).val(), format: 'option'});
-
-                });
-                $("#class_id").on('change', function () {
-                    $("#division_id").load("getDivisions.php", {class_id: $(this).val(), format: 'option'});
-
-                });
-                $("#division_id").on('change', function () {
-                    var cat_id = $("#cat_id").val();
-                    var class_id = $("#class_id").val();
-                    var division_id = $("#division_id").val();
-                    //            $("#student_id").load("getstudents.php", {division_id: division_id, class_id: class_id});
-                });
-            });
-        </script>
-
-
-        <!--
-        <script>
-            $(document).ready(function () {
-        //        $("#class_id").change(function () {
-        //            var class_id = $(this).val();
-        
-                $("#cat_id").change(function () {
-                    var cat_id = $(this).val();
-        
-                    $(".class").hide();
-                    $(".division").hide();
-        //            $("first_name").$("middle_name").$("last_name") hide();
-        
-                    $(".student").hide();
-        //            $(".class-" + class_id).show();
-                    $(".cat_id-" + cat_id).show();
-        
-        //            $(".student").hide();
-        //            $(".division-" + division_id).show();
-        
-        
-                });
-        
-        
-               });
-        </script>-->
-
         <?php
         include 'footer.php';
         ?>
