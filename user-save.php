@@ -18,10 +18,6 @@ if ($admin) {
 } else {
     echo "<script>alert('Oops', ' While Adding User!');
          echo window.location='user-add.php';</script>";
-
-
-
-
 }
 
 ?>

@@ -37,17 +37,17 @@ include 'header.php';
                     <div class="col-lg-12">
 
                         <div class="card">
-                            <div class="card-header">
-                                <h5>user Information</h5>
+                            <div class="card-header bg-primary bg-primary">
+                                <h5 class="text-white">User Information</h5>
                             </div>
                             <div class="card-body">
                                 <div class="row gy-3">
                                     
                                 <div class="col-md-4">
                                         <div class="form-group">
-                                            <label> Name Of work <span class="text-danger"></span></label>
-                                            <input type="text" name="name_of_work" id="name" class="form-control"
-                                                placeholder="Enter Name of Work" required="">
+                                            <label> Name <span class="text-danger"></span></label>
+                                            <input type="text" name="name" id="name" class="form-control"
+                                                placeholder="Enter Your Name " required="">
                                         </div>
                                     </div>
                                     
@@ -55,17 +55,17 @@ include 'header.php';
 
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="group">Name of Agency</label>
-                                            <input type="text" name="name_of_agency" id="mobile_no" class="form-control"
-                                                placeholder="Entre Mobile No" required="">
+                                            <label for="group"> Mobile Number</label>
+                                            <input type="text" name="mobile_no" id="mobile_no" class="form-control"
+                                                placeholder="Enter Mobile No" required="">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="group">Password</label>
-                                            <input type="text" name="password" id="password" class="form-control"
-                                                placeholder="Entre Password" required="">
+                                            <input type="passwordt" name="password" id="password" class="form-control"
+                                                placeholder="Enter Password" required="">
                                         </div>
                                     </div>
 

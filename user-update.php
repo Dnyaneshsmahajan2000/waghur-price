@@ -41,7 +41,7 @@ $user = $database->select("users", "*", ['id' => $id])[0];
                                         <input type="hidden" class="form-control" id="placeholderInput" name="user_id"
                                             value="<?php echo $user['id']; ?>">
 
-                                        <!--end col-->
+                                        <!-- end of -->
                                         <div class="col-xxl-3 col-md-4">
                                             <div>
                                                 <label for="placeholderInput" class="form-label">Name<span

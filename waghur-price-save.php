@@ -1,6 +1,7 @@
 <?php
 
 include './inc/database.php';
+
 $database= new Database();
 $data['month'] = $_POST['month'];
 $data['labour'] = $_POST['labour'];
@@ -16,11 +17,12 @@ $waghur_price = $database->insert("waghur_price", $data);
 
 if ($waghur_price) {
 
-    echo "<script> alert('Data Inserted Successfully !'); window.location=student-admission.php;</script>";
+    echo "<script> alert('Data Inserted Successfully !');</script>";
+    header("Location:waghur-price-view.php");
 
 } else {
-   echo "<script> alert('Data Failed to inserted !'); window.location=student-admission.php;</script>";
-
+   echo "<script> alert('Data Failed to inserted !');</script>";
+    header("Location:waghur-price-add.php");
 }
 ?>
 

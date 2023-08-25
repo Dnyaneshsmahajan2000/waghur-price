@@ -20,7 +20,7 @@ include 'header.php';
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Add Student | <a href="students.php">View All Students</a></h4>
+                        <h4 class="mb-sm-0">Add Price | <a href="students.php">View Waghur Price</a></h4>
                     </div>
                 </div>
             </div>
@@ -53,10 +53,10 @@ include 'header.php';
                                             <div>
                                                 <label for="placeholderInput" class="form-label"> Labour<span
                                                         class="text-danger">*</span></label>
-                                                        
+
                                                 <input type="number" step="0.01" class="form-control" name="labour"
                                                     placeholder="Enter lobour value" required>
-                                
+
                                             </div>
                                         </div>
 
@@ -98,15 +98,14 @@ include 'header.php';
                                     </div>
                                 </div>
                                 <!--end col-->
-                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 mt-4">
 
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
                             </div>
+                        </div>
 
-
-
-
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <input type="submit" value="submit" name="submit" class="btn btn-primary mb-4">
+                            </div>
                         </div>
 
 

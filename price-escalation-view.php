@@ -1,7 +1,7 @@
 <?php
 include 'header.php';
 $database= new Database();
-$waghur_price=$database->select("waghur_price","*");
+$price_escalation=$database->select("price_escalation","*");
 ?>
 <div class="main-content">
 
@@ -18,7 +18,11 @@ $waghur_price=$database->select("waghur_price","*");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title mb-0">View All Prices</h4>
+            
+                            <div class="card-header bg-primary bg-primary">
+                                                <h5 class="text-white"> View All Price Escalation Information</h5>
+                                        
+                            </div>
                         </div><!-- end card header -->
 
                         <div class="card-body">
@@ -26,10 +30,10 @@ $waghur_price=$database->select("waghur_price","*");
                                 <div class="row g-4 mb-3">
                                     <div class="col-sm-auto">
                                         <div>
-                                            <button type="button" onclick="location.href = 'waghur-price-add.php';"
+                                            <button type="button" onclick="location.href = 'price-escalation-add.php';"
                                                     class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn"
                                                     data-bs-target="#showModal"><i
-                                                    class="ri-add-line align-bottom me-1"></i> Add</button>
+                                                    class="ri-add-line align-bottom me-1"></i> Add Price Escalation</button>
                                             
                                         </div>
                                     </div>
@@ -51,13 +55,19 @@ $waghur_price=$database->select("waghur_price","*");
                                                 </th>
                                                 <th class="sort" data-sort="student_id">Sr. No.
                                                     &nbsp;&nbsp;&nbsp;&nbsp;</th>
-                                                <th class="sort" data-sort="month">Month-(1)</th>
-                                                <th class="sort" data-sort="labour">Labour-(2)&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <th class="sort" data-sort="name_of_work">Name of Work</th>
+                                                <th class="sort" data-sort="name_of_agency">Name of Agency &nbsp;&nbsp;&nbsp;&nbsp;
                                                 </th>
-                                                <th class="sort" data-sort="material">Material-(3)&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                                                <th class="sort" data-sort="pol">POL-(4)&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                                                <th class="sort" data-sort="steel">Steel-(5)&nbsp;&nbsp;</th>
-                                                <th class="sort" data-sort="cement">Cement-(6)&nbsp;&nbsp;</th>
+                                                <th class="sort" data-sort="agreement_no"> Agreement No. &nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                                <th class="sort" data-sort="sub_division">Sub-Division &nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                                <th class="sort" data-sort="authority">Authority &nbsp;&nbsp;</th>
+                                                <th class="sort" data-sort="dateofreceiptof_tendor">Date of receipt of tendor &nbsp;&nbsp;</th>
+                                                <th class="sort" data-sort="dateofwork_order">Date of work order &nbsp;&nbsp;</th>
+                                                <th class="sort" data-sort="sroc">Star Rate of Cement Rs. &nbsp;&nbsp;</th>
+                                                <th class="sort" data-sort="sros">Star Rate of Steel Rs. &nbsp;&nbsp;</th>
+                                                <th class="sort" data-sort="labour">Labour &nbsp;&nbsp;</th>
+                                                <th class="sort" data-sort="material">Material &nbsp;&nbsp;</th>
+                                                <th class="sort" data-sort="pol">POL &nbsp;&nbsp;</th>
 
                                                 <th class="sort" data-sort="action">Action</th>
                                             </tr>
@@ -66,7 +76,7 @@ $waghur_price=$database->select("waghur_price","*");
                                             <tr>
                                                 <?php
                                                 $count = 1;
-                                                foreach ($waghur_price as $value) {
+                                                foreach ($price_escalation as $value) {
                                                     ?>
                                                     <th scope="row">
                                                         <div class="form-check">
@@ -75,29 +85,49 @@ $waghur_price=$database->select("waghur_price","*");
                                                         </div>
                                                     </th>
 
-                                                    <td class="id" style="display:none;"><a href="javascript:void(0);"
-                                                                                            class="fw-medium link-primary">#VZ2101</a></td>
+                                                    <td class="id" style="display:none;">
+                                                        <a href="javascript:void(0);"
+                                                        class="fw-medium link-primary">#VZ2101</a></td>
                                                     <td class="customer_name">
                                                         <?php echo $count++; ?>
                                                     </td>
                                                     <td class="customer_name">
-                                                        <?php echo $value['month'] ?>
+                                                        <?php echo  $value['name_of_work']; ?>
                                                     </td>
 
+                                                    <td class="customer_name">
+                                                        <?php echo $value['name_of_agency']; ?>
+                                                    </td>
+                                                    <td class="customer_name">
+                                                        <?php echo $value['agreement_no']; ?>
+                                                    </td>
+                                                    <td class="customer_name">
+                                                        <?php echo $value['sub_division']; ?>
+                                                    </td>
+                                                    <td class="customer_name">
+                                                        <?php echo $value['authority']; ?>
+                                                    </td>
+
+                                                    <td class="customer_name">
+                                                        <?php echo  $value['dateofreceiptof_tendor']; ?>
+                                                    </td>
+
+                                                    <td class="customer_name">
+                                                        <?php echo $value['dateofwork_order']; ?>
+                                                    </td>
+                                                    <td class="customer_name">
+                                                        <?php echo $value['sroc']; ?>
+                                                    </td>
+                                                    <td class="customer_name">
+                                                        <?php echo $value['sros']; ?>
+                                                    </td>
                                                     <td class="customer_name">
                                                         <?php echo $value['labour']; ?>
                                                     </td>
                                                     <td class="customer_name">
                                                         <?php echo $value['material']; ?>
-                                                    </td>
-                                                    <td class="customer_name">
+                                                    </td> <td class="customer_name">
                                                         <?php echo $value['pol']; ?>
-                                                    </td>
-                                                    <td class="customer_name">
-                                                        <?php echo $value['steel']; ?>
-                                                    </td>
-                                                    <td class="customer_name">
-                                                        <?php echo $value['cement']; ?>
                                                     </td>
 
 
@@ -105,7 +135,7 @@ $waghur_price=$database->select("waghur_price","*");
                                                         <div class="d-flex gap-2">
                                                             <div class="edit">
                                                                 <button class="btn btn-sm btn-success edit-item-btn"
-                                                                        onClick="location.href = 'waghur-price-update.php?wp_id=<?php echo $value['wp_id']; ?>';"
+                                                                        onClick="location.href = 'price-escalation-update.php?pe_id=<?php echo $value['pe_id']; ?>';"
                                                                         data-bs-toggle="modal"
                                                                         data-bs-target="#showModal">Edit</button>
                                                             </div>
@@ -113,7 +143,7 @@ $waghur_price=$database->select("waghur_price","*");
                                                                 <button class="btn btn-sm btn-danger remove-item-btn"
                                                                         data-bs-toggle="modal"
                                                                         data-bs-target="#deleteRecordModal"
-                                                                        onClick="location.href = 'waghur-price-delete.php?wp_id=<?php echo $value['wp_id']; ?>';">Delete</button>
+                                                                        onClick="location.href = 'price-escalation-delete.php?pe_id=<?php echo $value['pe_id']; ?>';">Delete</button>
                                                             </div>
                                                             
                                                            
@@ -160,8 +190,6 @@ $waghur_price=$database->select("waghur_price","*");
         </div>
     </div>
 </div>
-
-
 
 <?php
 include 'footer.php';

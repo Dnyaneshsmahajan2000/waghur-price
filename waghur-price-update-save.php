@@ -1,5 +1,6 @@
 <?php
-include 'header.php';
+include './inc/database.php';
+
 
 $database = new Database();
 
