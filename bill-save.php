@@ -1,0 +1,26 @@
+<?php
+
+include './inc/database.php';
+
+$database= new Database();
+$data['name_of_work'] = $_POST['name_of_work'];
+$data['dateof_measurement'] = $_POST['dateof_measurement'];
+$data['total_amount'] = $_POST['total_amount'];
+$data['quantity_cement'] = $_POST['quantity_cement'];
+$data['quantity_steel'] = $_POST['quantity_steel'];
+
+$bill = $database->insert("bills", $data);
+
+if ($bill) {
+
+    echo "<script> alert('Data Inserted Successfully !');</script>";
+    header("Location:bill-view.php");
+
+} else {
+   echo "<script> alert('Data Failed to inserted !');</script>";
+    header("Location:bill-add.php");
+}
+?>
+
+
+

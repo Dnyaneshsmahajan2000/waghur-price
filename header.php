@@ -209,9 +209,7 @@ date_default_timezone_set("asia/kolkata");
                 </button>
             </div>
 
-            <?php
-            if ($user['type'] == 'Admin') {
-                ?>
+           
 
                 <div id="scrollbar" style="margin-top:-45px;">
                     <div class="container-fluid">
@@ -221,7 +219,7 @@ date_default_timezone_set("asia/kolkata");
                             <li class="nav-item">
                                 <a class="nav-link menu-link" href="#customers" data-bs-toggle="collapse" role="button"
                                     aria-expanded="false" aria-controls="customers">
-                                    <i class=" ri-user-3-fill"></i> <span data-key="t-authentication">Waghur Price</span>
+                                    <i class=" ri-user-3-fill"></i> <span data-key="t-authentication">Users</span>
                                 </a>
                                 <div class="collapse menu-dropdown" id="customers">
                                     <ul class="nav nav-sm flex-column">
@@ -229,37 +227,39 @@ date_default_timezone_set("asia/kolkata");
 
                                         <li class="nav-item">
                                             <a class="nav-link collapsed" data-bs-target="#forms-nav"
-                                                href="waghur-price-add.php">
-                                                <span>Add Price</span>
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a class="nav-link collapsed" data-bs-target="#forms-nav"
-                                                href="waghur-price-view.php">
-                                                <span>View Price</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-
-
-                            <li class="nav-item">
-                                <a class="nav-link menu-link" href="#customers3" data-bs-toggle="collapse" role="button"
-                                    aria-expanded="false" aria-controls="customers">
-                                    <i class=" ri-user-3-fill"></i> <span data-key="t-authentication">Users</span></a>
-                                <div class="collapse menu-dropdown" id="customers3">
-                                    <ul class="nav nav-sm flex-column">
-                                        <li class="nav-item">
-                                            <a class="nav-link collapsed" data-bs-target="#forms-nav" href="user-add.php">
+                                                href="user-add.php">
                                                 <span>Add User</span>
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a class="nav-link collapsed" data-bs-target="#forms-nav" href="users.php">
+                                            <a class="nav-link collapsed" data-bs-target="#forms-nav"
+                                                href="users.php">
                                                 <span>Manage Users</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <?php
+            if ($user['type'] == 'Admin') {
+                ?>
+                            <li class="nav-item">
+                                <a class="nav-link menu-link" href="#customers2" data-bs-toggle="collapse" role="button"
+                                    aria-expanded="false" aria-controls="customers">
+                                    <i class=" ri-user-3-fill"></i> <span data-key="t-authentication">Price Escalation</span></a>
+                                <div class="collapse menu-dropdown" id="customers2">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link collapsed" data-bs-target="#forms-nav" href="price-escalation-add.php">
+                                                <span>Add Price Escalation</span>
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link collapsed" data-bs-target="#forms-nav" href="price-escalation-view.php">
+                                                <span>View All Price Escalations</span>
                                             </a>
                                         </li>
 
@@ -270,21 +270,44 @@ date_default_timezone_set("asia/kolkata");
                             <li class="nav-item">
                                 <a class="nav-link menu-link" href="#customers3" data-bs-toggle="collapse" role="button"
                                     aria-expanded="false" aria-controls="customers">
-                                    <i class=" ri-user-3-fill"></i> <span data-key="t-authentication">Price
-                                        Escalation</span></a>
+                                    <i class=" ri-user-3-fill"></i> <span data-key="t-authentication"> Project-1</span></a>
                                 <div class="collapse menu-dropdown" id="customers3">
                                     <ul class="nav nav-sm flex-column">
                                         <li class="nav-item">
                                             <a class="nav-link collapsed" data-bs-target="#forms-nav"
-                                                href="price-escalation-add.php">
-                                                <span>Add Price Escalation</span>
+                                                href="project-1-add.php">
+                                                <span>Add Project</span>
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
                                             <a class="nav-link collapsed" data-bs-target="#forms-nav"
-                                                href="price-escalation-view.php">
-                                                <span>View Price Escalation</span>
+                                                href="project-1-view.php">
+                                                <span>View All Projects</span>
+                                            </a>
+                                        </li>
+
+
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link menu-link" href="#customers4" data-bs-toggle="collapse" role="button"
+                                    aria-expanded="false" aria-controls="customers">
+                                    <i class=" ri-user-3-fill"></i> <span data-key="t-authentication"> Bills</span></a>
+                                <div class="collapse menu-dropdown" id="customers4">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link collapsed" data-bs-target="#forms-nav"
+                                                href="bill-add.php">
+                                                <span>Add Bill</span>
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link collapsed" data-bs-target="#forms-nav"
+                                                href="bill-view.php">
+                                                <span>View All Bills</span>
                                             </a>
                                         </li>
 
@@ -326,6 +349,15 @@ date_default_timezone_set("asia/kolkata");
         </div>
     </div>
 </body>
+
+
+<script>
+            function delete_confirm() {
+                return confirm('Are you sure you want to delete this Record.');
+            }
+        </script>
+    </script>
+
 
 </html>
 <!-- Left Sidebar End -->

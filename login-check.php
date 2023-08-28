@@ -26,7 +26,7 @@ $userData = $database->get(
 if ($userData) {
     //echo "<script>alert('User Found')</script>";
     $_SESSION['user_login'] = $userData;
-   var_dump($_SESSION['user_login']);
+    var_dump($_SESSION['user_login']);
     echo "<script>alert('Login Successfully')</script>";
     echo "<script>window.location='index.php'</script>";
 

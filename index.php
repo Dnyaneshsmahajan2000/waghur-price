@@ -244,18 +244,11 @@ $message = get_time_greeting();
                             </div>
                                
                             <?php   }?>
-
-                            
                             <!-- end col -->
                         </div> <!-- end row-->
-
-
-                
+                    </div>
+                </div><!-- container-fluid -->
             </div>
-
-        </div>
-        <!-- container-fluid -->
-    </div>
     <!-- End Page-content -->
 
     
