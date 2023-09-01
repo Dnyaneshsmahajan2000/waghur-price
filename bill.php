@@ -1,3 +1,26 @@
+<?php
+
+session_start();
+include './inc/database.php';
+
+$database = new Database();
+
+if (isset($_GET['p1_id']) && is_numeric($_GET['p1_id'])) {
+    $p1_id = $_GET['p1_id'];
+    $project_1 = $database->get("project_1", "*", ["p1_id" => $p1_id]);
+
+    if (!$project_1) {
+        echo "Record not found.";
+        exit;
+    }
+} else {
+    echo "Invalid request.";
+    exit;
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,17 +97,29 @@
 <body>
     <h4>Price Escalation Statement</h4>
 
+    <?php
+
+    $p1_id = $_GET['p1_id'];
+    $project_1 = $database->get("project_1", "*", ["p1_id" => $p1_id]);
+
+    ?>
+
     <div class="container mt-3">
         <div class="row">
-            <div class="col-lg-9">
-                <strong>Name of Division: </strong><br>
-                <strong>Name of Work:</strong><br>
-                <strong>Name of Agency:</strong> Agency Name <br>
-                <strong>Agreement No:</strong> Agreement Number
+            <div class="col-lg-7">
+                <strong>Name of Division: </strong> Waghur Dam Division, Jalgaon <br>
+                <strong>Name of Work:</strong>
+                <?php echo $project_1['name_of_work']; ?><br>
+                <strong>Name of Agency:</strong>
+                <?php echo $project_1['name_of_agency']; ?> <br>
+                <strong>Agreement No:</strong>
+                <?php echo $project_1['agreement_no']; ?>
             </div>
             <div class="col">
-                <strong>Sub-Division:</strong><br>
+                <strong>Sub-Division:</strong>
+                <?php echo $project_1['sub_division']; ?><br>
                 <strong>Authority:</strong>
+                <?php echo $project_1['authority']; ?>
 
             </div>
         </div>
@@ -98,10 +133,10 @@
                 <table style="border: 1px solid black; ">
                     <tr>
                         <td>
-                            <strong>Date of receipt of tendor: </strong><br>
+                            <strong>Date of receipt of tendor: </strong> <br>
                         </td>
                         <td>
-                            13-Aug-21
+                            <?php echo $project_1['dateofreceiptof_tendor']; ?>
                         </td>
                     </tr>
                     <tr>
@@ -109,21 +144,23 @@
                             <strong>Date of work order </strong><br>
                         </td>
                         <td>
-                            30-Sep-21
+                            <?php echo $project_1['dateofwork_order']; ?>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <strong>Date of receipt of tendor: </strong>
+                            <strong>Star Rate of Cement Rs.: </strong>
                         </td>
-                        <td>4140</td>
+                        <td>
+                            <?php echo $project_1['sroc']; ?>
+                        </td>
                     </tr>
                     <tr>
                         <td>
-                            <strong>Date of receipt of tendor: </strong><br>
+                            <strong>Star Rate of Steel Rs.: </strong><br>
                         </td>
                         <td>
-                            50220
+                            <?php echo $project_1['sros']; ?>
                         </td>
                     </tr>
                 </table>
@@ -141,30 +178,48 @@
                         <th>Cement</th>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>May-21</td>
-                            <td>384</td>
-                            <td>132.9</td>
-                            <td>90.13</td>
-                            <td>130.9</td>
-                            <td>117.3</td>
-                        </tr>
-                        <tr>
-                            <td>Jun-21</td>
-                            <td>5646</td>
-                            <td>656</td>
-                            <td>66</td>
-                            <td>6526</td>
-                            <td>233</td>
-                        </tr>
-                        <tr>
-                            <td>Jul-21</td>
-                            <td>6456</td>
-                            <td>6151</td>
-                            <td>515</td>
-                            <td>84</td>
-                            <td>545</td>
-                        </tr>
+
+                        <?php
+
+                        $endDate =  $project_1['dateofreceiptof_tendor'];
+                            
+                        $startDate = date('M-Y', strtotime('-3 months', strtotime($endDate)));
+
+                        // Fetch data within the date range
+                        $data = $database->select('price_escalation', '*', [
+                            'month' => [$startDate, $endDate]
+                        ]);
+
+                        // Print or process the fetched data
+                        foreach ($data as $row) {
+                            ?>
+                            <tr>
+                                <td>
+                                    <?php echo $project_1['month']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $project_1['labour']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $project_1['material']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $project_1['pol']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $project_1['steel']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $project_1['cement']; ?>
+                                </td>
+                            </tr>
+
+
+                            <?php
+                            // Process each row of data here
+                            echo " lobour: " . $row['name'] . ", Date: " . $row['date_column'] . "<br>";
+                        }
+                        ?>
                         <tr>
                             <th>Av.Index</th>
                             <th>386.50</th>

@@ -129,6 +129,11 @@ $project_1 = $database->select("project_1", "*", ['is_deleted' => 0]);
                                                     
                                                                 
                                                 </div>
+                                                <div class="print">
+                                                    <button class="btn btn-sm btn-info edit-item-btn"
+                                                        onClick="location.href = 'bill.php?p1_id=<?php echo $value['p1_id']; ?>';"
+                                                        data-bs-toggle="modal" data-bs-target="#showModal">Print</button>
+                                                </div>
 
 
                                             </div>
