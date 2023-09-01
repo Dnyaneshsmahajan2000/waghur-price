@@ -3,16 +3,16 @@
 include './inc/database.php';
 
 $database= new Database();
-$data['month'] = $_POST['month'];
-$data['labour'] = $_POST['labour'];
-$data['material'] = $_POST['material'];
-$data['pol'] = $_POST['pol'];
- $data['steel'] = $_POST['steel'];
- $data['cement'] = $_POST['cement'];
+$data['month'] = $_REQUEST['month']."-00";
+$data['labour'] = $_REQUEST['labour'];
+$data['material'] = $_REQUEST['material'];
+$data['pol'] = $_REQUEST['pol'];
+ $data['steel'] = $_REQUEST['steel'];
+ $data['cement'] = $_REQUEST['cement'];
 
-$month = date('M-Y', strtotime($data['month']));
+//$month = date('M-Y', strtotime($data['month']));
 
-$data['month'] = "$year $month"; 
+//$data['month'] = "$year $month"; 
 $price_escalation = $database->insert("price_escalation", $data);
 
 if ($price_escalation) {

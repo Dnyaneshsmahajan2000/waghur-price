@@ -17,8 +17,31 @@ if (isset($_GET['p_id']) && is_numeric($_GET['p_id'])) {
     echo "Invalid request.";
     exit;
 }
+function getLastThreeMonths($givenDate)
+{
+    // Convert the given date to a DateTime object
+    $date = new DateTime($givenDate);
 
+    // Initialize an array to store the last three months
+    $lastThreeMonths = array();
 
+    // Loop to get the last three months
+    for ($i = 0; $i < 3; $i++) {
+        // Subtract one month from the current date
+        $date->modify('-1 month');
+
+        // Get the year and month in "Y-m-00" format
+        $yearMonth = $date->format('Y-m-00');
+
+        // Add the result to the array
+        $lastThreeMonths[] = $yearMonth;
+    }
+
+    // Return the array of last three months
+    return $lastThreeMonths;
+}
+
+// Example usage:
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +74,7 @@ if (isset($_GET['p_id']) && is_numeric($_GET['p_id'])) {
             margin: 2%;
         }
 
-        .pad td {
+        td {
             padding: 5px;
         }
 
@@ -97,13 +120,6 @@ if (isset($_GET['p_id']) && is_numeric($_GET['p_id'])) {
 <body>
     <h4>Price Escalation Statement</h4>
 
-    <?php
-
-    $p_id = $_GET['p_id'];
-    $project = $database->get("project", "*", ["p_id" => $p_id]);
-
-    ?>
-
     <div class="container mt-3">
         <div class="row">
             <div class="col-lg-7">
@@ -136,27 +152,8 @@ if (isset($_GET['p_id']) && is_numeric($_GET['p_id'])) {
                             <strong>Date of receipt of tendor: </strong> <br>
                         </td>
                         <td>
-                            <?php echo $project['date_receipt_tender'];
-                          $dateString = $project['date_receipt_tender'];
-                          $date = new DateTime($dateString);
-                          
-                          $months = array();
-                          
-                          $date->modify('-1 month');
-                          
-                          for ($i = 0; $i < 3; $i++) {
-                              $monthName = $date->format('F-Y');
-                              
-                              $months[] = $monthName;
-                          
-                              $date->modify('-1 month');
-                          }
-                          
-                          $months = array_reverse($months);
-                          
-                          foreach ($months as $month) {
-                              echo "$month";
-                          }
+                            <?php
+                                echo date("d-M-y", strtotime($project['date_receipt_tender'])); 
                             ?>
                         </td>
                     </tr>
@@ -201,63 +198,69 @@ if (isset($_GET['p_id']) && is_numeric($_GET['p_id'])) {
                     <tbody>
 
                         <?php
+                        $givenDate = $project['date_receipt_tender']; // Replace with your desired date
+                        $lastThreeMonths = getLastThreeMonths($givenDate);
+                        $data = $database->select("price_escalation", "*", ['month' => $lastThreeMonths]);
 
-                        $endDate =  $project['date_receipt_tender'];
-                            
-                        $startDate = date('M-Y', strtotime('-3 months', strtotime($endDate)));
+                        $rowCount = count($data);
 
-                        // Fetch data within the date range
-                        $data = $database->select('price_escalation', '*', [
-                            'month' => [$startDate, $endDate]
-                        ]);
+                        $labourSum = 0;
+                        $materialSum = 0;
+                        $polSum = 0;
+                        $steelSum = 0;
+                        $cementSum = 0;
 
-                        // Print or process the fetched data
                         foreach ($data as $row) {
-                            ?>
-                            <tr>
-                                <td>
-                                    <?php echo $project['month']; ?>
-                                </td>
-                                <td>
-                                    <?php echo $project['labour']; ?>
-                                </td>
-                                <td>
-                                    <?php echo $project['material']; ?>
-                                </td>
-                                <td>
-                                    <?php echo $project['pol']; ?>
-                                </td>
-                                <td>
-                                    <?php echo $project['steel']; ?>
-                                </td>
-                                <td>
-                                    <?php echo $project['cement']; ?>
-                                </td>
-                            </tr>
+                            $formattedMonth = date("M-Y", strtotime($row['month'])); // Format the month
+                            echo '<tr>';
+                            echo '<td>' . $formattedMonth . '</td>';
+                            echo '<td>' . $row['labour'] . '</td>';
+                            echo '<td>' . $row['material'] . '</td>';
+                            echo '<td>' . $row['pol'] . '</td>';
+                            echo '<td>' . $row['steel'] . '</td>';
+                            echo '<td>' . $row['cement'] . '</td>';
+                            echo '</tr>';
 
-
-                            <?php
-                            // Process each row of data here
-                            echo " lobour: " . $row['name'] . ", Date: " . $row['date_column'] . "<br>";
+                            $labourSum += $row['labour'];
+                            $materialSum += $row['material'];
+                            $polSum += $row['pol'];
+                            $steelSum += $row['steel'];
+                            $cementSum += $row['cement'];
                         }
+
+                        $labourAvg = $rowCount > 0 ? round($labourSum / $rowCount, 2) : 0;
+                        $materialAvg = $rowCount > 0 ? round($materialSum / $rowCount, 2) : 0;
+                        $polAvg = $rowCount > 0 ? round($polSum / $rowCount, 2) : 0;
+                        $steelAvg = $rowCount > 0 ? round($steelSum / $rowCount, 2) : 0;
+                        $cementAvg = $rowCount > 0 ? round($cementSum / $rowCount, 2) : 0;
+
+                        echo '<tr>';
+                        echo '<th>Av.Index</th>';
+                        echo '<th>' . $labourAvg . '</th>';
+                        echo '<th>' . $materialAvg . '</th>';
+                        echo '<th>' . $polAvg . '</th>';
+                        echo '<th>' . $steelAvg . '</th>';
+                        echo '<th>' . $cementAvg . '</th>';
+                        echo '</tr>';
                         ?>
                         <tr>
-                            <th>Av.Index</th>
-                            <th>386.50</th>
-                            <th>133.87</th>
-                            <th>94.03</th>
-                            <th>131.33</th>
-                            <th>118.03</th>
-                        </tr>
-                        <tr>
-                            <th style="font-size: 11px;">%as per Tendor</th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
+                            <th style="font-size: 11px;">%as per Tender</th>
+                            <th>
+                                <?php echo $project["labour"] ?>
+                            </th>
+                            <th>
+                                <?php echo $project["material"] ?>
+                            </th>
+                            <th>
+                                <?php echo $project["pol"] ?>
+                            </th>
                             <th></th>
                             <th></th>
                         </tr>
                     </tbody>
+
+
+
                 </table>
             </div>
 

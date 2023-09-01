@@ -20,7 +20,7 @@
                     </div>
                 </div>
             <!-- end page title -->
-            <form action="price-escalation-save.php" method="POST" enctype="multipart/form-data">
+            <form action="price-escalation-save.php" method="get" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
