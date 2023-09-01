@@ -1,7 +1,7 @@
 <?php
 include 'header.php';
 $database = new Database();
-$project_1 = $database->select("project_1", "*", ['is_deleted' => 0]);
+$project= $database->select("project", "*", ['is_deleted' => 0]);
 ?>
 <div class="main-content">
     <div class="page-content">
@@ -9,7 +9,7 @@ $project_1 = $database->select("project_1", "*", ['is_deleted' => 0]);
             <div class="row">
                 <div class="col-lg-12">
                     <div class="col mb-3 text-md-end">
-                        <button type="button" onclick="location.href = 'project-1-add.php';"
+                        <button type="button" onclick="location.href = 'project-add.php';"
                             class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn"
                             data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Add
                             Project</button>
@@ -33,7 +33,7 @@ $project_1 = $database->select("project_1", "*", ['is_deleted' => 0]);
                                             <!--<input class="form-check-input" type="checkbox" id="checkAll" value="option">-->
                                         </div>
                                     </th>
-                                    <th class="sort" data-sort="p1_id">Sr. No. &nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                    <th class="sort" data-sort="p_id">Sr. No. &nbsp;&nbsp;&nbsp;&nbsp;</th>
                                     <th class="sort" data-sort="name_of_work">Name of Work &nbsp;&nbsp;&nbsp;&nbsp; </th>
                                     <th class="sort" data-sort="name_of_agency">Name of Agency &nbsp;&nbsp;&nbsp;&nbsp;</th>
                                     <th class="sort" data-sort="agreement_no"> Agreement No.
@@ -41,12 +41,12 @@ $project_1 = $database->select("project_1", "*", ['is_deleted' => 0]);
                                     <th class="sort" data-sort="sub_division">Sub-Division &nbsp;&nbsp;&nbsp;&nbsp;
                                     </th>
                                     <th class="sort" data-sort="authority">Authority &nbsp;&nbsp;</th>
-                                    <th class="sort" data-sort="dateofreceiptof_tendor">Date of receipt of tendor
+                                    <th class="sort" data-sort="date_receipt_tendor">Date of receipt of tendor
                                         &nbsp;&nbsp;</th>
-                                    <th class="sort" data-sort="dateofwork_order">Date of work order &nbsp;&nbsp;
+                                    <th class="sort" data-sort="date_work_order">Date of work order &nbsp;&nbsp;
                                     </th>
-                                    <th class="sort" data-sort="sroc">Star Rate of Cement Rs. &nbsp;&nbsp;</th>
-                                    <th class="sort" data-sort="sros">Star Rate of Steel Rs. &nbsp;&nbsp;</th>
+                                    <th class="sort" data-sort="star_rate_cement">Star Rate of Cement Rs. &nbsp;&nbsp;</th>
+                                    <th class="sort" data-sort="star_rate_steel">Star Rate of Steel Rs. &nbsp;&nbsp;</th>
                                     <th class="sort" data-sort="labour">Labour &nbsp;&nbsp;</th>
                                     <th class="sort" data-sort="material">Material &nbsp;&nbsp;</th>
                                     <th class="sort" data-sort="pol">POL &nbsp;&nbsp;</th>
@@ -58,7 +58,7 @@ $project_1 = $database->select("project_1", "*", ['is_deleted' => 0]);
                                 <tr>
                                     <?php
                                     $count = 1;
-                                    foreach ($project_1 as $value) {
+                                    foreach ($project as $value) {
                                         ?>
                                         <th scope="row">
                                             <div class="form-check">
@@ -91,17 +91,17 @@ $project_1 = $database->select("project_1", "*", ['is_deleted' => 0]);
                                         </td>
 
                                         <td class="customer_name">
-                                            <?php echo $value['dateofreceiptof_tendor']; ?>
+                                            <?php echo $value['date_receipt_tendor']; ?>
                                         </td>
 
                                         <td class="customer_name">
-                                            <?php echo $value['dateofwork_order']; ?>
+                                            <?php echo $value['date_work_order']; ?>
                                         </td>
                                         <td class="customer_name">
-                                            <?php echo $value['sroc']; ?>
+                                            <?php echo $value['star_rate_cement']; ?>
                                         </td>
                                         <td class="customer_name">
-                                            <?php echo $value['sros']; ?>
+                                            <?php echo $value['star_rate_steel']; ?>
                                         </td>
                                         <td class="customer_name">
                                             <?php echo $value['labour']; ?>
@@ -118,12 +118,12 @@ $project_1 = $database->select("project_1", "*", ['is_deleted' => 0]);
                                             <div class="d-flex gap-2">
                                                 <div class="edit">
                                                     <button class="btn btn-sm btn-success edit-item-btn"
-                                                        onClick="location.href = 'project-1-update.php?p1_id=<?php echo $value['p1_id']; ?>';"
+                                                        onClick="location.href = 'project-update.php?p_id=<?php echo $value['p_id']; ?>';"
                                                         data-bs-toggle="modal" data-bs-target="#showModal">Edit</button>
                                                 </div>
                                                 <div class="remove">
 
-                                                <a href="project-1-delete.php?p1_id=<?php echo $value['p1_id'] ?>" >
+                                                <a href="project-delete.php?p_id=<?php echo $value['p_id'] ?>" >
                                                             <button class="btn btn-sm btn-danger remove-item-btn" onclick='return delete_confirm()'
                                                                 data-bs-toggle="modal" data-bs-target="#deleteRecordModal">Delete</button></a>
                                                     
@@ -131,7 +131,7 @@ $project_1 = $database->select("project_1", "*", ['is_deleted' => 0]);
                                                 </div>
                                                 <div class="print">
                                                     <button class="btn btn-sm btn-info edit-item-btn"
-                                                        onClick="location.href = 'bill.php?p1_id=<?php echo $value['p1_id']; ?>';"
+                                                        onClick="location.href = 'bill.php?p_id=<?php echo $value['p_id']; ?>';"
                                                         data-bs-toggle="modal" data-bs-target="#showModal">Print</button>
                                                 </div>
 

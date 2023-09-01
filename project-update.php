@@ -3,11 +3,11 @@ include 'header.php';
 
 $database = new Database();
 
-if (isset($_GET['p1_id']) && is_numeric($_GET['p1_id'])) {
-    $p1_id = $_GET['p1_id'];
-    $project_1 = $database->get("project_1", "*", ["p1_id" => $p1_id]);
+if (isset($_GET['p_id']) && is_numeric($_GET['p_id'])) {
+    $p_id = $_GET['p_id'];
+    $project = $database->get("project", "*", ["p_id" => $p_id]);
 
-    if (!$project_1) {
+    if (!$project) {
         echo "Record not found.";
         exit;
     }
@@ -23,12 +23,12 @@ if (isset($_GET['p1_id']) && is_numeric($_GET['p1_id'])) {
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Project &nbsp;&nbsp;|&nbsp;&nbsp; <a href="price-esccalation-view.php">View All Projects</a></h4>
+                        <h4 class="mb-sm-0">Project &nbsp;&nbsp;|&nbsp;&nbsp; <a href="project-view.php">View All Projects</a></h4>
                     </div>
                 </div>
             </div>
             <!-- end page title -->
-            <form action="project-1-update-save.php" method="POST" enctype="multipart/form-data">
+            <form action="project-update-save.php" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
@@ -44,13 +44,13 @@ if (isset($_GET['p1_id']) && is_numeric($_GET['p1_id'])) {
                                         <!--<div class="row gutters">-->
                                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
                                             <!-- <div class="col-xxl-3 col-md-6"> -->
-                                            <input type="hidden" name="p1_id"
-                                                value="<?php echo $project_1['p1_id']; ?>">
+                                            <input type="hidden" name="p_id"
+                                                value="<?php echo $project['p_id']; ?>">
                                             <div>
                                                 <label for="placeholderInput" class="form-label"> Name of Work <span
                                                         class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" name="name_of_work"
-                                                    value="<?php echo $project_1['name_of_work']; ?>"
+                                                    value="<?php echo $project['name_of_work']; ?>"
                                                     placeholder="Enter month-year" required>
                                             </div>
                                         </div>
@@ -61,7 +61,7 @@ if (isset($_GET['p1_id']) && is_numeric($_GET['p1_id'])) {
                                                         class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="name_of_agency"
                                                     name="name_of_agency"
-                                                    value="<?php echo $project_1['name_of_agency']; ?>">
+                                                    value="<?php echo $project['name_of_agency']; ?>">
 
                                             </div>
                                         </div>
@@ -73,7 +73,7 @@ if (isset($_GET['p1_id']) && is_numeric($_GET['p1_id'])) {
                                                         class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="agreement_no"
                                                     name="agreement_no"
-                                                    value="<?php echo $project_1['agreement_no']; ?>">
+                                                    value="<?php echo $project['agreement_no']; ?>">
 
                                             </div>
                                         </div>
@@ -83,7 +83,7 @@ if (isset($_GET['p1_id']) && is_numeric($_GET['p1_id'])) {
                                                         class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="sub_division"
                                                     name="sub_division"
-                                                    value="<?php echo $project_1['sub_division']; ?>">
+                                                    value="<?php echo $project['sub_division']; ?>">
 
                                             </div>
                                         </div>
@@ -92,7 +92,7 @@ if (isset($_GET['p1_id']) && is_numeric($_GET['p1_id'])) {
                                                 <label for="placeholderInput" class="form-label">Authority<span
                                                         class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="authority" name="authority"
-                                                    value="<?php echo $project_1['authority']; ?>">
+                                                    value="<?php echo $project['authority']; ?>">
 
                                             </div>
 
@@ -101,9 +101,9 @@ if (isset($_GET['p1_id']) && is_numeric($_GET['p1_id'])) {
                                             <div class="form-group">
                                                 <label for="group">Date of receipt of tendor<span
                                                         class="text-danger">*</span></label>
-                                                <input type="date" name="dateofreceiptof_tendor"
-                                                    id="dateofreceiptof_tendor" class="form-control"
-                                                    value="<?php echo $project_1['dateofreceiptof_tendor']; ?>" required>
+                                                <input type="date" name="date_receipt_tendor"
+                                                    id="date_receipt_tendor" class="form-control"
+                                                    value="<?php echo $project['date_receipt_tendor']; ?>" required>
                                             </div>
                                         </div>
 
@@ -111,27 +111,27 @@ if (isset($_GET['p1_id']) && is_numeric($_GET['p1_id'])) {
                                             <div class="form-group">
                                                 <label for="group">Date of work order<span
                                                         class="text-danger">*</span></label>
-                                                <input type="date" name="dateofwork_order" id="dateofwork_order"
+                                                <input type="date" name="date_work_order" id="date_work_order"
                                                     class="form-control"
-                                                    value="<?php echo $project_1['dateofwork_order']; ?>" required>
+                                                    value="<?php echo $project['date_work_order']; ?>" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="group">Star Rate of Cement Rs.<span
                                                         class="text-danger">*</span></label>
-                                                <input type="number" step="0.01" name="sroc" id="sroc"
+                                                <input type="number" step="0.01" name="star_rate_cement" id="star_rate_cement"
                                                     class="form-control" placeholder="Enter Star Rate of Cement"
-                                                    value="<?php echo $project_1['sroc']; ?>" required>
+                                                    value="<?php echo $project['star_rate_cement']; ?>" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="group">Star Rate of Steel Rs.<span
                                                         class="text-danger">*</span></label>
-                                                <input type="number" step="0.01" name="sros" id="sros"
+                                                <input type="number" step="0.01" name="star_rate_steel" id="star_rate_steel"
                                                     class="form-control" placeholder="Enter Star Rate Of Steel"
-                                                    value="<?php echo $project_1['sros']; ?>" required>
+                                                    value="<?php echo $project['star_rate_steel']; ?>" required>
                                             </div>
                                         </div>
 
@@ -140,7 +140,7 @@ if (isset($_GET['p1_id']) && is_numeric($_GET['p1_id'])) {
                                                 <label for="group">Labour<span class="text-danger">*</span></label>
                                                 <input type="number" step="0.01" name="labour" id="labour"
                                                     class="form-control" placeholder="Enter Labour value"
-                                                    value="<?php echo $project_1['labour']; ?>" required>
+                                                    value="<?php echo $project['labour']; ?>" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -148,7 +148,7 @@ if (isset($_GET['p1_id']) && is_numeric($_GET['p1_id'])) {
                                                 <label for="group">Material<span class="text-danger">*</span></label>
                                                 <input type="number" step="0.01" name="material" id="material"
                                                     class="form-control" placeholder="Enter Material value"
-                                                    value="<?php echo $project_1['material']; ?>" required>
+                                                    value="<?php echo $project['material']; ?>" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -156,7 +156,7 @@ if (isset($_GET['p1_id']) && is_numeric($_GET['p1_id'])) {
                                                 <label for="group">POL<span class="text-danger">*</span></label>
                                                 <input type="number" step="0.01" name="pol" id="pol"
                                                     class="form-control" placeholder="Enter pol value"
-                                                    value="<?php echo $project_1['pol']; ?>" required>
+                                                    value="<?php echo $project['pol']; ?>" required>
                                             </div>
                                         </div>
                                     </div>
@@ -166,7 +166,7 @@ if (isset($_GET['p1_id']) && is_numeric($_GET['p1_id'])) {
                     </div>
                     <div class="col-xl-4 col-lg-4 col-sm-4 col-12 ">
                         <button type="submit" class="btn btn-primary">Update</button>&nbsp;&nbsp;
-                        <a href="project-1-view.php"><button type="button" class="btn btn-danger text-white">Cancel</button></a>
+                        <a href="project-view.php"><button type="button" class="btn btn-danger text-white">Cancel</button></a>
 
                     </div>
                 </form>

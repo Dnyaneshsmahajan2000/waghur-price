@@ -70,7 +70,7 @@
                                         <div class="form-group">
                                             <label for="group">Date of receipt of tendor<span
                                                     class="text-danger">*</span></label>
-                                            <input type="date" name="dateofreceiptof_tendor" id="dateofreceiptof_tendor"
+                                            <input type="date" name="date_receipt_tendor" id="datereceipt_tendor"
                                                 class="form-control" placeholder="Enter Agreement No." required="">
                                         </div>
                                     </div>
@@ -79,7 +79,7 @@
                                         <div class="form-group">
                                             <label for="group">Date of work order<span
                                                     class="text-danger">*</span></label>
-                                            <input type="date" name="dateofwork_order" id="dateofwork_order"
+                                            <input type="date" name="date_work_order" id="date_work_order"
                                                 class="form-control" placeholder="Enter Sub-Division" required="">
                                         </div>
                                     </div>
@@ -87,7 +87,7 @@
                                         <div class="form-group">
                                             <label for="group">Star Rate of Cement Rs.<span
                                                     class="text-danger">*</span></label>
-                                            <input type="number" step="0.01" name="sroc" id="sroc" class="form-control"
+                                            <input type="number" step="0.01" name="star_rate_cement" id="star_rate_cement" class="form-control"
                                                 placeholder="Enter Star Rate of Cement" required="">
                                         </div>
                                     </div>
@@ -95,7 +95,7 @@
                                         <div class="form-group">
                                             <label for="group">Star Rate of Steel Rs.<span
                                                     class="text-danger">*</span></label>
-                                            <input type="number" step="0.01" name="sros" id="sros" class="form-control"
+                                            <input type="number" step="0.01" name="star_rate_steel" id="star_rate_steel" class="form-control"
                                                 placeholder="Enter Star Rate Of Steel" required="">
                                         </div>
                                     </div>

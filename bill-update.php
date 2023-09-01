@@ -88,8 +88,8 @@ if (isset($_GET['bill_id']) && is_numeric($_GET['bill_id'])) {
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label> Date Of Measurement <span class="text-danger">*</span></label>
-                                            <input type="date" name="dateof_measurement" id="dateof_measurement"
-                                                class="form-control" value="<?php echo $value['dateof_measurement']; ?>"
+                                            <input type="date" name="date_measurement" id="date_measurement"
+                                                class="form-control" value="<?php echo $value['date_measurement']; ?>"
                                                 placeholder="Enter Date of Measurement" required="">
                                         </div>
                                     </div>

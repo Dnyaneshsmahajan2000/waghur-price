@@ -270,19 +270,19 @@ date_default_timezone_set("asia/kolkata");
                             <li class="nav-item">
                                 <a class="nav-link menu-link" href="#customers3" data-bs-toggle="collapse" role="button"
                                     aria-expanded="false" aria-controls="customers">
-                                    <i class=" ri-user-3-fill"></i> <span data-key="t-authentication"> Project-1</span></a>
+                                    <i class=" ri-user-3-fill"></i> <span data-key="t-authentication"> Project</span></a>
                                 <div class="collapse menu-dropdown" id="customers3">
                                     <ul class="nav nav-sm flex-column">
                                         <li class="nav-item">
                                             <a class="nav-link collapsed" data-bs-target="#forms-nav"
-                                                href="project-1-add.php">
+                                                href="project-add.php">
                                                 <span>Add Project</span>
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
                                             <a class="nav-link collapsed" data-bs-target="#forms-nav"
-                                                href="project-1-view.php">
+                                                href="project-view.php">
                                                 <span>View All Projects</span>
                                             </a>
                                         </li>

@@ -8,25 +8,25 @@ $data['name_of_agency'] = $_POST['name_of_agency'];
 $data['agreement_no'] = $_POST['agreement_no'];
 $data['sub_division'] = $_POST['sub_division'];
 $data['authority'] = $_POST['authority'];
-$data['dateofreceiptof_tendor'] = $_POST['dateofreceiptof_tendor'];
-$data['dateofwork_order'] = $_POST['dateofwork_order'];
-$data['sroc'] = $_POST['sroc'];
-$data['sros'] = $_POST['sros'];
+$data['date_receipt_tendor'] = $_POST['date_receipt_tendor'];
+$data['date_work_order'] = $_POST['date_work_order'];
+$data['star_rate_cement'] = $_POST['star_rate_cement'];
+$data['star_rate_steel'] = $_POST['star_rate_steel'];
 $data['labour'] = $_POST['labour'];
 $data['material'] = $_POST['material'];
 $data['pol'] = $_POST['pol'];
 
 
-$price_escalation = $database->insert("project_1", $data);
+$project = $database->insert("project", $data);
 
-if ($price_escalation) {
+if ($project) {
 
     echo "<script> alert('Data Inserted Successfully !');</script>";
-    header("Location:project-1-view.php");
+    header("Location:project-view.php");
 
 } else {
    echo "<script> alert('Data Failed to inserted !');</script>";
-    header("Location:project-1-add.php");
+    header("Location:project-add.php");
 }
 ?>
 

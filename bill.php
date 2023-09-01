@@ -5,11 +5,11 @@ include './inc/database.php';
 
 $database = new Database();
 
-if (isset($_GET['p1_id']) && is_numeric($_GET['p1_id'])) {
-    $p1_id = $_GET['p1_id'];
-    $project_1 = $database->get("project_1", "*", ["p1_id" => $p1_id]);
+if (isset($_GET['p_id']) && is_numeric($_GET['p_id'])) {
+    $p_id = $_GET['p_id'];
+    $project = $database->get("project", "*", ["p_id" => $p_id]);
 
-    if (!$project_1) {
+    if (!$project) {
         echo "Record not found.";
         exit;
     }
@@ -99,8 +99,8 @@ if (isset($_GET['p1_id']) && is_numeric($_GET['p1_id'])) {
 
     <?php
 
-    $p1_id = $_GET['p1_id'];
-    $project_1 = $database->get("project_1", "*", ["p1_id" => $p1_id]);
+    $p_id = $_GET['p_id'];
+    $project = $database->get("project", "*", ["p_id" => $p_id]);
 
     ?>
 
@@ -109,17 +109,17 @@ if (isset($_GET['p1_id']) && is_numeric($_GET['p1_id'])) {
             <div class="col-lg-7">
                 <strong>Name of Division: </strong> Waghur Dam Division, Jalgaon <br>
                 <strong>Name of Work:</strong>
-                <?php echo $project_1['name_of_work']; ?><br>
+                <?php echo $project['name_of_work']; ?><br>
                 <strong>Name of Agency:</strong>
-                <?php echo $project_1['name_of_agency']; ?> <br>
+                <?php echo $project['name_of_agency']; ?> <br>
                 <strong>Agreement No:</strong>
-                <?php echo $project_1['agreement_no']; ?>
+                <?php echo $project['agreement_no']; ?>
             </div>
             <div class="col">
                 <strong>Sub-Division:</strong>
-                <?php echo $project_1['sub_division']; ?><br>
+                <?php echo $project['sub_division']; ?><br>
                 <strong>Authority:</strong>
-                <?php echo $project_1['authority']; ?>
+                <?php echo $project['authority']; ?>
 
             </div>
         </div>
@@ -136,7 +136,7 @@ if (isset($_GET['p1_id']) && is_numeric($_GET['p1_id'])) {
                             <strong>Date of receipt of tendor: </strong> <br>
                         </td>
                         <td>
-                            <?php echo $project_1['dateofreceiptof_tendor']; ?>
+                            <?php echo $project['date_receipt_tendor']; ?>
                         </td>
                     </tr>
                     <tr>
@@ -144,7 +144,7 @@ if (isset($_GET['p1_id']) && is_numeric($_GET['p1_id'])) {
                             <strong>Date of work order </strong><br>
                         </td>
                         <td>
-                            <?php echo $project_1['dateofwork_order']; ?>
+                            <?php echo $project['date_work_order']; ?>
                         </td>
                     </tr>
                     <tr>
@@ -152,7 +152,7 @@ if (isset($_GET['p1_id']) && is_numeric($_GET['p1_id'])) {
                             <strong>Star Rate of Cement Rs.: </strong>
                         </td>
                         <td>
-                            <?php echo $project_1['sroc']; ?>
+                            <?php echo $project['star_rate_cement']; ?>
                         </td>
                     </tr>
                     <tr>
@@ -160,7 +160,7 @@ if (isset($_GET['p1_id']) && is_numeric($_GET['p1_id'])) {
                             <strong>Star Rate of Steel Rs.: </strong><br>
                         </td>
                         <td>
-                            <?php echo $project_1['sros']; ?>
+                            <?php echo $project['star_rate_steel']; ?>
                         </td>
                     </tr>
                 </table>
@@ -181,7 +181,7 @@ if (isset($_GET['p1_id']) && is_numeric($_GET['p1_id'])) {
 
                         <?php
 
-                        $endDate =  $project_1['dateofreceiptof_tendor'];
+                        $endDate =  $project['date_receipt_tendor'];
                             
                         $startDate = date('M-Y', strtotime('-3 months', strtotime($endDate)));
 
@@ -195,22 +195,22 @@ if (isset($_GET['p1_id']) && is_numeric($_GET['p1_id'])) {
                             ?>
                             <tr>
                                 <td>
-                                    <?php echo $project_1['month']; ?>
+                                    <?php echo $project['month']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $project_1['labour']; ?>
+                                    <?php echo $project['labour']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $project_1['material']; ?>
+                                    <?php echo $project['material']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $project_1['pol']; ?>
+                                    <?php echo $project['pol']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $project_1['steel']; ?>
+                                    <?php echo $project['steel']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $project_1['cement']; ?>
+                                    <?php echo $project['cement']; ?>
                                 </td>
                             </tr>
 

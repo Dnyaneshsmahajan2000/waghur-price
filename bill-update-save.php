@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $data = [
         "name_of_work" => $_POST['name_of_work'],
-        "dateof_measurement" => $_POST['dateof_measurement'],
+        "date_measurement" => $_POST['date_measurement'],
         "total_amount" => $_POST['total_amount'],
         "quantity_cement" => $_POST['quantity_cement'],
         "quantity_steel" => $_POST['quantity_steel']

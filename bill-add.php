@@ -1,6 +1,6 @@
 <?php include 'header.php';
 $database = new Database();
-$bill = $database->select("project_1", "*");
+$bill = $database->select("project", "*");
 ?>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
@@ -49,7 +49,7 @@ $bill = $database->select("project_1", "*");
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label> Date Of Measurement <span class="text-danger">*</span></label>
-                                            <input type="date" name="dateof_measurement" id="dateof_measurement"
+                                            <input type="date" name="date_measurement" id="date_measurement"
                                                 class="form-control" required="">
                                         </div>
                                     </div>

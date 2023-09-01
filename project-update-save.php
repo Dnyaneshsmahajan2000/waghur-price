@@ -5,7 +5,7 @@ include './inc/database.php';
 $database = new Database();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $p1_id = $_POST['p1_id'];
+    $p_id = $_POST['p_id'];
 
     $data = [
         "name_of_work" => $_POST['name_of_work'],
@@ -13,19 +13,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         "agreement_no" => $_POST['agreement_no'],
         "sub_division" => $_POST['sub_division'],
         "authority" => $_POST['authority'],
-        "dateofreceiptof_tendor" => $_POST['dateofreceiptof_tendor'],
-        "dateofwork_order" => $_POST['dateofwork_order'],
-        "sroc" => $_POST['sroc'],
-        "sros" => $_POST['sros'],
+        "date_receipt_tendor" => $_POST['date_receipt_tendor'],
+        "date_work_order" => $_POST['date_work_order'],
+        "star_rate_cement" => $_POST['star_rate_cement'],
+        "star_rate_steel" => $_POST['star_rate_steel'],
         "labour" => $_POST['labour'],
         "material" => $_POST['material'],
         "pol" => $_POST['pol']
 
     ];
 
-    $database->update("project_1", $data, ["p1_id" => $p1_id]);
+    $database->update("project", $data, ["p_id" => $p_id]);
 
-    header("Location: project-1-view.php");
+    header("Location: project-view.php");
     exit;
 }
 

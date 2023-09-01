@@ -32,7 +32,7 @@ $bill = $database->select("bills", "*", ['is_deleted' => 0]);
                                                             value="option">-->
                                                 </div>
                                             </th>
-                                            <th class="sort" data-sort="student_id">Sr. No.
+                                            <th class="sort" data-sort="bill_id">Sr. No.
                                                 &nbsp;&nbsp;&nbsp;&nbsp;</th>
                                             <th class="sort" data-sort="name_of_work">Name of Work</th>
                                             <th class="sort" data-sort="name_of_agency">Date of Measurement
@@ -70,7 +70,7 @@ $bill = $database->select("bills", "*", ['is_deleted' => 0]);
                                                 </td>
 
                                                 <td class="customer_name">
-                                                    <?php echo $value['dateof_measurement']; ?>
+                                                    <?php echo $value['date_measurement']; ?>
                                                 </td>
                                                 <td class="customer_name">
                                                     <?php echo $value['total_amount']; ?>
