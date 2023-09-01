@@ -136,7 +136,28 @@ if (isset($_GET['p_id']) && is_numeric($_GET['p_id'])) {
                             <strong>Date of receipt of tendor: </strong> <br>
                         </td>
                         <td>
-                            <?php echo $project['date_receipt_tendor']; ?>
+                            <?php echo $project['date_receipt_tender'];
+                          $dateString = $project['date_receipt_tender'];
+                          $date = new DateTime($dateString);
+                          
+                          $months = array();
+                          
+                          $date->modify('-1 month');
+                          
+                          for ($i = 0; $i < 3; $i++) {
+                              $monthName = $date->format('F-Y');
+                              
+                              $months[] = $monthName;
+                          
+                              $date->modify('-1 month');
+                          }
+                          
+                          $months = array_reverse($months);
+                          
+                          foreach ($months as $month) {
+                              echo "$month";
+                          }
+                            ?>
                         </td>
                     </tr>
                     <tr>
@@ -181,7 +202,7 @@ if (isset($_GET['p_id']) && is_numeric($_GET['p_id'])) {
 
                         <?php
 
-                        $endDate =  $project['date_receipt_tendor'];
+                        $endDate =  $project['date_receipt_tender'];
                             
                         $startDate = date('M-Y', strtotime('-3 months', strtotime($endDate)));
 

@@ -19,7 +19,7 @@
                     </div>
                 </div>
             </div>
-            <form action="project-1-save.php" method="post" class="needs-validation" enctype="multipart/form-data">
+            <form action="project-save.php" method="post" class="needs-validation" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">

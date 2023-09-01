@@ -91,7 +91,7 @@ $project= $database->select("project", "*", ['is_deleted' => 0]);
                                         </td>
 
                                         <td class="customer_name">
-                                            <?php echo $value['date_receipt_tendor']; ?>
+                                            <?php echo $value['date_receipt_tender']; ?>
                                         </td>
 
                                         <td class="customer_name">
