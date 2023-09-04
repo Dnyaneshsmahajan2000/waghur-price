@@ -59,7 +59,8 @@ $price_escalation = $database->select("price_escalation", "*", ['is_deleted' => 
                                                     <?php echo $count++; ?>
                                                 </td>
                                                 <td class="customer_name">
-                                                    <?php echo $value['month'] ?>
+                                                    
+                                                    <?php echo date("M-y", strtotime($value['month'])) ?>
                                                 </td>
 
                                                 <td class="customer_name">

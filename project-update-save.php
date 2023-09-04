@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         "agreement_no" => $_POST['agreement_no'],
         "sub_division" => $_POST['sub_division'],
         "authority" => $_POST['authority'],
-        "date_receipt_tendor" => $_POST['date_receipt_tendor'],
+        "date_receipt_tender" => $_POST['date_receipt_tender'],
         "date_work_order" => $_POST['date_work_order'],
         "star_rate_cement" => $_POST['star_rate_cement'],
         "star_rate_steel" => $_POST['star_rate_steel'],

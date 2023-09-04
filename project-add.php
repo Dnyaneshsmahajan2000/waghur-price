@@ -102,21 +102,21 @@
 
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="group">Labour<span class="text-danger">*</span></label>
+                                            <label for="group">Labour <sup>(%as per Tender)</sup> <span class="text-danger">*</span></label>
                                             <input type="number" step="0.01" name="labour" id="labour"
                                                 class="form-control" placeholder="Enter Labour value" required="">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="group">Material<span class="text-danger">*</span></label>
+                                            <label for="group">Material <sup>(%as per Tender)</sup><span class="text-danger">*</span></label>
                                             <input type="number" step="0.01" name="material" id="material"
                                                 class="form-control" placeholder="Enter Material value" required="">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="group">POL<span class="text-danger">*</span></label>
+                                            <label for="group">POL <sup>(%as per Tender)</sup><span class="text-danger">*</span></label>
                                             <input type="number" step="0.01" name="pol" id="pol" class="form-control"
                                                 placeholder="Enter pol value" required="">
                                         </div>

@@ -51,6 +51,7 @@ $bill = $database->select("bills", "*", ['is_deleted' => 0]);
                                             <?php
                                             $count = 1;
                                             foreach ($bill as $value) {
+                                                $project_name=$db->get("project","name_of_work",['p_id'=>$value['project_id']]);
                                                 ?>
                                                 <th scope="row">
                                                     <div class="form-check">
@@ -66,7 +67,7 @@ $bill = $database->select("bills", "*", ['is_deleted' => 0]);
                                                     <?php echo $count++; ?>
                                                 </td>
                                                 <td class="customer_name">
-                                                    <?php echo $value['name_of_work']; ?>
+                                                    <?php echo $project_name; ?>
                                                 </td>
 
                                                 <td class="customer_name">

@@ -1,5 +1,6 @@
 <?php
 
+
 session_start();
 include './inc/database.php';
 
@@ -41,7 +42,31 @@ function getLastThreeMonths($givenDate)
     return $lastThreeMonths;
 }
 
-// Example usage:
+function getallMonths($givenDate)
+{
+    // Convert the given date to a DateTime object
+    $date = new DateTime($givenDate);
+
+    // Initialize an array to store the last three months
+    $allMonths = array();
+
+    // Loop to get the last three months
+    for ($i = 0; $i < 3; $i++) {
+        // Subtract one month from the current date
+        $date->modify('month');
+
+        // Get the year and month in "Y-m-00" format
+        $yearMonth = $date->format('M-Y');
+
+        // Add the result to the array
+        $allMonths[] = $yearMonth;
+    }
+
+    // Return the array of last three months
+    return $allMonths;
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -56,65 +81,8 @@ function getLastThreeMonths($givenDate)
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script type="text/javascript" src="https://www.hostmath.com/Math/MathJax.js?config=OK"></script>
+    <link rel="stylesheet" href="style.css">
 
-    <style>
-        * {
-            padding: 0%;
-            margin: 0%;
-            box-sizing: border-box;
-        }
-
-        body {
-            min-width: 100vh;
-            min-height: 100vh;
-        }
-
-        .container {
-            padding: 0%;
-            margin: 2%;
-        }
-
-        td {
-            padding: 5px;
-        }
-
-        h4 {
-            text-align: center;
-            text-decoration: underline;
-        }
-
-        .margin {
-            margin: 5px;
-            margin-top: 20px;
-            text-align: center;
-
-        }
-
-        table,
-        tr,
-        td,
-        th {
-            border: 1px solid black;
-        }
-
-        td {
-            padding: 2px;
-        }
-
-        .container {
-            margin: 0;
-            padding: 5px;
-            max-width: 1300px;
-        }
-
-        .col th,
-        td {
-            font-size: 15px;
-            padding: 5px 5px 5px 0;
-            text-align: center;
-            padding-bottom: 2px;
-        }
-    </style>
 </head>
 
 <body>
@@ -153,7 +121,7 @@ function getLastThreeMonths($givenDate)
                         </td>
                         <td>
                             <?php
-                                echo date("d-M-y", strtotime($project['date_receipt_tender'])); 
+                            echo date("d-M-y", strtotime($project['date_receipt_tender']));
                             ?>
                         </td>
                     </tr>
@@ -196,7 +164,6 @@ function getLastThreeMonths($givenDate)
                         <th>Cement</th>
                     </thead>
                     <tbody>
-
                         <?php
                         $givenDate = $project['date_receipt_tender']; // Replace with your desired date
                         $lastThreeMonths = getLastThreeMonths($givenDate);
@@ -211,16 +178,29 @@ function getLastThreeMonths($givenDate)
                         $cementSum = 0;
 
                         foreach ($data as $row) {
-                            $formattedMonth = date("M-Y", strtotime($row['month'])); // Format the month
-                            echo '<tr>';
-                            echo '<td>' . $formattedMonth . '</td>';
-                            echo '<td>' . $row['labour'] . '</td>';
-                            echo '<td>' . $row['material'] . '</td>';
-                            echo '<td>' . $row['pol'] . '</td>';
-                            echo '<td>' . $row['steel'] . '</td>';
-                            echo '<td>' . $row['cement'] . '</td>';
-                            echo '</tr>';
-
+                            $formattedMonth = date("M-Y", strtotime($row['month']));
+                            ?>
+                            <tr>
+                                <td>
+                                    <?php echo $formattedMonth ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['labour'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['material'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['pol'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['steel'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['cement'] ?>
+                                </td>
+                            </tr>
+                            <?php
                             $labourSum += $row['labour'];
                             $materialSum += $row['material'];
                             $polSum += $row['pol'];
@@ -234,15 +214,26 @@ function getLastThreeMonths($givenDate)
                         $steelAvg = $rowCount > 0 ? round($steelSum / $rowCount, 2) : 0;
                         $cementAvg = $rowCount > 0 ? round($cementSum / $rowCount, 2) : 0;
 
-                        echo '<tr>';
-                        echo '<th>Av.Index</th>';
-                        echo '<th>' . $labourAvg . '</th>';
-                        echo '<th>' . $materialAvg . '</th>';
-                        echo '<th>' . $polAvg . '</th>';
-                        echo '<th>' . $steelAvg . '</th>';
-                        echo '<th>' . $cementAvg . '</th>';
-                        echo '</tr>';
                         ?>
+                        <tr>
+                            <th>Av.Index</th>
+                            <th>
+                                <?php echo $labourAvg ?>
+                            </th>
+                            <th>
+                                <?php echo $materialAvg ?>
+                            </th>
+                            <th>
+                                <?php echo $polAvg ?>
+                            </th>
+                            <th>
+                                <?php echo $steelAvg ?>
+                            </th>
+                            <th>
+                                <?php echo $cementAvg ?>
+                            </th>
+
+                        </tr>
                         <tr>
                             <th style="font-size: 11px;">%as per Tender</th>
                             <th>
@@ -258,9 +249,6 @@ function getLastThreeMonths($givenDate)
                             <th></th>
                         </tr>
                     </tbody>
-
-
-
                 </table>
             </div>
 
@@ -278,7 +266,7 @@ function getLastThreeMonths($givenDate)
                 <td rowspan="2"><strong>Total Amount:</strong></td>
                 <td colspan="4"><strong>Deduct: Schedule A/Steel/Cement/Bulk Asphal/ Amount</strong></td>
                 <td rowspan="2"><strong>Net/Amount for price Escalation</strong></td>
-                <td rowspan="2"><strong>Month</strong></td>
+                <td rowspan="2" style="padding: 7px;"><strong>Month</strong></td>
                 <td colspan="3"><strong>LABOUR</strong>
                     <font style="font-size: 12px;">
                         \[V_{1}=0.85P\left(\begin{array}{c}\frac{K_{1}}{100}\times\frac{L_{1}-L_{0}}{L_{0}}\end{array}\right)\]
@@ -356,60 +344,370 @@ function getLastThreeMonths($givenDate)
             <tr class="pad">
                 <td></td>
             </tr>
-            <tr class="pad">
-                <td>1</td>
-                <td>20-Mar-23</td>
-                <td>1165513</td>
-                <td>Cement</td>
-                <td>39.90</td>
-                <td>4140</td>
-                <td>165186</td>
-                <td>846754</td>
-                <td>Oct-21</td>
-                <td>397.2</td>
-                <td>418.43</td>
-                <td>17.45</td>
-                <td>10</td>
-                <td>11</td>
-                <td>12</td>
-                <td>10</td>
-                <td>11</td>
-                <td>12</td>
-                <td>10</td>
-                <td>11</td>
-                <td>12</td>
-                <td>10</td>
-                <td>11</td>
-                <td>12</td>
+            <?php
+            $data = $database->get("bills", "*");
+            ?>
+            <tr style="vertical-align: text-top;">
+                <td>
+                    <?php echo $project['p_id']; ?>
+                </td>
+                <td>
+
+                    <?php
+
+
+                    // display all data too be fetch from given date:
+                    function fetchDataFromDateMeasurement($database, $selectedDate)
+                    {
+                        // Query to fetch data from 'price_escalation' table where 'month' is before the selected date
+                        $data = $database->select('price_escalation', '*', [
+                            'month[<]' => $selectedDate
+                        ]);
+
+                        return $data;
+                    }
+
+                    // Function to display data
+                    
+                    //end function.
+                    
+
+                    $data = $database->get(
+                        "bills",
+                        "*",
+                        ['project_id' => $p_id]
+                    );
+
+                    echo date("d-M-y", strtotime($data['date_measurement']));
+                    ?>
+                </td>
+                <td>
+                    <?php echo $data['total_amount']; ?>
+                </td>
+                <td>Cement <br> Steel <br>B.A 60/70<br> B.A 80/100 <br>Clause-38</td>
+                <td>
+                    <?php echo $data['quantity_cement'] . "\n" . $data['quantity_steel']; ?>
+                </td>
+                <td>
+                    <?php echo $project['star_rate_cement'] . "\n";
+                    echo $project['star_rate_steel']; ?>
+
+                </td>
+                <td>
+                    <?php $amount = $project['star_rate_cement'] * $data['quantity_cement'];
+                    echo $amount . "\n";
+                    $amount1 = $project['star_rate_steel'] * $data['quantity_steel'];
+                    echo $amount1;
+
+                    $total_amount = $amount + $amount1;
+                    ?>
+                </td>
+
+                <td>
+                    <?php $netamount = $data['total_amount'] - $total_amount;
+                    echo $netamount;
+                    ?>
+                </td>
+                <td>
+                    <?php
+
+                    $data = $database->get("bills", ["date_measurement"]);
+
+                    $selectedDate = $data['date_measurement'];
+                    // Fetch and display data from 'price_escalation' table based on the selected date
+                    $dataToDisplay = fetchDataFromDateMeasurement($database, $selectedDate);
+
+                    // Display the fetched data
+                    displayData($dataToDisplay);
+                    function displayData($data)
+                    {
+                        foreach ($data as $row) {
+                            // Display each row of data
+                            echo date("M-y", strtotime($row['month'])) . "\n";
+
+                        }
+                    }
+                    ?>
+
+                </td>
+                <td>
+                    <?php
+                    displayLabour($dataToDisplay);
+                    function displayLabour($data)
+                    {
+                        $labourSum = 0;
+                        foreach ($data as $row) {
+                            // Display each row of data
+                            echo $row['labour'] . "\n";
+
+                        }
+                    }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                    displayLabourAvg($dataToDisplay);
+                    function displayLabourAvg($data)
+                    {
+                        $labourSum = 0;
+                        $rowCount = count($data);
+                        foreach ($data as $row) {
+
+                            $labourSum = $labourSum + $row['labour'];
+                        }
+                        $labourAvg = $rowCount > 0 ? round($labourSum / $rowCount, 2) : 0;
+                        echo $labourAvg;
+                    }
+                    ?>
+                </td>
+                <td></td>
+                <td>
+                    <?php
+                    displayMaterial($dataToDisplay);
+                    function displayMaterial($data)
+                    {
+                        foreach ($data as $row) {
+                            // Display each row of data
+                            echo $row['material'] . "\n";
+                        }
+                    }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                    displayMaterialAvg($dataToDisplay);
+                    function displayMaterialAvg($data)
+                    {
+                        $materialSum = 0;
+                        $rowCount = count($data);
+                        foreach ($data as $row) {
+
+                            $materialSum = $materialSum + $row['material'];
+                        }
+                        $materialAvg = $rowCount > 0 ? round($materialSum / $rowCount, 2) : 0;
+                        echo $materialAvg;
+                    }
+                    ?>
+                </td>
+                <td></td>
+                <td>
+                    <?php
+                    displayPol($dataToDisplay);
+                    function displayPol($data)
+                    {
+                        foreach ($data as $row) {
+                            // Display each row of data
+                            echo $row['pol'] . "\n";
+
+                        }
+                    }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                    displayPolAvg($dataToDisplay);
+                    function displayPolAvg($data)
+                    {
+                        $polSum = 0;
+                        $rowCount = count($data);
+                        foreach ($data as $row) {
+
+                            $polSum = $polSum + $row['pol'];
+                        }
+                        $polAvg = $rowCount > 0 ? round($polSum / $rowCount, 2) : 0;
+                        echo $polAvg;
+                    }
+                    ?>
+                </td>
+                <td></td>
+                <td>
+                    <?php
+                    displaySteel($dataToDisplay);
+                    function displaySteel($data)
+                    {
+                        foreach ($data as $row) {
+                            // Display each row of data
+                            echo $row['steel'] . "\n";
+
+                        }
+                    }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                    displaySteelAvg($dataToDisplay);
+                    function displaySteelAvg($data)
+                    {
+                        $steelSum = 0;
+                        $rowCount = count($data);
+                        foreach ($data as $row) {
+
+                            $steelSum = $steelSum + $row['steel'];
+                        }
+                        $steelAvg = $rowCount > 0 ? round($steelSum / $rowCount, 2) : 0;
+                        echo $steelAvg;
+                    }
+                    ?>
+                </td>
+                <td></td>
+                <td>
+                    <?php
+                    displayCement($dataToDisplay);
+                    function displayCement($data)
+                    {
+                        foreach ($data as $row) {
+                            // Display each row of data
+                            echo $row['cement'] . "\n";
+
+                        }
+                    }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                    displayCementAvg($dataToDisplay);
+                    function displayCementAvg($data)
+                    {
+                        $cementSum = 0;
+                        $rowCount = count($data);
+                        foreach ($data as $row) {
+
+                            $cementSum = $cementSum + $row['cement'];
+                        }
+                        $cementAvg = $rowCount > 0 ? round($cementSum / $rowCount, 2) : 0;
+                        echo $cementAvg;
+                    }
+                    ?>
+                </td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <?php
+                $data = $database->get("bills", "*", ['project_id' => $p_id]); ?>
+
+                <th></th>
+                <th>Total</th>
+                <th>
+                    <?php
+                    $totalamount = $data['total_amount'];
+                    echo $totalamount;
+                    ?>
+                </th>
+                <th>Total</th>
+                <th>
+                    <?php
+
+                    $amount = $data['quantity_cement'];
+                    $amount1 = $data['quantity_steel'];
+                    $totamount = $amount + $amount1;
+                    echo $totamount;
+
+                    ?>
+                </th>
+                <th>Total</th>
+                <th>
+                    <?php
+                    $amount = $project['star_rate_cement'] * $data['quantity_cement'];
+                    $amount1 = $project['star_rate_steel'] * $data['quantity_steel'];
+                    echo $netamount = $amount + $amount1;
+                    ?>
+                </th>
+                <th>
+                    <?php $finalamount = $totalamount - $netamount;
+                    echo $finalamount; ?>
+                </th>
+                <th>Total</th>
+                <th>
+                    <?php
+                    displayLabourTotal($dataToDisplay);
+                    function displayLabourTotal($data)
+                    {
+                        $labourSum = 0;
+                        foreach ($data as $row) {
+
+                            $labourSum = $labourSum + $row['labour'];
+                        }
+                        echo $labourSum;
+                    }
+                    ?>
+                </th>
+                <th>Total</th>
+                <th></th>
+                <th>
+                    <?php
+                    displayMaterialTotal($dataToDisplay);
+                    function displayMaterialTotal($data)
+                    {
+                        $materialSum = 0;
+                        foreach ($data as $row) {
+
+                            $materialSum = $materialSum + $row['material'];
+                        }
+                        echo $materialSum;
+                    }
+                    ?>
+                </th>
+                <th>Total</th>
+                <th></th>
+                <th>
+                    <?php
+                    displayPolTotal($dataToDisplay);
+                    function displayPolTotal($data)
+                    {
+                        $polSum = 0;
+                        foreach ($data as $row) {
+
+                            $polSum = $polSum + $row['pol'];
+                        }
+                        echo $polSum;
+                    }
+                    ?>
+                </th>
+                <th>Total</th>
+                <th></th>
+                <th>
+                    <?php
+                    displaySteelTotal($dataToDisplay);
+                    function displaySteelTotal($data)
+                    {
+                        $steelSum = 0;
+                        foreach ($data as $row) {
+
+                            $steelSum = $steelSum + $row['steel'];
+                        }
+                        echo $steelSum;
+                    }
+                    ?>
+                </th>
+                <th>Total</th>
+                <th></th>
+                <th>
+                    <?php
+                    displayCementTotal($dataToDisplay);
+                    function displayCementTotal($data)
+                    {
+                        $cementSum = 0;
+                        foreach ($data as $row) {
+
+                            $cementSum = $cementSum + $row['cement'];
+                        }
+                        echo $cementSum;
+                    }
+                    ?>
+                </th>
+                <th>Total</th>
+                <th></th>
 
             </tr>
             <tr>
-                <th></th>
-                <th>Total</th>
-                <th>5454545</th>
-                <th>Total</th>
-                <th>212</th>
-                <th>Total</th>
-                <th>545546</th>
-                <th>2165654</th>
-                <th>Total</th>
-                <th>6266</th>
-                <th>Total</th>
-                <th>1545</th>
-                <th>64545</th>
-                <th>Total</th>
-                <th>5454</th>
-                <th>44545</th>
-                <th>Total</th>
-                <th>454545</th>
-                <th>544</th>
-                <th>Total</th>
-                <th>8454</th>
-                <th>455</th>
-                <th>Total</th>
-                <th>5454</th>
-
+                <td></td>
             </tr>
+            <tr>
+                <td></td>
+            </tr>
+
+
             <tr>
                 <th colspan="2">Grand Total</th>
 
@@ -436,17 +734,19 @@ function getLastThreeMonths($givenDate)
 
             </tr>
         </tbody>
+
     </table>
+
 
     <div class="container mt-5">
         <div class="row">
             <div class="col-lg-5 ml-5">
                 <h3 style="font-size: 15px;"><b><u>Update Quantity of Cement/Steel</b></u></h3>
 
-                <table style="border: 1px solid black; ">
+                <table style="border: 1px solid black;">
                     <tr>
-                        <td>
-                            <strong>Date of receipt of tendor: </strong><br>
+                        <td style="width:70%;">
+                            <strong>Cement</strong><br>
                         </td>
                         <td>
                             13-Aug-21
@@ -454,7 +754,7 @@ function getLastThreeMonths($givenDate)
                     </tr>
                     <tr>
                         <td>
-                            <strong>Date of work order </strong><br>
+                            <strong>Steel</strong><br>
                         </td>
                         <td>
                             30-Sep-21
@@ -462,13 +762,13 @@ function getLastThreeMonths($givenDate)
                     </tr>
                     <tr>
                         <td>
-                            <strong>Date of receipt of tendor: </strong>
+                            <strong>B.A. 60/70 </strong>
                         </td>
                         <td>4140</td>
                     </tr>
                     <tr>
                         <td>
-                            <strong>Date of receipt of tendor: </strong><br>
+                            <strong>B.A. 80/100 </strong><br>
                         </td>
                         <td>
                             50220
@@ -536,15 +836,30 @@ function getLastThreeMonths($givenDate)
     </div>
     </div>
 
-
-
-
-
-
-
-
-
-
 </body>
 
 </html>
+<?php
+// ... (previous code)
+
+// Fetch all distinct dates from the `date_measurement` column of the `bills` table
+$dateMeasurements = $database->select("bills", ["date_measurement"]);
+
+foreach ($dateMeasurements as $measurement) {
+    $selectedDate = $measurement["date_measurement"];
+
+    // Fetch and display data from 'price_escalation' table based on the selected date
+    $dataToDisplay = fetchDataFromDateMeasurement($database, $selectedDate);
+
+    // Display the fetched data for the current date
+    echo "<h2>Data for Date: " . date("d-M-y", strtotime($selectedDate)) . "</h2>";
+    if ($selectedDate === $selectedDate) {
+        // Display the fetched data
+        displayData($dataToDisplay);
+
+    }
+
+    // ... (other code for displaying additional data)
+}
+
+?>

@@ -38,7 +38,7 @@ $bill = $database->select("project", "*");
                                                 <?php
                                                 foreach ($bill as $value) {
                                                     ?>
-                                                    <option value="<?php echo $value['name_of_work'] ?>"><?php echo $value['name_of_work'] ?></option>
+                                                    <option value="<?php echo $value['p_id'] ?>"><?php echo $value['name_of_work'] ?></option>
                                                     <?php
                                                 }
                                                 ?>
@@ -57,7 +57,7 @@ $bill = $database->select("project", "*");
                                         <div class="form-group">
                                             <label for="total amount">Total Amount<span
                                                     class="text-danger">*</span></label>
-                                            <input type="number" name="total_amount" id="total_amount"
+                                            <input type="number" step="0.001" name="total_amount" id="total_amount"
                                                 class="form-control" placeholder="Enter Total Amount" required="">
                                         </div>
                                     </div>
@@ -65,7 +65,7 @@ $bill = $database->select("project", "*");
                                         <div class="form-group">
                                             <label for="group">Quntity of Cement<span
                                                     class="text-danger">*</span></label>
-                                            <input type="number" name="quantity_cement" id="quantity_cement"
+                                            <input type="number" step="0.001" name="quantity_cement" id="quantity_cement"
                                                 class="form-control" placeholder="Enter quantity of cement" required="">
                                         </div>
                                     </div>
@@ -73,7 +73,7 @@ $bill = $database->select("project", "*");
                                         <div class="form-group">
                                             <label for="quantity cement">Quntity of Steel<span
                                                     class="text-danger">*</span></label>
-                                            <input type="number" name="quantity_steel" id="quantity_steel"
+                                            <input type="number" step="0.001" name="quantity_steel" id="quantity_steel"
                                                 class="form-control" placeholder=" Enter Quantity of Steel" required="">
                                         </div>
                                     </div>

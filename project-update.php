@@ -101,9 +101,9 @@ if (isset($_GET['p_id']) && is_numeric($_GET['p_id'])) {
                                             <div class="form-group">
                                                 <label for="group">Date of receipt of tendor<span
                                                         class="text-danger">*</span></label>
-                                                <input type="date" name="date_receipt_tendor"
+                                                <input type="date" name="date_receipt_tender"
                                                     id="date_receipt_tendor" class="form-control"
-                                                    value="<?php echo $project['date_receipt_tendor']; ?>" required>
+                                                    value="<?php echo $project['date_receipt_tender']; ?>" required>
                                             </div>
                                         </div>
 
