@@ -393,75 +393,42 @@ function getallMonths($givenDate)
                     ?>
                 </td>
                 <td>
-                    <?php
-
-                    ?>
+                    
 
                 </td>
                 <td>
-                    <?php
-                    ?>
+                   
                 </td>
                 <td>
-                    <?php
-                    ?>
+                    
                 </td>
                 <td></td>
                 <td>
-                    <?php
-                    ?>
+                   
                 </td>
                 <td>
-                    <?php
-                    ?>
+                   
                 </td>
                 <td></td>
                 <td>
-                    <?php
-                    ?>
+                    
                 </td>
                 <td>
-                    <?php
-                    ?>
+                    
                 </td>
                 <td></td>
                 <td>
-                    <?php
-                    ?>
+                   
                 </td>
                 <td>
-                    <?php
-                    ?>
+                    
                 </td>
                 <td></td>
                 <td>
-                    <?php
-                    displayCement($dataToDisplay);
-                    function displayCement($data)
-                    {
-                        foreach ($data as $row) {
-                            // Display each row of data
-                            echo $row['cement'] . "\n";
-
-                        }
-                    }
-                    ?>
+                    
                 </td>
                 <td>
-                    <?php
-                    displayCementAvg($dataToDisplay);
-                    function displayCementAvg($data)
-                    {
-                        $cementSum = 0;
-                        $rowCount = count($data);
-                        foreach ($data as $row) {
-
-                            $cementSum = $cementSum + $row['cement'];
-                        }
-                        $cementAvg = $rowCount > 0 ? round($cementSum / $rowCount, 2) : 0;
-                        echo $cementAvg;
-                    }
-                    ?>
+                   
                 </td>
                 <td></td>
             </tr>
@@ -503,82 +470,27 @@ function getallMonths($givenDate)
                 </th>
                 <th>Total</th>
                 <th>
-                    <?php
-                    displayLabourTotal($dataToDisplay);
-                    function displayLabourTotal($data)
-                    {
-                        $labourSum = 0;
-                        foreach ($data as $row) {
-
-                            $labourSum = $labourSum + $row['labour'];
-                        }
-                        echo $labourSum;
-                    }
-                    ?>
+                    
                 </th>
                 <th>Total</th>
                 <th></th>
                 <th>
-                    <?php
-                    displayMaterialTotal($dataToDisplay);
-                    function displayMaterialTotal($data)
-                    {
-                        $materialSum = 0;
-                        foreach ($data as $row) {
-
-                            $materialSum = $materialSum + $row['material'];
-                        }
-                        echo $materialSum;
-                    }
-                    ?>
+                    
                 </th>
                 <th>Total</th>
                 <th></th>
                 <th>
-                    <?php
-                    displayPolTotal($dataToDisplay);
-                    function displayPolTotal($data)
-                    {
-                        $polSum = 0;
-                        foreach ($data as $row) {
-
-                            $polSum = $polSum + $row['pol'];
-                        }
-                        echo $polSum;
-                    }
-                    ?>
+                    
                 </th>
                 <th>Total</th>
                 <th></th>
                 <th>
-                    <?php
-                    displaySteelTotal($dataToDisplay);
-                    function displaySteelTotal($data)
-                    {
-                        $steelSum = 0;
-                        foreach ($data as $row) {
-
-                            $steelSum = $steelSum + $row['steel'];
-                        }
-                        echo $steelSum;
-                    }
-                    ?>
+                   
                 </th>
                 <th>Total</th>
                 <th></th>
                 <th>
-                    <?php
-                    displayCementTotal($dataToDisplay);
-                    function displayCementTotal($data)
-                    {
-                        $cementSum = 0;
-                        foreach ($data as $row) {
-
-                            $cementSum = $cementSum + $row['cement'];
-                        }
-                        echo $cementSum;
-                    }
-                    ?>
+                   
                 </th>
                 <th>Total</th>
                 <th></th>
@@ -723,27 +635,3 @@ function getallMonths($givenDate)
 </body>
 
 </html>
-<?php
-// ... (previous code)
-
-// Fetch all distinct dates from the `date_measurement` column of the `bills` table
-$dateMeasurements = $database->select("bills", ["date_measurement"]);
-
-foreach ($dateMeasurements as $measurement) {
-    $selectedDate = $measurement["date_measurement"];
-
-    // Fetch and display data from 'price_escalation' table based on the selected date
-    $dataToDisplay = fetchDataFromDateMeasurement($database, $selectedDate);
-
-    // Display the fetched data for the current date
-    echo "<h2>Data for Date: " . date("d-M-y", strtotime($selectedDate)) . "</h2>";
-    if ($selectedDate === $selectedDate) {
-        // Display the fetched data
-        displayData($dataToDisplay);
-
-    }
-
-    // ... (other code for displaying additional data)
-}
-
-?>
