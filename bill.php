@@ -357,12 +357,28 @@ function getallMonths($givenDate)
 
 
                     // display all data too be fetch from given date:
-                   
+                    function fetchDataFromDateMeasurement($database, $selectedDate)
+                    {
+                        // Query to fetch data from 'price_escalation' table where 'month' is before the selected date
+                        $data = $database->select('price_escalation', '*', [
+                            'month[<]' => $selectedDate
+                        ]);
+
+                        return $data;
+                    }
+
                     // Function to display data
                     
                     //end function.
                     
 
+                    $data = $database->get(
+                        "bills",
+                        "*",
+                        ['project_id' => $p_id]
+                    );
+
+                    echo date("d-M-y", strtotime($data['date_measurement']));
                     ?>
                 </td>
                 <td>
