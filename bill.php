@@ -357,28 +357,12 @@ function getallMonths($givenDate)
 
 
                     // display all data too be fetch from given date:
-                    function fetchDataFromDateMeasurement($database, $selectedDate)
-                    {
-                        // Query to fetch data from 'price_escalation' table where 'month' is before the selected date
-                        $data = $database->select('price_escalation', '*', [
-                            'month[<]' => $selectedDate
-                        ]);
-
-                        return $data;
-                    }
-
+                   
                     // Function to display data
                     
                     //end function.
                     
 
-                    $data = $database->get(
-                        "bills",
-                        "*",
-                        ['project_id' => $p_id]
-                    );
-
-                    echo date("d-M-y", strtotime($data['date_measurement']));
                     ?>
                 </td>
                 <td>
@@ -411,142 +395,42 @@ function getallMonths($givenDate)
                 <td>
                     <?php
 
-                    $data = $database->get("bills", ["date_measurement"]);
-
-                    $selectedDate = $data['date_measurement'];
-                    // Fetch and display data from 'price_escalation' table based on the selected date
-                    $dataToDisplay = fetchDataFromDateMeasurement($database, $selectedDate);
-
-                    // Display the fetched data
-                    displayData($dataToDisplay);
-                    function displayData($data)
-                    {
-                        foreach ($data as $row) {
-                            // Display each row of data
-                            echo date("M-y", strtotime($row['month'])) . "\n";
-
-                        }
-                    }
                     ?>
 
                 </td>
                 <td>
                     <?php
-                    displayLabour($dataToDisplay);
-                    function displayLabour($data)
-                    {
-                        $labourSum = 0;
-                        foreach ($data as $row) {
-                            // Display each row of data
-                            echo $row['labour'] . "\n";
-
-                        }
-                    }
                     ?>
                 </td>
                 <td>
                     <?php
-                    displayLabourAvg($dataToDisplay);
-                    function displayLabourAvg($data)
-                    {
-                        $labourSum = 0;
-                        $rowCount = count($data);
-                        foreach ($data as $row) {
-
-                            $labourSum = $labourSum + $row['labour'];
-                        }
-                        $labourAvg = $rowCount > 0 ? round($labourSum / $rowCount, 2) : 0;
-                        echo $labourAvg;
-                    }
                     ?>
                 </td>
                 <td></td>
                 <td>
                     <?php
-                    displayMaterial($dataToDisplay);
-                    function displayMaterial($data)
-                    {
-                        foreach ($data as $row) {
-                            // Display each row of data
-                            echo $row['material'] . "\n";
-                        }
-                    }
                     ?>
                 </td>
                 <td>
                     <?php
-                    displayMaterialAvg($dataToDisplay);
-                    function displayMaterialAvg($data)
-                    {
-                        $materialSum = 0;
-                        $rowCount = count($data);
-                        foreach ($data as $row) {
-
-                            $materialSum = $materialSum + $row['material'];
-                        }
-                        $materialAvg = $rowCount > 0 ? round($materialSum / $rowCount, 2) : 0;
-                        echo $materialAvg;
-                    }
                     ?>
                 </td>
                 <td></td>
                 <td>
                     <?php
-                    displayPol($dataToDisplay);
-                    function displayPol($data)
-                    {
-                        foreach ($data as $row) {
-                            // Display each row of data
-                            echo $row['pol'] . "\n";
-
-                        }
-                    }
                     ?>
                 </td>
                 <td>
                     <?php
-                    displayPolAvg($dataToDisplay);
-                    function displayPolAvg($data)
-                    {
-                        $polSum = 0;
-                        $rowCount = count($data);
-                        foreach ($data as $row) {
-
-                            $polSum = $polSum + $row['pol'];
-                        }
-                        $polAvg = $rowCount > 0 ? round($polSum / $rowCount, 2) : 0;
-                        echo $polAvg;
-                    }
                     ?>
                 </td>
                 <td></td>
                 <td>
                     <?php
-                    displaySteel($dataToDisplay);
-                    function displaySteel($data)
-                    {
-                        foreach ($data as $row) {
-                            // Display each row of data
-                            echo $row['steel'] . "\n";
-
-                        }
-                    }
                     ?>
                 </td>
                 <td>
                     <?php
-                    displaySteelAvg($dataToDisplay);
-                    function displaySteelAvg($data)
-                    {
-                        $steelSum = 0;
-                        $rowCount = count($data);
-                        foreach ($data as $row) {
-
-                            $steelSum = $steelSum + $row['steel'];
-                        }
-                        $steelAvg = $rowCount > 0 ? round($steelSum / $rowCount, 2) : 0;
-                        echo $steelAvg;
-                    }
                     ?>
                 </td>
                 <td></td>
