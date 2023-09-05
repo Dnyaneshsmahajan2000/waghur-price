@@ -1,6 +1,4 @@
 <?php
-
-
 session_start();
 include './inc/database.php';
 
@@ -219,7 +217,9 @@ function getallMonths($givenDate)
                         <tr>
                             <th>Av.Index</th>
                             <th>
-                                <?php echo $labourAvg ?>
+                                <?php 
+                                $B=$labourAvg;
+                                echo $labourAvg ?>
                             </th>
                             <th>
                                 <?php echo $materialAvg ?>
@@ -238,7 +238,9 @@ function getallMonths($givenDate)
                         <tr>
                             <th style="font-size: 11px;">%as per Tender</th>
                             <th>
-                                <?php echo $project["labour"] ?>
+                                <?php 
+                                $D=$project['labour'];
+                                echo $project["labour"] ?>
                             </th>
                             <th>
                                 <?php echo $project["material"] ?>
@@ -350,7 +352,7 @@ function getallMonths($givenDate)
                     "*",
                     ['project_id' => $p_id]
                 );
-
+                $count=1;
                 foreach ($projectdata as $data) {
                     ?>
                     <td>
@@ -360,7 +362,14 @@ function getallMonths($givenDate)
                     <td>
                         <?php
                         $bill_end_date = $data['date_measurement'];
-
+                        
+                        /*if($count==1)
+                        {
+                        }
+                        else{
+                            $last_bill
+                            
+                        }*/
                         echo date("d-M-y", strtotime($data['date_measurement'])); ?>
                     </td>
                     <td>
@@ -385,14 +394,15 @@ function getallMonths($givenDate)
                     </td>
                     <td>
                         <?php $netamount = $data['total_amount'] - $total_amount;
-                        echo $netamount;
+                       $C=$netamount;
+                       echo $netamount;
                         ?>
                     </td>
                     <td>
                         <?php
                         $bill_data = $database->query("SELECT * 
-                   FROM price_escalation 
-                   WHERE month >= '$bill_start_date' AND month <= '$bill_end_date'")->fetchAll();
+                        FROM price_escalation 
+                        WHERE month >= '$bill_start_date' AND month <= '$bill_end_date'")->fetchAll();
                         foreach ($bill_data as $bill) {
                             echo date("M-y", strtotime($bill['month'])) . "\n";
                         }
@@ -400,8 +410,6 @@ function getallMonths($givenDate)
                     </td>
                     <td>
                         <?php
-
-                        
                         $labourcount = 0;
                         $totalLabourAmount = 0;
                         foreach ($bill_data as $bill) {
@@ -414,11 +422,12 @@ function getallMonths($givenDate)
                     <td>
                         <?php
                         $averageLabourAmount = ($labourcount > 0) ? $totalLabourAmount / $labourcount : 0;
+                       $A=$averageLabourAmount;
                         echo $averageLabourAmount;
                         ?>
                     </td>
                     <td>
-                        <?php ?>
+                      <?php echo $P= $A-$B/$B ?>
                     </td>
                     <td>
                         <?php
@@ -562,7 +571,10 @@ function getallMonths($givenDate)
                     <th>Total</th>
                     <th></th>
                 </tr>
-            <?php } ?>
+            <?php
+            $bill_start_date = $data['date_measurement'];
+                        
+        } ?>
 
             <tr>
                 <td></td>
