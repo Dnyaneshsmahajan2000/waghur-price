@@ -9,8 +9,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Add Project &nbsp; &nbsp;|&nbsp; &nbsp;<a href="project-1-view.php">View All
-                                Projects</a></h4>
+                        <h4 class="mb-sm-0">Add Contractor &nbsp; &nbsp;|&nbsp; &nbsp;<a href="contractor-view.php">View All
+                                Contractors</a></h4>
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="home.php">Home</a></li>
@@ -20,7 +20,7 @@
                     </div>
                 </div>
             </div>
-            <form action="contractor-info-save.php" method="post" class="needs-validation"
+            <form action="contractor-save.php" method="post" class="needs-validation"
                 enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-lg-12">
@@ -62,7 +62,7 @@
                                         <div class="form-group">
                                             <label for="group">PWD-Registration No and Valid Date Upto<span
                                                     class="text-danger">*</span></label>
-                                            <input class="form-control" type="file" accept="PDF/*" id="formFile"
+                                            <input class="form-control" type="file" accept=".pdf" id="formFile"
                                                 name="pwd" value="Upload PDF File">
 
                                         </div>
@@ -100,7 +100,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="group">Pan Card Number<span class="text-danger">*</span></label>
-                                            <input class="form-control" type="file" accept="PDF/*" id="formFile"
+                                            <input class="form-control" type="file" accept=".pdf" id="formFile"
                                                 name="pancard_number" value="Upload PDF File" required>
                                         </div>
                                     </div>
@@ -109,7 +109,7 @@
                                         <div class="form-group">
                                             <label for="group">Good Service Tax Number(GST No) <span
                                                     class="text-danger">*</span></label>
-                                            <input class="form-control" type="file" accept="PDF/*" id="formFile"
+                                            <input class="form-control" type="file" accept=".pdf" id="formFile"
                                                 name="gst_number" value="Upload PDF File" required>
 
                                         </div>

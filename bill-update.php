@@ -72,8 +72,16 @@ if (isset($_GET['bill_id']) && is_numeric($_GET['bill_id'])) {
                                             <select class="form-control" id="type" name="name_of_work" required>
                                                 <?php
                                                 foreach ($bill as $value) {
-                                                    ?>
-                                                    <option value="<?php echo $value['name_of_work'] ?>"><?php echo $value['name_of_work'] ?></option>
+                                                    $projectId = $value['project_id'];
+
+                                                    // Perform the query
+                                                    $projectName = $database->get('project', 'name_of_work', [
+                                                        'AND' => [
+                                                            'p_id' => $projectId,
+                                                            'is_deleted' => 0,
+                                                        ],
+                                                    ]);                                                    ?>
+                                                    <option value="<?php echo $value['project_id']; ?>"><?php echo $projectName; ?></option>
                                                     <?php
                                                 }
                                                 ?>

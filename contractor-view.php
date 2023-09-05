@@ -1,7 +1,7 @@
 <?php
 include 'header.php';
 $database = new Database();
-$contractors= $database->select("contractors", "*", ['is_deleted' => 0]);
+$contractor = $database->select("contractors", "*", ['is_deleted' => 0]);
 ?>
 <div class="main-content">
     <div class="page-content">
@@ -9,7 +9,7 @@ $contractors= $database->select("contractors", "*", ['is_deleted' => 0]);
             <div class="row">
                 <div class="col-lg-12">
                     <div class="col mb-3 text-md-end">
-                        <button type="button" onclick="location.href = 'project-add.php';"
+                        <button type="button" onclick="location.href = 'contractor-add.php';"
                             class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn"
                             data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Add
                             Contractor</button>
@@ -34,22 +34,26 @@ $contractors= $database->select("contractors", "*", ['is_deleted' => 0]);
                                         </div>
                                     </th>
                                     <th class="sort" data-sort="c_id">Sr. No. &nbsp;&nbsp;&nbsp;&nbsp;</th>
-                                    <th class="sort" data-sort="name_of_work">Name of Work &nbsp;&nbsp;&nbsp;&nbsp; </th>
-                                    <th class="sort" data-sort="name_of_agency">Name of Agency &nbsp;&nbsp;&nbsp;&nbsp;</th>
-                                    <th class="sort" data-sort="agreement_no"> Agreement No.
+                                    <th class="sort" data-sort="name_of_contractor">Name of Contractor
+                                        &nbsp;&nbsp;&nbsp;&nbsp; </th>
+                                    <th class="sort" data-sort="address_of_contractor">Address of Contractor
                                         &nbsp;&nbsp;&nbsp;&nbsp;</th>
-                                    <th class="sort" data-sort="sub_division">Sub-Division &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <th class="sort" data-sort="contractor_representative"> Name and Mobile Number of
+                                        Contractor Representative&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                    <th class="sort" data-sort="pwd">PWD-Registration No and Valid Date
+                                        Upto&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                    <th class="sort" data-sort="pin_cod">PIN Code &nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                    <th class="sort" data-sort="email">Email-ID &nbsp;&nbsp;</th>
+                                    <th class="sort" data-sort="mobile_number">Mobile Number&nbsp;&nbsp;</th>
+                                    <th class="sort" data-sort="landline_number">Landline Number &nbsp;&nbsp;</th>
+                                    <th class="sort" data-sort="pancard_number">Pan Card Number &nbsp;&nbsp;</th>
+                                    <th class="sort" data-sort="gst_number">Good Service Tax Number(GST No) &nbsp;&nbsp;
                                     </th>
-                                    <th class="sort" data-sort="authority">Authority &nbsp;&nbsp;</th>
-                                    <th class="sort" data-sort="date_receipt_tendor">Date of receipt of tendor
-                                        &nbsp;&nbsp;</th>
-                                    <th class="sort" data-sort="date_work_order">Date of work order &nbsp;&nbsp;
-                                    </th>
-                                    <th class="sort" data-sort="star_rate_cement">Star Rate of Cement Rs. &nbsp;&nbsp;</th>
-                                    <th class="sort" data-sort="star_rate_steel">Star Rate of Steel Rs. &nbsp;&nbsp;</th>
-                                    <th class="sort" data-sort="labour">Labour &nbsp;&nbsp;</th>
-                                    <th class="sort" data-sort="material">Material &nbsp;&nbsp;</th>
-                                    <th class="sort" data-sort="pol">POL &nbsp;&nbsp;</th>
+                                    <th class="sort" data-sort="bank_name">Bank Name &nbsp;&nbsp;</th>
+                                    <th class="sort" data-sort="account_number">Account Number &nbsp;&nbsp;</th>
+                                    <th class="sort" data-sort="ifsc_code">IFSC Code &nbsp;&nbsp;</th>
+                                    <th class="sort" data-sort="account_number">Account Type &nbsp;&nbsp;</th>
+                                    <th class="sort" data-sort="branch_address">Branch Address &nbsp;&nbsp;</th>
 
                                     <th class="sort" data-sort="action">Action</th>
                                 </tr>
@@ -58,7 +62,7 @@ $contractors= $database->select("contractors", "*", ['is_deleted' => 0]);
                                 <tr>
                                     <?php
                                     $count = 1;
-                                    foreach ($project as $value) {
+                                    foreach ($contractor as $value) {
                                         ?>
                                         <th scope="row">
                                             <div class="form-check">
@@ -74,43 +78,55 @@ $contractors= $database->select("contractors", "*", ['is_deleted' => 0]);
                                             <?php echo $count++; ?>
                                         </td>
                                         <td class="customer_name">
-                                            <?php echo $value['name_of_work']; ?>
+                                            <?php echo $value['name_of_contractor']; ?>
                                         </td>
 
                                         <td class="customer_name">
-                                            <?php echo $value['name_of_agency']; ?>
+                                            <?php echo $value['address_of_contractor']; ?>
                                         </td>
                                         <td class="customer_name">
-                                            <?php echo $value['agreement_no']; ?>
+                                            <?php echo $value['contractor_representative']; ?>
                                         </td>
                                         <td class="customer_name">
-                                            <?php echo $value['sub_division']; ?>
+                                            <?php echo $value['pwd']; ?>
                                         </td>
                                         <td class="customer_name">
-                                            <?php echo $value['authority']; ?>
-                                        </td>
-
-                                        <td class="customer_name">
-                                            <?php echo $value['date_receipt_tender']; ?>
+                                            <?php echo $value['pin_code']; ?>
                                         </td>
 
                                         <td class="customer_name">
-                                            <?php echo $value['date_work_order']; ?>
+                                            <?php echo $value['email']; ?>
+                                        </td>
+
+                                        <td class="customer_name">
+                                            <?php echo $value['mobile_number']; ?>
                                         </td>
                                         <td class="customer_name">
-                                            <?php echo $value['star_rate_cement']; ?>
+                                            <?php echo $value['landline_number']; ?>
                                         </td>
                                         <td class="customer_name">
-                                            <?php echo $value['star_rate_steel']; ?>
+                                            <?php echo $value['pancard_number']; ?>
                                         </td>
                                         <td class="customer_name">
-                                            <?php echo $value['labour']; ?>
+                                            <?php echo $value['gst_number']; ?>
                                         </td>
                                         <td class="customer_name">
-                                            <?php echo $value['material']; ?>
+                                            <?php echo $value['bank_name']; ?>
                                         </td>
                                         <td class="customer_name">
-                                            <?php echo $value['pol']; ?>
+                                            <?php echo $value['account_number']; ?>
+                                        </td>
+                                        <td class="customer_name">
+                                            <?php echo $value['ifsc_code']; ?>
+                                        </td>
+                                        <td class="customer_name">
+                                            <?php echo $value['account_type']; ?>
+                                        </td>
+                                        <td class="customer_name">
+                                            <?php echo $value['branch_address']; ?>
+                                        </td>
+                                        <td class="customer_name">
+                                            <?php echo $value['branch_telephone_number']; ?>
                                         </td>
 
 
@@ -118,22 +134,17 @@ $contractors= $database->select("contractors", "*", ['is_deleted' => 0]);
                                             <div class="d-flex gap-2">
                                                 <div class="edit">
                                                     <button class="btn btn-sm btn-success edit-item-btn"
-                                                        onClick="location.href = 'project-update.php?p_id=<?php echo $value['p_id']; ?>';"
+                                                        onClick="location.href = 'contractor-update.php?c_id=<?php echo $value['c_id']; ?>';"
                                                         data-bs-toggle="modal" data-bs-target="#showModal">Edit</button>
                                                 </div>
                                                 <div class="remove">
 
-                                                <a href="project-delete.php?p_id=<?php echo $value['p_id'] ?>" >
-                                                            <button class="btn btn-sm btn-danger remove-item-btn" onclick='return delete_confirm()'
-                                                                data-bs-toggle="modal" data-bs-target="#deleteRecordModal">Delete</button></a>
-                                                    
-                                                                
+                                                    <a href="contractor-delete.php?c_id=<?php echo $value['c_id'] ?>">
+                                                        <button class="btn btn-sm btn-danger remove-item-btn"
+                                                            onclick='return delete_confirm()' data-bs-toggle="modal"
+                                                            data-bs-target="#deleteRecordModal">Delete</button></a>
                                                 </div>
-                                                <div class="print">
-                                                    <button class="btn btn-sm btn-info edit-item-btn"
-                                                        onClick="location.href = 'bill.php?p_id=<?php echo $value['p_id']; ?>';"
-                                                        data-bs-toggle="modal" data-bs-target="#showModal">Print</button>
-                                                </div>
+                                                
 
 
                                             </div>

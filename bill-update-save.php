@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $bill_id = $_POST['bill_id'];
 
     $data = [
-        "name_of_work" => $_POST['name_of_work'],
+        "project_id" => $_POST['name_of_work'],
         "date_measurement" => $_POST['date_measurement'],
         "total_amount" => $_POST['total_amount'],
         "quantity_cement" => $_POST['quantity_cement'],
