@@ -1,45 +1,552 @@
 <?php
 session_start();
 include './inc/database.php';
-$user = $_SESSION['user_login'];
 
-$db = new Database();
-$id = $user['id'];
+$database = new Database();
 
-// Corrected date format
-$dateString = "2021-08-13"; // Change this to your desired date
+if (isset($_GET['p_id']) && is_numeric($_GET['p_id'])) {
+    $p_id = $_GET['p_id'];
+    $project = $database->get("project", "*", ["p_id" => $p_id]);
 
-// Create a DateTime object from the input date
-$date = new DateTime($dateString);
+    if (!$project) {
+        echo "Record not found.";
+        exit;
+    }
+} else {
+    echo "Invalid request.";
+    exit;
+}
+function getLastThreeMonths($givenDate)
+{
+    // Convert the given date to a DateTime object
+    $date = new DateTime($givenDate);
 
-// Initialize an array to store the month names
-$months = array();
+    // Initialize an array to store the last three months
+    $lastThreeMonths = array();
 
-// Subtract one month to exclude the current month
-$date->modify('-1 month');
+    // Loop to get the last three months
+    for ($i = 0; $i < 3; $i++) {
+        // Subtract one month from the current date
+        $date->modify('-1 month');
 
-for ($i = 0; $i < 3; $i++) {
-    // Get the month and year of the current date in the format "F-Y"
-    $monthName = $date->format('F-Y');
-    
-    $months[] = $monthName;
+        // Get the year and month in "Y-m-00" format
+        $yearMonth = $date->format('Y-m-00');
 
-    // Move to the previous month
-    $date->modify('-1 month');
+        // Add the result to the array
+        $lastThreeMonths[] = $yearMonth;
+    }
+
+    // Return the array of last three months
+    return $lastThreeMonths;
 }
 
-// Reverse the array to get the names in the correct order (previous to most recent)
-$months = array_reverse($months);
+function getallMonths($givenDate)
+{
+    // Convert the given date to a DateTime object
+    $date = new DateTime($givenDate);
 
-// Create a comma-separated list of month names
-$monthList = implode("', '", $months);
-echo $monthList;
+    // Initialize an array to store the last three months
+    $allMonths = array();
 
+    // Loop to get the last three months
+    for ($i = 0; $i < 3; $i++) {
+        // Subtract one month from the current date
+        $date->modify('month');
 
-var_dump($data);// Process the retrieved data as needed
-foreach ($data as $row) {
-    echo $row['month']."\n";
-    echo $row['pol']."\n";
-    echo $row['labour']."\n";
+        // Get the year and month in "Y-m-00" format
+        $yearMonth = $date->format('M-Y');
+
+        // Add the result to the array
+        $allMonths[] = $yearMonth;
+    }
+
+    // Return the array of last three months
+    return $allMonths;
 }
+
+
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Price Escalation Statement</title>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/javascript" src="https://www.hostmath.com/Math/MathJax.js?config=OK"></script>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <h4>Price Escalation Statement</h4>
+
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-lg-7">
+                <strong>Name of Division: </strong> Waghur Dam Division, Jalgaon <br>
+                <strong>Name of Work:</strong>
+                <?php echo $project['name_of_work']; ?><br>
+                <strong>Name of Agency:</strong>
+                <?php echo $project['name_of_agency']; ?> <br>
+                <strong>Agreement No:</strong>
+                <?php echo $project['agreement_no']; ?>
+            </div>
+            <div class="col">
+                <strong>Sub-Division:</strong>
+                <?php echo $project['sub_division']; ?><br>
+                <strong>Authority:</strong>
+                <?php echo $project['authority']; ?>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-lg-5">
+                <table style="border: 1px solid black; ">
+                    <tr>
+                        <td>
+                            <strong>Date of receipt of tendor: </strong> <br>
+                        </td>
+                        <td>
+                            <?php
+                            echo date("d-M-y", strtotime($project['date_receipt_tender']));
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Date of work order </strong><br>
+                        </td>
+                        <td>
+                            <?php echo $project['date_work_order'];
+                            $bill_start_date=$project['date_work_order'];
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Star Rate of Cement Rs.: </strong>
+                        </td>
+                        <td>
+                            <?php echo $project['star_rate_cement']; ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Star Rate of Steel Rs.: </strong><br>
+                        </td>
+                        <td>
+                            <?php echo $project['star_rate_steel']; ?>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class=" col col-lg-4">
+                <table style="border: 1px solid black;">
+                    <thead>
+                        <h4 style="font-size: 15px;"><b>Basics Indices for the presiding months</b></h4>
+                        <th>Month</th>
+                        <th>Labour</th>
+                        <th>Material</th>
+                        <th>POL</th>
+                        <th>Steel</th>
+                        <th>Cement</th>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $givenDate = $project['date_receipt_tender']; // Replace with your desired date
+                        $lastThreeMonths = getLastThreeMonths($givenDate);
+                        $data = $database->select("price_escalation", "*", ['month' => $lastThreeMonths]);
+
+                        $rowCount = count($data);
+
+                        $labourSum = 0;
+                        $materialSum = 0;
+                        $polSum = 0;
+                        $steelSum = 0;
+                        $cementSum = 0;
+
+                        foreach ($data as $row) {
+                            $formattedMonth = date("M-Y", strtotime($row['month']));
+                            ?>
+                            <tr>
+                                <td>
+                                    <?php echo $formattedMonth ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['labour'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['material'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['pol'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['steel'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['cement'] ?>
+                                </td>
+                            </tr>
+                            <?php
+                            $labourSum += $row['labour'];
+                            $materialSum += $row['material'];
+                            $polSum += $row['pol'];
+                            $steelSum += $row['steel'];
+                            $cementSum += $row['cement'];
+                        }
+
+                        $labourAvg = $rowCount > 0 ? round($labourSum / $rowCount, 2) : 0;
+                        $materialAvg = $rowCount > 0 ? round($materialSum / $rowCount, 2) : 0;
+                        $polAvg = $rowCount > 0 ? round($polSum / $rowCount, 2) : 0;
+                        $steelAvg = $rowCount > 0 ? round($steelSum / $rowCount, 2) : 0;
+                        $cementAvg = $rowCount > 0 ? round($cementSum / $rowCount, 2) : 0;
+
+                        ?>
+                        <tr>
+                            <th>Av.Index</th>
+                            <th>
+                                <?php echo $labourAvg ?>
+                            </th>
+                            <th>
+                                <?php echo $materialAvg ?>
+                            </th>
+                            <th>
+                                <?php echo $polAvg ?>
+                            </th>
+                            <th>
+                                <?php echo $steelAvg ?>
+                            </th>
+                            <th>
+                                <?php echo $cementAvg ?>
+                            </th>
+
+                        </tr>
+                        <tr>
+                            <th style="font-size: 11px;">%as per Tender</th>
+                            <th>
+                                <?php echo $project["labour"] ?>
+                            </th>
+                            <th>
+                                <?php echo $project["material"] ?>
+                            </th>
+                            <th>
+                                <?php echo $project["pol"] ?>
+                            </th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <center>
+        <h6>R.A. BILL No. & FINAL</h6>
+    </center>
+    <table class="margin mt-5">
+    <tbody>
+        <tr>
+            <td rowspan="2"><strong>Sr. No</strong></td>
+            <td rowspan="2"><strong>Date Of Measurement</strong></td>
+            <td rowspan="2"><strong>Total Amount:</strong></td>
+            <td colspan="4"><strong>Deduct: Schedule A/Steel/Cement/Bulk Asphalt Amount</strong></td>
+            <td rowspan="2"><strong>Net/Amount for price Escalation</strong></td>
+            <td rowspan="2" style="padding: 7px;"><strong>Month</strong></td>
+            <td colspan="3"><strong>LABOUR</strong>
+                <font style="font-size: 12px;">
+                    \[V_{1}=0.85P\left(\begin{array}{c}\frac{K_{1}}{100}\times\frac{L_{1}-L_{0}}{L_{0}}\end{array}\right)\]
+                </font>
+            </td>
+            <td colspan="3"><strong>MATERIAL</strong>
+                <font style="font-size: 12px;">
+                    \[V_{2}=0.85P\left(\begin{array}{c}\frac{K_{2}}{100}\times\frac{M_{1}-M_{0}}{M_{0}}\end{array}\right)\]
+                </font>
+            </td>
+            <td colspan="3"><strong>POL</strong>
+                <font style="font-size: 12px;">
+                    \[V_{3}=0.85P\left(\begin{array}{c}\frac{K_{3}}{100}\times\frac{P_{1}-P_{0}}{P_{0}}\end{array}\right)\]
+                </font>
+            </td>
+            <td colspan="3"><strong>STEEL</strong>
+                <font style="font-size: 10px;">\[V_{5}=\frac{SO\left({SI_{1}}-{SI_{0}}\right)}{SI_{0}}\times T\]
+                </font>
+            </td>
+            <td colspan="3"><strong>CEMENT</strong>
+                <font style="font-size: 10px;">\[V_{5}=\frac{SO\left({SI_{1}}-{SI_{0}}\right)}{SI_{0}}\times T\]
+                </font>
+            </td>
+        </tr>
+        <tr class="pad">
+            <td>Particular</td>
+            <td>Qty.</td>
+            <td>Rate</td>
+            <td>amount</td>
+            <td>Index</td>
+            <td>Av.Index</td>
+            <td>Amount</td>
+            <td>Index</td>
+            <td>Av.Index</td>
+            <td>Amount</td>
+            <td>Index</td>
+            <td>Av.Index</td>
+            <td>Amount</td>
+            <td>Index</td>
+            <td>Av.Index</td>
+            <td>Amount</td>
+            <td>Index</td>
+            <td>Av.Index</td>
+            <td>Amount</td>
+        </tr>
+        <tr class="pad">
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+            <td>10</td>
+            <td>11</td>
+            <td>12</td>
+            <td>10</td>
+            <td>11</td>
+            <td>12</td>
+            <td>10</td>
+            <td>11</td>
+            <td>12</td>
+            <td>10</td>
+            <td>11</td>
+            <td>12</td>
+            <td>10</td>
+            <td>11</td>
+            <td>12</td>
+        </tr>
+        <tr class="pad">
+            <td></td>
+        </tr>
+        <?php
+$c = 0;
+$projectdata = $database->select(
+    "bills",
+    "*",
+    ['project_id' => $p_id]
+);
+
+foreach ($projectdata as $data) {
+    $c++;
+    $bill_start_date = $data['date_measurement'];
+
+    // Fetch bill end date from the database based on project data
+    $bill_end_date_query = $database->query("SELECT MAX(month) AS max_month
+                                             FROM price_escalation
+                                             WHERE month >= '$bill_start_date'")
+                                  ->fetch();
+    
+    // Extract the bill end date from the query result
+    $bill_end_date = $bill_end_date_query['max_month'];
+
+    // Fetch bill data for the entire project
+    $bill_data = $database->query("SELECT * 
+                                   FROM price_escalation 
+                                   WHERE month >= '$bill_start_date' AND month <= '$bill_end_date'")
+                        ->fetchAll();
+    // Rest of your code...
+
+    echo '<tr>';
+    echo '<td>' . $c . '</td>';
+    echo '<td>' . date("d-M-y", strtotime($data['date_measurement'])) . '</td>';
+    echo '<td>' . $data['total_amount'] . '</td>';
+    echo '<td>Cement <br> Steel <br> B.A 60/70<br> B.A 80/100 <br>Clause-38</td>';
+    echo '<td>' . $data['quantity_cement'] . "\n" . $data['quantity_steel'] . '</td>';
+    echo '<td>' . $project['star_rate_cement'] . "\n" . $project['star_rate_steel'] . '</td>';
+
+    // Calculate amounts
+    $amount_cement = $project['star_rate_cement'] * $data['quantity_cement'];
+    $amount_steel = $project['star_rate_steel'] * $data['quantity_steel'];
+    $net_amount = $amount_cement + $amount_steel;
+
+    echo '<td>' . $amount_cement . "\n" . $amount_steel . '</td>';
+    echo '<td>' . ($data['total_amount'] - $net_amount) . '</td>';
+
+    // Print unique months
+    echo '<td>';
+
+    foreach ($bill_data as $bill) {
+        $formatted_date = date("M-y", strtotime($bill['month']));
+
+        // Check if this full date has already been printed
+            echo $formatted_date . "\n";
+         }
+    echo '</td>';
+
+    // Calculate and print labor data
+    echo '<td>';
+    $labourcount = 0;
+    $totalLabourAmount = 0;
+    foreach ($bill_data as $bill) {
+        echo $bill['labour'] . "\n";
+        $totalLabourAmount += $bill['labour'];
+        $labourcount++;
+    }
+    echo '</td>';
+    echo '<td>' . (($labourcount > 0) ? $totalLabourAmount / $labourcount : 0) . '</td>';
+
+    // Similar calculations and printing for material, pol, steel, and cement data...
+
+    echo '</tr>';
+}
+
+echo '<tr>';
+// ... Print the total row here
+echo '</tr>';
+?>
+
+        <tr>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+
+        <tr>
+            <th colspan="2">Grand Total</th>
+            <th>5454545</th>
+            <th>&nbsp; &nbsp;&nbsp;</th>
+            <th>&nbsp; &nbsp;&nbsp;</th>
+            <th colspan="2">Grand Total</th>
+            <th>2165654</th>
+            <th></th>
+            <th colspan="2" style="font-size: 14px;">G.T. of LABOUR</th>
+            <th>1545</th>
+            <th colspan="2" style="font-size: 14px;">G.T. of MATERIAL</th>
+            <th>64545</th>
+            <th colspan="2" style="font-size: 14px;">G.T. of POL</th>
+            <th>5454</th>
+            <th colspan="2" style="font-size: 14px;">G.T. of STEEL</th>
+            <th>44545</th>
+            <th colspan="2" style="font-size: 14px;">G.T. of CEMENT</th>
+            <th>165646</th>
+        </tr>
+    </tbody>
+</table>
+
+
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-5 ml-5">
+                <h3 style="font-size: 15px;"><b><u>Update Quantity of Cement/Steel</b></u></h3>
+
+                <table style="border: 1px solid black;">
+                    <tr>
+                        <td style="width:70%;">
+                            <strong>Cement</strong><br>
+                        </td>
+                        <td>
+                            13-Aug-21
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Steel</strong><br>
+                        </td>
+                        <td>
+                            30-Sep-21
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>B.A. 60/70 </strong>
+                        </td>
+                        <td>4140</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>B.A. 80/100 </strong><br>
+                        </td>
+                        <td>
+                            50220
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class=" col col-lg-4">
+                <table style="border: 1px solid black;">
+                    <thead>
+                        <h4 style="font-size: 15px;"><b>ABSTRACT</b></h4>
+                        <th>Particulars</th>
+                        <th>Upto Date Amt.</th>
+                        <th>Previous Paid</th>
+                        <th>Now to be Paid</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Labour</td>
+                            <td>384</td>
+                            <td>132.9</td>
+                            <td>90.13</td>
+
+                        </tr>
+                        <tr>
+                            <td>Material</td>
+                            <td>5646</td>
+                            <td>656</td>
+                            <td>66</td>
+
+                        </tr>
+                        <tr>
+                            <td>Pol</td>
+                            <td>6456</td>
+                            <td>6151</td>
+                            <td>515</td>
+
+                        </tr>
+                        <tr>
+                            <td>Steel</td>
+                            <td>386.50</td>
+                            <td>131.33</td>
+                            <td>118.03</td>
+                        </tr>
+                        <tr>
+                            <td>Cement</td>
+                            <td>51545</td>
+                            <td>545454</td>
+                            <td>1546514</td>
+
+                        </tr>
+                        <tr>
+                            <th>TOTAL Rs.</th>
+                            <th>5664496</th>
+                            <th>62154</th>
+                            <th>1212121215</th>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+</body>
+
+</html>
