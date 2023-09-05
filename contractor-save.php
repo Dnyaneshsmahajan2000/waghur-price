@@ -44,6 +44,8 @@ $data['gst_number'] = $folder3;
 
 
 
+
+
 $contractor = $database->insert("contractors", $data);
 
 if ($contractor) {

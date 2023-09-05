@@ -339,6 +339,30 @@ date_default_timezone_set("asia/kolkata");
                                     </ul>
                                 </div>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link menu-link" href="#customers6" data-bs-toggle="collapse" role="button"
+                                    aria-expanded="false" aria-controls="customers">
+                                    <i class=" ri-user-3-fill"></i> <span data-key="t-authentication"> Tender</span></a>
+                                <div class="collapse menu-dropdown" id="customers6">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link collapsed" data-bs-target="#forms-nav"
+                                                href="tender-add.php">
+                                                <span>Add Tender</span>
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link collapsed" data-bs-target="#forms-nav"
+                                                href="tender-view.php">
+                                                <span>View All Tender</span>
+                                            </a>
+                                        </li>
+
+
+                                    </ul>
+                                </div>
+                            </li>
                         <?php } ?>
 
                         <li class="nav-item">

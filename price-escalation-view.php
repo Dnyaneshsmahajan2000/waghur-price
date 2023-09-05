@@ -25,7 +25,7 @@ $price_escalation = $database->select("price_escalation", "*", ['is_deleted' => 
                                         <tr>
                                             <th scope="col" style="width: 50px;">
                                                 <div class="form-check">
-                                                    <!--                                                        <input class="form-check-input" type="checkbox" id="checkAll"
+                                                    <!--   <input class="form-check-input" type="checkbox" id="checkAll"
                                                             value="option">-->
                                                 </div>
                                             </th>
