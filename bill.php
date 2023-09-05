@@ -261,7 +261,7 @@ function getallMonths($givenDate)
     <center>
         <h6>R.A. BILL No. & FINAL</h6>
     </center>
-    <table class="margin mt-5">
+    <table class="margin mt-5 ">
         <tbody>
             <tr>
                 <td rowspan="2"><strong>Sr. No</strong></td>
@@ -344,7 +344,7 @@ function getallMonths($givenDate)
             <tr class="pad">
                 <td></td>
             </tr>
-            <tr style="vertical-align: text-top;">
+            
                 <?php
                 $c = 0;
                 $projectdata = $database->select(
@@ -355,6 +355,7 @@ function getallMonths($givenDate)
                 $count=1;
                 foreach ($projectdata as $data) {
                     ?>
+                   <tr style="vertical-align: text-top;"> 
                     <td>
                         <?php echo ++$c; ?>
                     </td>
@@ -375,7 +376,7 @@ function getallMonths($givenDate)
                     <td>
                         <?php echo $data['total_amount']; ?>
                     </td>
-                    <td>Cement <br> Steel <br>B.A 60/70<br> B.A 80/100 <br>Clause-38</td>
+                    <td style="  ">Cement <br> Steel <br>B.A 60/70<br> B.A 80/100 <br>Clause-38</td>
                     <td>
                         <?php echo $data['quantity_cement'] . "\n" . $data['quantity_steel']; ?>
                     </td>

@@ -36,7 +36,7 @@ if (isset($_GET['c_id']) && is_numeric($_GET['c_id'])) {
                     </div>
                 </div>
             </div>
-            <form action="contractor-save.php" method="post" class="needs-validation" enctype="multipart/form-data">
+            <form action="contractor-update-save.php" method="post" class="needs-validation" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
@@ -46,7 +46,7 @@ if (isset($_GET['c_id']) && is_numeric($_GET['c_id'])) {
 
                             <div class="card-body">
                                 <div class="row gy-3">
-                                    <input type="hidden" name="pe_id" value="<?php echo $contractor['c_id']; ?>">
+                                    <input type="hidden" name="c_id" value="<?php echo $contractor['c_id']; ?>">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label> Name of Contractor <span class="text-danger">*</span></label>
@@ -174,9 +174,8 @@ if (isset($_GET['c_id']) && is_numeric($_GET['c_id'])) {
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="group">Account Type<span class="text-danger">*</span></label>
-                                            <select class="form-control" id="account_type" name="account_type" 
+                                            <select class="form-control" name="account_type" id="account_type" 
                                                 value="<?php echo $contractor['account_type']; ?>">
-                                                <option value="" disabled selected>Please select Account Type</option>
                                                 <option value="current">Current</option>
                                                 <option value="saving">Saving</option>
                                             </select>
