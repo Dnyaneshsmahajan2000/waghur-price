@@ -68,7 +68,6 @@ function getallMonths($givenDate)
 
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -131,7 +130,7 @@ function getallMonths($givenDate)
                         </td>
                         <td>
                             <?php echo $project['date_work_order'];
-                            $bill_start_date=$project['date_work_order'];
+                            $bill_start_date = $project['date_work_order'];
                             ?>
                         </td>
                     </tr>
@@ -261,278 +260,338 @@ function getallMonths($givenDate)
         <h6>R.A. BILL No. & FINAL</h6>
     </center>
     <table class="margin mt-5">
-    <tbody>
-        <tr>
-            <td rowspan="2"><strong>Sr. No</strong></td>
-            <td rowspan="2"><strong>Date Of Measurement</strong></td>
-            <td rowspan="2"><strong>Total Amount:</strong></td>
-            <td colspan="4"><strong>Deduct: Schedule A/Steel/Cement/Bulk Asphalt Amount</strong></td>
-            <td rowspan="2"><strong>Net/Amount for price Escalation</strong></td>
-            <td rowspan="2" style="padding: 7px;"><strong>Month</strong></td>
-            <td colspan="3"><strong>LABOUR</strong>
-                <font style="font-size: 12px;">
-                    \[V_{1}=0.85P\left(\begin{array}{c}\frac{K_{1}}{100}\times\frac{L_{1}-L_{0}}{L_{0}}\end{array}\right)\]
-                </font>
-            </td>
-            <td colspan="3"><strong>MATERIAL</strong>
-                <font style="font-size: 12px;">
-                    \[V_{2}=0.85P\left(\begin{array}{c}\frac{K_{2}}{100}\times\frac{M_{1}-M_{0}}{M_{0}}\end{array}\right)\]
-                </font>
-            </td>
-            <td colspan="3"><strong>POL</strong>
-                <font style="font-size: 12px;">
-                    \[V_{3}=0.85P\left(\begin{array}{c}\frac{K_{3}}{100}\times\frac{P_{1}-P_{0}}{P_{0}}\end{array}\right)\]
-                </font>
-            </td>
-            <td colspan="3"><strong>STEEL</strong>
-                <font style="font-size: 10px;">\[V_{5}=\frac{SO\left({SI_{1}}-{SI_{0}}\right)}{SI_{0}}\times T\]
-                </font>
-            </td>
-            <td colspan="3"><strong>CEMENT</strong>
-                <font style="font-size: 10px;">\[V_{5}=\frac{SO\left({SI_{1}}-{SI_{0}}\right)}{SI_{0}}\times T\]
-                </font>
-            </td>
-        </tr>
-        <tr class="pad">
-            <td>Particular</td>
-            <td>Qty.</td>
-            <td>Rate</td>
-            <td>amount</td>
-            <td>Index</td>
-            <td>Av.Index</td>
-            <td>Amount</td>
-            <td>Index</td>
-            <td>Av.Index</td>
-            <td>Amount</td>
-            <td>Index</td>
-            <td>Av.Index</td>
-            <td>Amount</td>
-            <td>Index</td>
-            <td>Av.Index</td>
-            <td>Amount</td>
-            <td>Index</td>
-            <td>Av.Index</td>
-            <td>Amount</td>
-        </tr>
-        <tr class="pad">
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-            <td>5</td>
-            <td>6</td>
-            <td>7</td>
-            <td>8</td>
-            <td>9</td>
-            <td>10</td>
-            <td>11</td>
-            <td>12</td>
-            <td>10</td>
-            <td>11</td>
-            <td>12</td>
-            <td>10</td>
-            <td>11</td>
-            <td>12</td>
-            <td>10</td>
-            <td>11</td>
-            <td>12</td>
-            <td>10</td>
-            <td>11</td>
-            <td>12</td>
-        </tr>
-        <tr class="pad">
-            <td></td>
-        </tr>
-        <tr style="vertical-align: text-top;">
-            <?php
-            $c = 0;
-            $projectdata = $database->select(
-                "bills",
-                "*",
-                ['project_id' => $p_id]
-            );
-
-            foreach ($projectdata as $data) {
-            ?>
-                <td><?php echo ++$c; ?></td>
-                 
-                <td><?php 
-            $bill_end_date = $data['date_measurement'];
-                
-                echo date("d-M-y", strtotime($data['date_measurement'])); ?></td>
-                <td><?php echo $data['total_amount']; ?></td>
-                <td>Cement <br> Steel <br>B.A 60/70<br> B.A 80/100 <br>Clause-38</td>
-                <td><?php echo $data['quantity_cement'] . "\n" . $data['quantity_steel']; ?></td>
-                <td><?php echo $project['star_rate_cement'] . "\n" . $project['star_rate_steel']; ?></td>
-                <td><?php
-                    $amount = $project['star_rate_cement'] * $data['quantity_cement'];
-                    echo $amount . "\n";
-                    $amount1 = $project['star_rate_steel'] * $data['quantity_steel'];
-                    echo $amount1;
-
-                    $total_amount = $amount + $amount1;
-                    ?></td>
-                <td><?php $netamount = $data['total_amount'] - $total_amount;
-                    echo $netamount;
-                    ?></td>
-                <td><?php
-                    $bill_data = $database->query("SELECT * 
-                   FROM price_escalation 
-                   WHERE month >= '$bill_start_date' AND month <= '$bill_end_date'")->fetchAll();
-                    foreach ($bill_data as $bill) {
-                        echo date("M-y", strtotime($bill['month'])) . "\n";
-                    }
-                    ?></td>
-                <td><?php
-                    $labourcount = 0;
-                    $totalLabourAmount = 0;
-                    foreach ($bill_data as $bill) {
-                        echo $bill['labour'] . "\n";
-                        $totalLabourAmount += $bill['labour'];
-                        $labourcount++;
-                    }
-                    ?></td>
-                <td><?php
-                    $averageLabourAmount = ($labourcount > 0) ? $totalLabourAmount / $labourcount : 0;
-                    echo $averageLabourAmount;
-                    ?></td>
-                <td><?php ?></td>
-                <td><?php
-                    $materialcount = 0;
-                    $totalmaterialAmount = 0;
-                    foreach ($bill_data as $bill) {
-                        echo $bill['material'] . "\n";
-                        $materialcount++;
-                        $totalmaterialAmount += $bill['material'];
-                    }
-                    ?></td>
-                <td><?php
-                    $averagematerialAmount = ($materialcount > 0) ? $totalmaterialAmount / $materialcount : 0;
-                    echo $averagematerialAmount;
-                    ?></td>
-                <td></td>
-                <td><?php
-                    $polcount = 0;
-                    $totalpolAmount = 0;
-                    foreach ($bill_data as $bill) {
-                        echo $bill['pol'] . "\n";
-                        $polcount++;
-                        $totalpolAmount += $bill['pol'];
-                    }
-                    ?></td>
-                <td><?php
-                    $averagepolAmount = ($polcount > 0) ? $totalpolAmount / $polcount : 0;
-                    echo $averagepolAmount;
-                    ?></td>
-                <td></td>
-                <td><?php
-                    $steelcount = 0;
-                    $totalsteelAmount = 0;
-                    foreach ($bill_data as $bill) {
-                        echo $bill['steel'] . "\n";
-                        $steelcount++;
-                        $totalsteelAmount += $bill['steel'];
-                    }
-                    ?></td>
-                <td><?php
-                    $averagesteelAmount = ($steelcount > 0) ? $totalsteelAmount / $steelcount : 0;
-                    echo $averagesteelAmount;
-                    ?></td>
-                <td></td>
-                <td><?php
-                    $cementcount = 0;
-                    $totalcementAmount = 0;
-                    foreach ($bill_data as $bill) {
-                        echo $bill['cement'] . "\n";
-                        $cementcount++;
-                        $totalcementAmount += $bill['cement'];
-                    }
-                    ?></td>
-                <td><?php
-                    $averagecementAmount = ($cementcount > 0) ? $totalcementAmount / $cementcount : 0;
-                    echo $averagecementAmount;
-                    ?></td>
+        <tbody>
+            <tr>
+                <td rowspan="2"><strong>Sr. No</strong></td>
+                <td rowspan="2"><strong>Date Of Measurement</strong></td>
+                <td rowspan="2"><strong>Total Amount:</strong></td>
+                <td colspan="4"><strong>Deduct: Schedule A/Steel/Cement/Bulk Asphalt Amount</strong></td>
+                <td rowspan="2"><strong>Net/Amount for price Escalation</strong></td>
+                <td rowspan="2" style="padding: 7px;"><strong>Month</strong></td>
+                <td colspan="3"><strong>LABOUR</strong>
+                    <font style="font-size: 12px;">
+                        \[V_{1}=0.85P\left(\begin{array}{c}\frac{K_{1}}{100}\times\frac{L_{1}-L_{0}}{L_{0}}\end{array}\right)\]
+                    </font>
+                </td>
+                <td colspan="3"><strong>MATERIAL</strong>
+                    <font style="font-size: 12px;">
+                        \[V_{2}=0.85P\left(\begin{array}{c}\frac{K_{2}}{100}\times\frac{M_{1}-M_{0}}{M_{0}}\end{array}\right)\]
+                    </font>
+                </td>
+                <td colspan="3"><strong>POL</strong>
+                    <font style="font-size: 12px;">
+                        \[V_{3}=0.85P\left(\begin{array}{c}\frac{K_{3}}{100}\times\frac{P_{1}-P_{0}}{P_{0}}\end{array}\right)\]
+                    </font>
+                </td>
+                <td colspan="3"><strong>STEEL</strong>
+                    <font style="font-size: 10px;">\[V_{5}=\frac{SO\left({SI_{1}}-{SI_{0}}\right)}{SI_{0}}\times T\]
+                    </font>
+                </td>
+                <td colspan="3"><strong>CEMENT</strong>
+                    <font style="font-size: 10px;">\[V_{5}=\frac{SO\left({SI_{1}}-{SI_{0}}\right)}{SI_{0}}\times T\]
+                    </font>
+                </td>
+            </tr>
+            <tr class="pad">
+                <td>Particular</td>
+                <td>Qty.</td>
+                <td>Rate</td>
+                <td>amount</td>
+                <td>Index</td>
+                <td>Av.Index</td>
+                <td>Amount</td>
+                <td>Index</td>
+                <td>Av.Index</td>
+                <td>Amount</td>
+                <td>Index</td>
+                <td>Av.Index</td>
+                <td>Amount</td>
+                <td>Index</td>
+                <td>Av.Index</td>
+                <td>Amount</td>
+                <td>Index</td>
+                <td>Av.Index</td>
+                <td>Amount</td>
+            </tr>
+            <tr class="pad">
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+                <td>10</td>
+                <td>11</td>
+                <td>12</td>
+                <td>10</td>
+                <td>11</td>
+                <td>12</td>
+                <td>10</td>
+                <td>11</td>
+                <td>12</td>
+                <td>10</td>
+                <td>11</td>
+                <td>12</td>
+                <td>10</td>
+                <td>11</td>
+                <td>12</td>
+            </tr>
+            <tr class="pad">
                 <td></td>
             </tr>
-        <?php  ?>
+            <tr style="vertical-align: text-top;">
+                <?php
+                $c = 0;
+                $projectdata = $database->select(
+                    "bills",
+                    "*",
+                    ['project_id' => $p_id]
+                );
 
-        <tr>
-            <?php
-            ?>
-            <th></th>
-            <th>Total</th>
-            <th><?php
-                $totalamount = $data['total_amount'];
-                echo $totalamount;
-                ?></th>
-            <th>Total</th>
-            <th><?php
-                $amount = $data['quantity_cement'];
-                $amount1 = $data['quantity_steel'];
-                $totamount = $amount + $amount1;
-                echo $totamount;
-                ?></th>
-            <th>Total</th>
-            <th><?php
-                $amount = $project['star_rate_cement'] * $data['quantity_cement'];
-                $amount1 = $project['star_rate_steel'] * $data['quantity_steel'];
-                echo $netamount = $amount + $amount1;
-                ?></th>
-            <th><?php $finalamount = $totalamount - $netamount;
-                echo $finalamount; ?></th>
-            <th>Total</th>
-            <th><?php
-                echo number_format($totalLabourAmount, 2);
-                ?></th>
-            <th>Total</th>
-            <th><?php ?></th>
-            <th><?php echo number_format($totalmaterialAmount, 2);
-                ?></th>
-            <th>Total</th>
-            <th></th>
-            <th><?php echo number_format($totalpolAmount, 2);
-                ?></th>
-            <th>Total</th>
-            <th></th>
-            <th><?php echo number_format($totalsteelAmount, 2);
-                ?></th>
-            <th>Total</th>
-            <th></th>
-            <th><?php echo number_format($totalcementAmount, 2);
-                ?></th>
-            <th>Total</th>
-            <th></th>
-        </tr>
-        <?php }?>
+                foreach ($projectdata as $data) {
+                    ?>
+                    <td>
+                        <?php echo ++$c; ?>
+                    </td>
 
-        <tr>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-        </tr>
+                    <td>
+                        <?php
+                        $bill_end_date = $data['date_measurement'];
 
-        <tr>
-            <th colspan="2">Grand Total</th>
-            <th>5454545</th>
-            <th>&nbsp; &nbsp;&nbsp;</th>
-            <th>&nbsp; &nbsp;&nbsp;</th>
-            <th colspan="2">Grand Total</th>
-            <th>2165654</th>
-            <th></th>
-            <th colspan="2" style="font-size: 14px;">G.T. of LABOUR</th>
-            <th>1545</th>
-            <th colspan="2" style="font-size: 14px;">G.T. of MATERIAL</th>
-            <th>64545</th>
-            <th colspan="2" style="font-size: 14px;">G.T. of POL</th>
-            <th>5454</th>
-            <th colspan="2" style="font-size: 14px;">G.T. of STEEL</th>
-            <th>44545</th>
-            <th colspan="2" style="font-size: 14px;">G.T. of CEMENT</th>
-            <th>165646</th>
-        </tr>
-    </tbody>
-</table>
+                        echo date("d-M-y", strtotime($data['date_measurement'])); ?>
+                    </td>
+                    <td>
+                        <?php echo $data['total_amount']; ?>
+                    </td>
+                    <td>Cement <br> Steel <br>B.A 60/70<br> B.A 80/100 <br>Clause-38</td>
+                    <td>
+                        <?php echo $data['quantity_cement'] . "\n" . $data['quantity_steel']; ?>
+                    </td>
+                    <td>
+                        <?php echo $project['star_rate_cement'] . "\n" . $project['star_rate_steel']; ?>
+                    </td>
+                    <td>
+                        <?php
+                        $amount = $project['star_rate_cement'] * $data['quantity_cement'];
+                        echo $amount . "\n";
+                        $amount1 = $project['star_rate_steel'] * $data['quantity_steel'];
+                        echo $amount1;
+
+                        $total_amount = $amount + $amount1;
+                        ?>
+                    </td>
+                    <td>
+                        <?php $netamount = $data['total_amount'] - $total_amount;
+                        echo $netamount;
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                        $bill_data = $database->query("SELECT * 
+                   FROM price_escalation 
+                   WHERE month >= '$bill_start_date' AND month <= '$bill_end_date'")->fetchAll();
+                        foreach ($bill_data as $bill) {
+                            echo date("M-y", strtotime($bill['month'])) . "\n";
+                        }
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+
+                        
+                        $labourcount = 0;
+                        $totalLabourAmount = 0;
+                        foreach ($bill_data as $bill) {
+                            echo $bill['labour'] . "\n";
+                            $totalLabourAmount += $bill['labour'];
+                            $labourcount++;
+                        }
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                        $averageLabourAmount = ($labourcount > 0) ? $totalLabourAmount / $labourcount : 0;
+                        echo $averageLabourAmount;
+                        ?>
+                    </td>
+                    <td>
+                        <?php ?>
+                    </td>
+                    <td>
+                        <?php
+                        $materialcount = 0;
+                        $totalmaterialAmount = 0;
+                        foreach ($bill_data as $bill) {
+                            echo $bill['material'] . "\n";
+                            $materialcount++;
+                            $totalmaterialAmount += $bill['material'];
+                        }
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                        $averagematerialAmount = ($materialcount > 0) ? $totalmaterialAmount / $materialcount : 0;
+                        echo $averagematerialAmount;
+                        ?>
+                    </td>
+                    <td></td>
+                    <td>
+                        <?php
+                        $polcount = 0;
+                        $totalpolAmount = 0;
+                        foreach ($bill_data as $bill) {
+                            echo $bill['pol'] . "\n";
+                            $polcount++;
+                            $totalpolAmount += $bill['pol'];
+                        }
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                        $averagepolAmount = ($polcount > 0) ? $totalpolAmount / $polcount : 0;
+                        echo $averagepolAmount;
+                        ?>
+                    </td>
+                    <td></td>
+                    <td>
+                        <?php
+                        $steelcount = 0;
+                        $totalsteelAmount = 0;
+                        foreach ($bill_data as $bill) {
+                            echo $bill['steel'] . "\n";
+                            $steelcount++;
+                            $totalsteelAmount += $bill['steel'];
+                        }
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                        $averagesteelAmount = ($steelcount > 0) ? $totalsteelAmount / $steelcount : 0;
+                        echo $averagesteelAmount;
+                        ?>
+                    </td>
+                    <td></td>
+                    <td>
+                        <?php
+                        $cementcount = 0;
+                        $totalcementAmount = 0;
+                        foreach ($bill_data as $bill) {
+                            echo $bill['cement'] . "\n";
+                            $cementcount++;
+                            $totalcementAmount += $bill['cement'];
+                        }
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                        $averagecementAmount = ($cementcount > 0) ? $totalcementAmount / $cementcount : 0;
+                        echo $averagecementAmount;
+                        ?>
+                    </td>
+                    <td></td>
+                </tr>
+                <?php ?>
+
+                <tr style="vertical-align: text-top;">
+                    <?php
+                    ?>
+                    <th></th>
+                    <th>Total</th>
+                    <th>
+                        <?php
+                        $totalamount = $data['total_amount'];
+                        echo $totalamount;
+                        ?>
+                    </th>
+                    <th>Total</th>
+                    <th>
+                        <?php
+                        $amount = $data['quantity_cement'];
+                        $amount1 = $data['quantity_steel'];
+                        $totamount = $amount + $amount1;
+                        echo $totamount;
+                        ?>
+                    </th>
+                    <th>Total</th>
+                    <th>
+                        <?php
+                        $amount = $project['star_rate_cement'] * $data['quantity_cement'];
+                        $amount1 = $project['star_rate_steel'] * $data['quantity_steel'];
+                        echo $netamount = $amount + $amount1;
+                        ?>
+                    </th>
+                    <th>
+                        <?php $finalamount = $totalamount - $netamount;
+                        echo $finalamount; ?>
+                    </th>
+                    <th>Total</th>
+                    <th>
+                        <?php
+                        echo number_format($totalLabourAmount, 2);
+                        ?>
+                    </th>
+                    <th>Total</th>
+                    <th>
+                        <?php ?>
+                    </th>
+                    <th>
+                        <?php echo number_format($totalmaterialAmount, 2);
+                        ?>
+                    </th>
+                    <th>Total</th>
+                    <th></th>
+                    <th>
+                        <?php echo number_format($totalpolAmount, 2);
+                        ?>
+                    </th>
+                    <th>Total</th>
+                    <th></th>
+                    <th>
+                        <?php echo number_format($totalsteelAmount, 2);
+                        ?>
+                    </th>
+                    <th>Total</th>
+                    <th></th>
+                    <th>
+                        <?php echo number_format($totalcementAmount, 2);
+                        ?>
+                    </th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            <?php } ?>
+
+            <tr>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+
+            <tr>
+                <th colspan="2">Grand Total</th>
+                <th>5454545</th>
+                <th>&nbsp; &nbsp;&nbsp;</th>
+                <th>&nbsp; &nbsp;&nbsp;</th>
+                <th colspan="2">Grand Total</th>
+                <th>2165654</th>
+                <th></th>
+                <th colspan="2" style="font-size: 14px;">G.T. of LABOUR</th>
+                <th>1545</th>
+                <th colspan="2" style="font-size: 14px;">G.T. of MATERIAL</th>
+                <th>64545</th>
+                <th colspan="2" style="font-size: 14px;">G.T. of POL</th>
+                <th>5454</th>
+                <th colspan="2" style="font-size: 14px;">G.T. of STEEL</th>
+                <th>44545</th>
+                <th colspan="2" style="font-size: 14px;">G.T. of CEMENT</th>
+                <th>165646</th>
+            </tr>
+        </tbody>
+    </table>
 
 
 
