@@ -29,14 +29,12 @@ function getLastThreeMonths($givenDate)
         // Subtract one month from the current date
         $date->modify('-1 month');
 
-        // Get the year and month in "Y-m-00" format
-        $yearMonth = $date->format('Y-m-00');
+        $yearMonth = $date->format('Y-m-01');
 
         // Add the result to the array
         $lastThreeMonths[] = $yearMonth;
     }
 
-    // Return the array of last three months
     return $lastThreeMonths;
 }
 
@@ -165,9 +163,10 @@ function getallMonths($givenDate)
                     <tbody>
                         <?php
                         $givenDate = $project['date_receipt_tender']; // Replace with your desired date
+                    
                         $lastThreeMonths = getLastThreeMonths($givenDate);
                         $data = $database->select("price_escalation", "*", ['month' => $lastThreeMonths]);
-
+    
                         $rowCount = count($data);
 
                         $labourSum = 0;
@@ -184,19 +183,19 @@ function getallMonths($givenDate)
                                     <?php echo $formattedMonth ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['labour'] ?>
+                                    <?php echo number_format($row['labour'],1); ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['material'] ?>
+                                    <?php echo number_format($row['material'],1); ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['pol'] ?>
+                                    <?php echo number_format($row['pol'],1); ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['steel'] ?>
+                                    <?php echo number_format($row['steel'],1); ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['cement'] ?>
+                                    <?php echo number_format($row['cement'],1); ?>
                                 </td>
                             </tr>
                             <?php
@@ -218,20 +217,21 @@ function getallMonths($givenDate)
                             <th>Av.Index</th>
                             <th>
                                 <?php 
-                                $B=$labourAvg;
-                                echo $labourAvg ?>
+                                $Labour_B=$labourAvg;
+                                echo
+                                number_format($labourAvg,2) ?>
                             </th>
                             <th>
-                                <?php echo $materialAvg ?>
+                                <?php echo number_format($materialAvg,2); ?>
                             </th>
                             <th>
-                                <?php echo $polAvg ?>
+                                <?php echo number_format($polAvg,2); ?>
                             </th>
                             <th>
-                                <?php echo $steelAvg ?>
+                                <?php echo number_format($steelAvg,2); ?>
                             </th>
                             <th>
-                                <?php echo $cementAvg ?>
+                                <?php echo number_format($cementAvg,2); ?>
                             </th>
 
                         </tr>
@@ -239,7 +239,7 @@ function getallMonths($givenDate)
                             <th style="font-size: 11px;">%as per Tender</th>
                             <th>
                                 <?php 
-                                $D=$project['labour'];
+                               $Labour_D=$project['labour']/100;
                                 echo $project["labour"] ?>
                             </th>
                             <th>
@@ -262,8 +262,23 @@ function getallMonths($givenDate)
         <h6>R.A. BILL No. & FINAL</h6>
     </center>
     <table class="margin mt-5">
-        <tbody>
-            <tr>
+    <?php
+                $c = 0;
+                $projectdata = $database->select(
+                    "bills",
+                    "*",
+                    ['project_id' => $p_id]
+                );
+                $count=1;
+                $totalSum=0;
+                $netTotalSum=0;
+                foreach ($projectdata as $data) {
+                    ?>
+                     
+    <tbody>
+           <td></td>
+            
+           <tr>
                 <td rowspan="2"><strong>Sr. No</strong></td>
                 <td rowspan="2"><strong>Date Of Measurement</strong></td>
                 <td rowspan="2"><strong>Total Amount:</strong></td>
@@ -345,17 +360,7 @@ function getallMonths($givenDate)
                 <td></td>
             </tr>
             <tr style="vertical-align: text-top;">
-                <?php
-                $c = 0;
-                $projectdata = $database->select(
-                    "bills",
-                    "*",
-                    ['project_id' => $p_id]
-                );
-                $count=1;
-                foreach ($projectdata as $data) {
-                    ?>
-                    <td>
+               <td>
                         <?php echo ++$c; ?>
                     </td>
 
@@ -373,29 +378,30 @@ function getallMonths($givenDate)
                         echo date("d-M-y", strtotime($data['date_measurement'])); ?>
                     </td>
                     <td>
-                        <?php echo $data['total_amount']; ?>
+                        <?php echo number_format($data['total_amount']); ?>
                     </td>
                     <td>Cement <br> Steel <br>B.A 60/70<br> B.A 80/100 <br>Clause-38</td>
                     <td>
-                        <?php echo $data['quantity_cement'] . "\n" . $data['quantity_steel']; ?>
+                        <?php echo number_format($data['quantity_cement'],3) . "\n" . number_format($data['quantity_steel'],3); ?>
                     </td>
                     <td>
-                        <?php echo $project['star_rate_cement'] . "\n" . $project['star_rate_steel']; ?>
+                        <?php echo number_format($project['star_rate_cement']) . "\n" . number_format($project['star_rate_steel']); ?>
                     </td>
                     <td>
                         <?php
                         $amount = $project['star_rate_cement'] * $data['quantity_cement'];
-                        echo $amount . "\n";
+                        echo number_format($amount ). "\n";
                         $amount1 = $project['star_rate_steel'] * $data['quantity_steel'];
-                        echo $amount1;
+                        echo
+                        number_format($amount1 );
 
                         $total_amount = $amount + $amount1;
                         ?>
                     </td>
                     <td>
                         <?php $netamount = $data['total_amount'] - $total_amount;
-                       $C=$netamount;
-                       echo $netamount;
+$Labour_C=$netamount;
+                      echo  ($netamount);
                         ?>
                     </td>
                     <td>
@@ -420,14 +426,23 @@ function getallMonths($givenDate)
                         ?>
                     </td>
                     <td>
-                        <?php
-                        $averageLabourAmount = ($labourcount > 0) ? $totalLabourAmount / $labourcount : 0;
-                       $A=$averageLabourAmount;
-                        echo $averageLabourAmount;
-                        ?>
+                     <?php
+                    $averageLabourAmount = ($labourcount > 0) ? $totalLabourAmount / $labourcount : 0;
+                      $Labour_A=$averageLabourAmount;
+                       echo (number_format($averageLabourAmount, 2));
+                     ?>
                     </td>
                     <td>
-                      <?php echo $P= $A-$B/$B ?>
+                      <?php  
+                      
+
+                
+                    $Labour_P = ($Labour_A - $Labour_B) / $Labour_B;
+                      
+                    $labour = $Labour_P * 0.85 * $Labour_C * $Labour_D;
+                                        
+                      echo($labour);
+                      ?>
                     </td>
                     <td>
                         <?php
@@ -443,7 +458,8 @@ function getallMonths($givenDate)
                     <td>
                         <?php
                         $averagematerialAmount = ($materialcount > 0) ? $totalmaterialAmount / $materialcount : 0;
-                        echo $averagematerialAmount;
+                        echo
+                        (number_format( $averagematerialAmount, 2));
                         ?>
                     </td>
                     <td></td>
@@ -461,8 +477,11 @@ function getallMonths($givenDate)
                     <td>
                         <?php
                         $averagepolAmount = ($polcount > 0) ? $totalpolAmount / $polcount : 0;
-                        echo $averagepolAmount;
-                        ?>
+                       
+                        echo 
+                        (number_format( $averagepolAmount, 2));
+  
+                       ?>
                     </td>
                     <td></td>
                     <td>
@@ -479,8 +498,9 @@ function getallMonths($givenDate)
                     <td>
                         <?php
                         $averagesteelAmount = ($steelcount > 0) ? $totalsteelAmount / $steelcount : 0;
-                        echo $averagesteelAmount;
-                        ?>
+                        echo   (number_format($averagesteelAmount, 2));
+
+                  ?>
                     </td>
                     <td></td>
                     <td>
@@ -497,8 +517,9 @@ function getallMonths($givenDate)
                     <td>
                         <?php
                         $averagecementAmount = ($cementcount > 0) ? $totalcementAmount / $cementcount : 0;
-                        echo $averagecementAmount;
-                        ?>
+                        echo   (number_format($averagecementAmount, 2));
+   
+                      ?>
                     </td>
                     <td></td>
                 </tr>
@@ -512,16 +533,19 @@ function getallMonths($givenDate)
                     <th>
                         <?php
                         $totalamount = $data['total_amount'];
-                        echo $totalamount;
+                        $totalSum += $data['total_amount'];
+
+                        echo number_format($totalamount);
                         ?>
                     </th>
                     <th>Total</th>
                     <th>
-                        <?php
+                         <?php
                         $amount = $data['quantity_cement'];
                         $amount1 = $data['quantity_steel'];
                         $totamount = $amount + $amount1;
-                        echo $totamount;
+                        echo 
+                        number_format($totamount);
                         ?>
                     </th>
                     <th>Total</th>
@@ -529,12 +553,18 @@ function getallMonths($givenDate)
                         <?php
                         $amount = $project['star_rate_cement'] * $data['quantity_cement'];
                         $amount1 = $project['star_rate_steel'] * $data['quantity_steel'];
-                        echo $netamount = $amount + $amount1;
-                        ?>
+                        $netamount = $amount + $amount1;
+                       echo  number_format($netamount);
+
+                     ?>
                     </th>
                     <th>
-                        <?php $finalamount = $totalamount - $netamount;
-                        echo $finalamount; ?>
+                   <?php 
+                        $finalamount = $totalamount - $netamount;
+                    $netTotalSum+=$finalamount;
+                      
+                    echo number_format($finalamount); 
+                        ?>
                     </th>
                     <th>Total</th>
                     <th>
@@ -579,17 +609,14 @@ function getallMonths($givenDate)
             <tr>
                 <td></td>
             </tr>
-            <tr>
-                <td></td>
-            </tr>
 
             <tr>
                 <th colspan="2">Grand Total</th>
-                <th>5454545</th>
+                <th><?php echo number_format($totalSum);?></th>
                 <th>&nbsp; &nbsp;&nbsp;</th>
                 <th>&nbsp; &nbsp;&nbsp;</th>
                 <th colspan="2">Grand Total</th>
-                <th>2165654</th>
+                <th><?php echo number_format($netTotalSum);?></th>
                 <th></th>
                 <th colspan="2" style="font-size: 14px;">G.T. of LABOUR</th>
                 <th>1545</th>
