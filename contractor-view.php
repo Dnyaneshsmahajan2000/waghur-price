@@ -54,6 +54,8 @@ $contractor = $database->select("contractors", "*", ['is_deleted' => 0]);
                                     <th class="sort" data-sort="ifsc_code">IFSC Code &nbsp;&nbsp;</th>
                                     <th class="sort" data-sort="account_number">Account Type &nbsp;&nbsp;</th>
                                     <th class="sort" data-sort="branch_address">Branch Address &nbsp;&nbsp;</th>
+                                    <th class="sort" data-sort="branch_address">Branch Telephone Number &nbsp;&nbsp;</th>
+
 
                                     <th class="sort" data-sort="action">Action</th>
                                 </tr>

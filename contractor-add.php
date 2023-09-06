@@ -9,7 +9,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Add Contractor &nbsp; &nbsp;|&nbsp; &nbsp;<a href="contractor-view.php">View All
+                        <h4 class="mb-sm-0">Add Contractor &nbsp; &nbsp;|&nbsp; &nbsp;<a href="contractor-view.php">View
+                                All
                                 Contractors</a></h4>
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
@@ -20,51 +21,104 @@
                     </div>
                 </div>
             </div>
-            <form action="contractor-save.php" method="post" class="needs-validation"
-                enctype="multipart/form-data">
+            <form action="contractor-save.php" method="post" class="needs-validation" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header bg-primary bg-primary">
-                                <h5 class="text-white">Contractor Information</h5>
+                                <h5 class="text-white">Contractor Profile Information</h5>
                             </div>
 
                             <div class="card-body">
                                 <div class="row gy-3">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label> Name of Contractor <span class="text-danger">*</span></label>
-                                            <input type="text" name="name_of_contractor" id="name_of_contractor"
-                                                class="form-control" placeholder="Enter Name of Contractor "
-                                                required="">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="group"> Address of Contractor<span
+                                            <label> Name of Contractor (English) <span
                                                     class="text-danger">*</span></label>
-                                            <input type="text" name="address_of_contractor" id="address_of_contractor"
-                                                class="form-control" placeholder="Enter Address of Contractor"
-                                                required="">
+                                            <input type="text" name="name_of_contractor_english"
+                                                id="name_of_contractor_english" class="form-control"
+                                                placeholder="Enter Name of Contractor in English" required="">
                                         </div>
                                     </div>
+
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="contractor_representative">Name and Mobile number of Contractor
+                                            <label> Name of Contractor (Marathi) <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" name="name_of_contractor_marathi"
+                                                id="name_of_contractor_marathi" class="form-control"
+                                                placeholder="Enter Name of Contractor in Marathi" required="">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label> Name of Contractor (English) <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" name="name_of_contractor_english"
+                                                id="name_of_contractor_english" class="form-control"
+                                                placeholder="Enter Name of Contractor in English" required="">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label> Name of Contractor (Marathi) <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" name="name_of_contractor_marathi"
+                                                id="name_of_contractor_marathi" class="form-control"
+                                                placeholder="Enter Name of Contractor in Marathi"
+                                                oninput="validateMarathiInput(this)" required="">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="contractor_representative_name">Name of Contractor
                                                 Representative<span class="text-danger">*</span></label>
-                                            <input type="text" name="contractor_representative"
-                                                id="contractor_representative" class="form-control"
-                                                placeholder="Enter Name and Mobile Number(e.g., John Doe - 123-456-7890)" required>
+                                            <input type="text" name="contractor_representative_name"
+                                                id="contractor_representative_name" class="form-control"
+                                                placeholder="Enter Name of Contractor Representative" required>
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="group">PWD-Registration No and Valid Date Upto<span
-                                                    class="text-danger">*</span></label>
-                                            <input class="form-control" type="file" accept=".pdf" id="formFile"
-                                                name="pwd" value="Upload PDF File">
+                                            <label for="contractor_representative_mobile">Mobile Number of Contractor
+                                                Representative<span class="text-danger">*</span></label>
+                                            <input type="text" name="contractor_representative_mobile"
+                                                id="contractor_representative_mobile" class="form-control"
+                                                placeholder="Enter Mobile Number of Contractor Representative" required>
+                                        </div>
+                                    </div>
 
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="pwd_registration_no">PWD Registration No <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" name="pwd_registration_no" id="pwd_registration_no"
+                                                class="form-control" placeholder="Enter PWD Registration No"
+                                                required="">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="pwd_valid_date">PWD Valid Date Upto <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="date" name="pwd_valid_date" id="pwd_valid_date"
+                                                class="form-control" required="">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="pwd_document">Upload PWD Document <span
+                                                    class="text-danger">*</span></label>
+                                            <input class="form-control" type="file" accept=".pdf" id="pwd_document"
+                                                name="pwd_document" value="Upload PDF File">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -87,9 +141,29 @@
                                         <div class="form-group">
                                             <label for="group">Mobile Number<span class="text-danger">*</span></label>
                                             <input type="number" name="mobile_number" id="mobile_number"
-                                                class="form-control" pattern="[0-9]{10}" placeholder="Enter your 10-digit mobile number" required="">
+                                                class="form-control" pattern="[0-9]{10}"
+                                                placeholder="Enter your 10-digit mobile number" required="">
                                         </div>
                                     </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="group">Alternate Number 1</label>
+                                            <input type="number" name="alternate_number_1" id="alternate_number_1"
+                                                class="form-control" pattern="[0-9]{10}"
+                                                placeholder="Enter alternate mobile number 1">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="group">Alternate Number 2</label>
+                                            <input type="number" name="alternate_number_2" id="alternate_number_2"
+                                                class="form-control" pattern="[0-9]{10}"
+                                                placeholder="Enter alternate mobile number 2">
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="group">Landline Number<span class="text-danger">*</span></label>
@@ -97,23 +171,50 @@
                                                 class="form-control" placeholder="Enter Landline Number" required="">
                                         </div>
                                     </div>
+
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="group">Pan Card Number<span class="text-danger">*</span></label>
-                                            <input class="form-control" type="file" accept=".pdf" id="formFile"
-                                                name="pancard_number" value="Upload PDF File" required>
+                                            <label for="group">Alternate Landline Number</label>
+                                            <input type="number" name="alternate_landline_number"
+                                                id="alternate_landline_number" class="form-control"
+                                                placeholder="Enter Alternate Landline Number">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="group">Good Service Tax Number(GST No) <span
+                                            <label for="pancard_number">Pan Card Number<span
                                                     class="text-danger">*</span></label>
-                                            <input class="form-control" type="file" accept=".pdf" id="formFile"
-                                                name="gst_number" value="Upload PDF File" required>
-
+                                            <input type="text" name="pancard_number" id="pancard_number"
+                                                class="form-control" placeholder="Enter Pan Card Number" required>
                                         </div>
                                     </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="pancard_document">Upload Pan Card Document<span
+                                                    class="text-danger">*</span></label>
+                                            <input class="form-control" type="file" accept=".pdf" id="pancard_document"
+                                                name="pancard_document" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="gst_number">Good Service Tax Number (GST No)<span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" name="gst_number" id="gst_number" class="form-control"
+                                                placeholder="Enter GST No" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="gst_document">Upload GST Document<span
+                                                    class="text-danger">*</span></label>
+                                            <input class="form-control" type="file" accept=".pdf" id="gst_document"
+                                                name="gst_document" required>
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="group">Bank Name<span class="text-danger">*</span></label>
@@ -159,21 +260,37 @@
                                             <input type="number" name="branch_telephone_number"
                                                 id="branch_telephone_number" class="form-control"
                                                 placeholder="Enter Branch Telephone Number" required="">
-                                                
+
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <input type="submit" value="submit" name="submit" class="btn btn-primary mb-4">
+                                </div> 
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <input type="submit" value="submit" name="submit" class="btn btn-primary mb-4">
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
 </div>
 </div>
+<script>
+    function validateMarathiInput(input) {
+        // Define a regular expression pattern for Marathi characters (you can expand this pattern if needed)
+        var marathiPattern = /^[ \u0900-\u097F]*$/;
+
+        // Check if the input value matches the Marathi pattern
+        if (!marathiPattern.test(input.value)) {
+            // If the input doesn't match, clear the input
+            input.value = "";
+            alert("Please enter valid Marathi characters.");
+        }
+    }
+</script>
+
+
 <?php include 'footer.php'; ?>
