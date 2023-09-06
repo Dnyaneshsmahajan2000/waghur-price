@@ -174,9 +174,8 @@ if (isset($_GET['c_id']) && is_numeric($_GET['c_id'])) {
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="group">Account Type<span class="text-danger">*</span></label>
-                                            <select class="form-control" id="account_type" name="account_type" 
+                                            <select class="form-control" name="account_type" id="account_type" 
                                                 value="<?php echo $contractor['account_type']; ?>">
-                                                <option value="" disabled selected>Please select Account Type</option>
                                                 <option value="current">Current</option>
                                                 <option value="saving">Saving</option>
                                             </select>

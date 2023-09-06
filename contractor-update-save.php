@@ -22,8 +22,6 @@ $data['branch_telephone_number'] = $_POST['branch_telephone_number'];
 
 
 
-
-
 $file_photo = $_FILES['pwd']['name'] ?? null;
 $file_path = $_FILES['pwd']['tmp_name'] ?? null;
 if ($file_photo && $file_path) {

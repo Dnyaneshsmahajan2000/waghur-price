@@ -279,6 +279,10 @@ function getallMonths($givenDate)
            <td></td>
             
            <tr>
+    <table class="margin mt-5 ">
+        <tbody>
+            <tr>
+
                 <td rowspan="2"><strong>Sr. No</strong></td>
                 <td rowspan="2"><strong>Date Of Measurement</strong></td>
                 <td rowspan="2"><strong>Total Amount:</strong></td>
@@ -380,7 +384,7 @@ function getallMonths($givenDate)
                     <td>
                         <?php echo number_format($data['total_amount']); ?>
                     </td>
-                    <td>Cement <br> Steel <br>B.A 60/70<br> B.A 80/100 <br>Clause-38</td>
+                    <td style="  ">Cement <br> Steel <br>B.A 60/70<br> B.A 80/100 <br>Clause-38</td>
                     <td>
                         <?php echo number_format($data['quantity_cement'],3) . "\n" . number_format($data['quantity_steel'],3); ?>
                     </td>
