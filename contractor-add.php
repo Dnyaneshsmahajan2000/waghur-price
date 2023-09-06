@@ -53,21 +53,21 @@
 
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label> Name of Contractor (English) <span
+                                            <label>Address of Contractor (English) <span
                                                     class="text-danger">*</span></label>
-                                            <input type="text" name="name_of_contractor_english"
-                                                id="name_of_contractor_english" class="form-control"
-                                                placeholder="Enter Name of Contractor in English" required="">
+                                            <input type="text" name="address_of_contractor_english"
+                                                id="address_of_contractor_english" class="form-control"
+                                                placeholder="Enter Address of Contractor in English" required="">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label> Name of Contractor (Marathi) <span
+                                            <label> Address of Contractor (Marathi) <span
                                                     class="text-danger">*</span></label>
-                                            <input type="text" name="name_of_contractor_marathi"
-                                                id="name_of_contractor_marathi" class="form-control"
-                                                placeholder="Enter Name of Contractor in Marathi"
+                                            <input type="text" name="address_of_contractor_marathi"
+                                                id="address_of_contractor_marathi" class="form-control"
+                                                placeholder="Enter Address of Contractor in Marathi"
                                                 oninput="validateMarathiInput(this)" required="">
                                         </div>
                                     </div>
