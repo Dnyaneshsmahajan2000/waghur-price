@@ -1,21 +1,23 @@
 <?php
 include 'header.php';
 $database = new Database();
-$project= $database->select("project", "*", ['is_deleted' => 0]);
+$project = $database->select("project", "*", ['is_deleted' => 0]);
 ?>
 <div class="main-content">
     <div class="page-content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="col mb-3 text-md-end">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0">Add Project &nbsp; &nbsp; |&nbsp; &nbsp;
+                            <a href="price-escalation-view.php">View All Projects</a>
+                        </h4>
                         <button type="button" onclick="location.href = 'project-add.php';"
                             class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn"
                             data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Add
                             Project</button>
                     </div>
                 </div>
-
             </div>
             <div class="card">
 
@@ -26,7 +28,7 @@ $project= $database->select("project", "*", ['is_deleted' => 0]);
                 <div class="card-body">
                     <div class="table-responsive table-card">
                         <table class="table align-middle table-nowrap" id="customerTable">
-                            <thead class="table-light">
+                            <thead class="table">
                                 <tr>
                                     <th scope="col" style="width: 50px;">
                                         <div class="form-check">
@@ -34,8 +36,10 @@ $project= $database->select("project", "*", ['is_deleted' => 0]);
                                         </div>
                                     </th>
                                     <th class="sort" data-sort="p_id">Sr. No. &nbsp;&nbsp;&nbsp;&nbsp;</th>
-                                    <th class="sort" data-sort="name_of_work">Name of Work &nbsp;&nbsp;&nbsp;&nbsp; </th>
-                                    <th class="sort" data-sort="name_of_agency">Name of Agency &nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                    <th class="sort" data-sort="name_of_work">Name of Work &nbsp;&nbsp;&nbsp;&nbsp;
+                                    </th>
+                                    <th class="sort" data-sort="name_of_agency">Name of Agency &nbsp;&nbsp;&nbsp;&nbsp;
+                                    </th>
                                     <th class="sort" data-sort="agreement_no"> Agreement No.
                                         &nbsp;&nbsp;&nbsp;&nbsp;</th>
                                     <th class="sort" data-sort="sub_division">Sub-Division &nbsp;&nbsp;&nbsp;&nbsp;
@@ -45,8 +49,10 @@ $project= $database->select("project", "*", ['is_deleted' => 0]);
                                         &nbsp;&nbsp;</th>
                                     <th class="sort" data-sort="date_work_order">Date of work order &nbsp;&nbsp;
                                     </th>
-                                    <th class="sort" data-sort="star_rate_cement">Star Rate of Cement Rs. &nbsp;&nbsp;</th>
-                                    <th class="sort" data-sort="star_rate_steel">Star Rate of Steel Rs. &nbsp;&nbsp;</th>
+                                    <th class="sort" data-sort="star_rate_cement">Star Rate of Cement Rs. &nbsp;&nbsp;
+                                    </th>
+                                    <th class="sort" data-sort="star_rate_steel">Star Rate of Steel Rs. &nbsp;&nbsp;
+                                    </th>
                                     <th class="sort" data-sort="labour">Labour &nbsp;&nbsp;</th>
                                     <th class="sort" data-sort="material">Material &nbsp;&nbsp;</th>
                                     <th class="sort" data-sort="pol">POL &nbsp;&nbsp;</th>
@@ -123,11 +129,12 @@ $project= $database->select("project", "*", ['is_deleted' => 0]);
                                                 </div>
                                                 <div class="remove">
 
-                                                <a href="project-delete.php?p_id=<?php echo $value['p_id'] ?>" >
-                                                            <button class="btn btn-sm btn-danger remove-item-btn" onclick='return delete_confirm()'
-                                                                data-bs-toggle="modal" data-bs-target="#deleteRecordModal">Delete</button></a>
-                                                    
-                                                                
+                                                    <a href="project-delete.php?p_id=<?php echo $value['p_id'] ?>">
+                                                        <button class="btn btn-sm btn-danger remove-item-btn"
+                                                            onclick='return delete_confirm()' data-bs-toggle="modal"
+                                                            data-bs-target="#deleteRecordModal">Delete</button></a>
+
+
                                                 </div>
                                                 <div class="print">
                                                     <button class="btn btn-sm btn-info edit-item-btn"
