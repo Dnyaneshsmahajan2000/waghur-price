@@ -27,7 +27,7 @@ $price_escalation = $database->select("price_escalation", "*", ['is_deleted' => 
                 <div class="card-body">
                     <div class="table-responsive table-card">
                         <table class="table align-middle table-nowrap" id="customerTable">
-                            <thead class="table-warning">
+                            <thead class="table">
                                 <tr>
                                     <th scope="col" style="width: 50px;">
                                         <div class="form-check">

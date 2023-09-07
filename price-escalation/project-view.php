@@ -28,7 +28,7 @@ $project = $database->select("project", "*", ['is_deleted' => 0]);
                 <div class="card-body">
                     <div class="table-responsive table-card">
                         <table class="table align-middle table-nowrap" id="customerTable">
-                            <thead class="table-light">
+                            <thead class="table">
                                 <tr>
                                     <th scope="col" style="width: 50px;">
                                         <div class="form-check">
