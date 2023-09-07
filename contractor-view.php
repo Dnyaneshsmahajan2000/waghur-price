@@ -34,27 +34,44 @@ $contractor = $database->select("contractors", "*", ['is_deleted' => 0]);
                                         </div>
                                     </th>
                                     <th class="sort" data-sort="c_id">Sr. No. &nbsp;&nbsp;&nbsp;&nbsp;</th>
-                                    <th class="sort" data-sort="name_of_contractor">Name of Contractor
+                                    <th class="sort" data-sort="name_of_contractor">Name of Contractor(English)
                                         &nbsp;&nbsp;&nbsp;&nbsp; </th>
-                                    <th class="sort" data-sort="address_of_contractor">Address of Contractor
+                                        <th class="sort" data-sort="name_of_contractor">Name of Contractor(Marathi)
+                                        &nbsp;&nbsp;&nbsp;&nbsp; </th>
+                                    <th class="sort" data-sort="address_of_contractor">Address of Contractor(English)
                                         &nbsp;&nbsp;&nbsp;&nbsp;</th>
-                                    <th class="sort" data-sort="contractor_representative"> Name and Mobile Number of
+                                        <th class="sort" data-sort="address_of_contractor">Address of Contractor(Marathi)
+                                        &nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                    <th class="sort" data-sort="contractor_representative"> Name of
                                         Contractor Representative&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                                    <th class="sort" data-sort="pwd">PWD-Registration No and Valid Date
-                                        Upto&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                    <th class="sort" data-sort="contractor_representative"> Mobile Number of
+                                        Contractor Representative&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                    <th class="sort" data-sort="pwd">PWD-Registration No &nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                    <th class="sort" data-sort="pwd">PWD-Valid Date Upto&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                    <th class="sort" data-sort="pwd">PWD-Document&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                     <th class="sort" data-sort="pin_cod">PIN Code &nbsp;&nbsp;&nbsp;&nbsp;</th>
                                     <th class="sort" data-sort="email">Email-ID &nbsp;&nbsp;</th>
                                     <th class="sort" data-sort="mobile_number">Mobile Number&nbsp;&nbsp;</th>
+                                    <th class="sort" data-sort="mobile_number">Alternate Mobile Number -1&nbsp;&nbsp;
+                                    </th>
+                                    <th class="sort" data-sort="mobile_number">Alternate Mobile Number -2&nbsp;&nbsp;
+                                    </th>
                                     <th class="sort" data-sort="landline_number">Landline Number &nbsp;&nbsp;</th>
+                                    <th class="sort" data-sort="alternate_landline_number">Alternate Landline Number
+                                        &nbsp;&nbsp;
+                                    </th>
                                     <th class="sort" data-sort="pancard_number">Pan Card Number &nbsp;&nbsp;</th>
+                                    <th class="sort" data-sort="pancard_number">Pan Card Document &nbsp;&nbsp;</th>
                                     <th class="sort" data-sort="gst_number">Good Service Tax Number(GST No) &nbsp;&nbsp;
                                     </th>
+                                    <th class="sort" data-sort="gst_number">GST No Document &nbsp;&nbsp;</th>
                                     <th class="sort" data-sort="bank_name">Bank Name &nbsp;&nbsp;</th>
                                     <th class="sort" data-sort="account_number">Account Number &nbsp;&nbsp;</th>
                                     <th class="sort" data-sort="ifsc_code">IFSC Code &nbsp;&nbsp;</th>
                                     <th class="sort" data-sort="account_number">Account Type &nbsp;&nbsp;</th>
                                     <th class="sort" data-sort="branch_address">Branch Address &nbsp;&nbsp;</th>
-                                    <th class="sort" data-sort="branch_address">Branch Telephone Number &nbsp;&nbsp;</th>
+                                    <th class="sort" data-sort="branch_address">Branch Telephone Number &nbsp;&nbsp;
+                                    </th>
 
 
                                     <th class="sort" data-sort="action">Action</th>
@@ -80,17 +97,33 @@ $contractor = $database->select("contractors", "*", ['is_deleted' => 0]);
                                             <?php echo $count++; ?>
                                         </td>
                                         <td class="customer_name">
-                                            <?php echo $value['name_of_contractor']; ?>
+                                            <?php echo $value['name_of_contractor_english']; ?>
+                                        </td>
+                                        <td class="customer_name">
+                                            <?php echo $value['name_of_contractor_marathi']; ?>
                                         </td>
 
                                         <td class="customer_name">
-                                            <?php echo $value['address_of_contractor']; ?>
+                                            <?php echo $value['address_of_contractor_english']; ?>
                                         </td>
                                         <td class="customer_name">
-                                            <?php echo $value['contractor_representative']; ?>
+                                            <?php echo $value['address_of_contractor_marathi']; ?>
                                         </td>
                                         <td class="customer_name">
-                                            <?php echo $value['pwd']; ?>
+                                            <?php echo $value['contractor_representative_name']; ?>
+                                        </td>
+                                        <td class="customer_name">
+                                            <?php echo $value['contractor_representative_mobile']; ?>
+                                        </td>
+                                        <td class="customer_name">
+                                            <?php echo $value['pwd_registration_no']; ?>
+                                        </td>
+
+                                        <td class="customer_name">
+                                            <?php echo $value['pwd_valid_date']; ?>
+                                        </td>
+                                        <td class="customer_name">
+                                            <?php echo $value['pwd_document']; ?>
                                         </td>
                                         <td class="customer_name">
                                             <?php echo $value['pin_code']; ?>
@@ -102,15 +135,25 @@ $contractor = $database->select("contractors", "*", ['is_deleted' => 0]);
 
                                         <td class="customer_name">
                                             <?php echo $value['mobile_number']; ?>
+                                        </td><td class="customer_name">
+                                            <?php echo $value['alternate_number_1']; ?>
+                                        </td><td class="customer_name">
+                                            <?php echo $value['alternate_number_2']; ?>
                                         </td>
                                         <td class="customer_name">
                                             <?php echo $value['landline_number']; ?>
+                                        </td><td class="customer_name">
+                                            <?php echo $value['alternate_landline_number']; ?>
                                         </td>
                                         <td class="customer_name">
                                             <?php echo $value['pancard_number']; ?>
+                                        </td><td class="customer_name">
+                                            <?php echo $value['pancard_document']; ?>
                                         </td>
                                         <td class="customer_name">
                                             <?php echo $value['gst_number']; ?>
+                                        </td><td class="customer_name">
+                                            <?php echo $value['gst_document']; ?>
                                         </td>
                                         <td class="customer_name">
                                             <?php echo $value['bank_name']; ?>
@@ -146,7 +189,7 @@ $contractor = $database->select("contractors", "*", ['is_deleted' => 0]);
                                                             onclick='return delete_confirm()' data-bs-toggle="modal"
                                                             data-bs-target="#deleteRecordModal">Delete</button></a>
                                                 </div>
-                                                
+
 
 
                                             </div>

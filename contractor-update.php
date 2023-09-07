@@ -36,7 +36,8 @@ if (isset($_GET['c_id']) && is_numeric($_GET['c_id'])) {
                     </div>
                 </div>
             </div>
-            <form action="contractor-update-save.php" method="post" class="needs-validation" enctype="multipart/form-data">
+            <form action="contractor-update-save.php" method="post" class="needs-validation"
+                enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
@@ -46,46 +47,104 @@ if (isset($_GET['c_id']) && is_numeric($_GET['c_id'])) {
 
                             <div class="card-body">
                                 <div class="row gy-3">
-                                    <input type="hidden" name="contractor_id" value="<?php echo $contractor['c_id']; ?>">
+                                    <input type="hidden" name="contractor_id"
+                                        value="<?php echo $contractor['c_id']; ?>">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label> Name of Contractor <span class="text-danger">*</span></label>
-                                            <input type="text" name="name_of_contractor" id="name_of_contractor"
-                                                class="form-control" placeholder="Enter Name of Contractor " required=""
-                                                value="<?php echo $contractor['name_of_contractor']; ?>">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="group"> Address of Contractor<span
+                                            <label> Name of Contractor (English) <span
                                                     class="text-danger">*</span></label>
-                                            <input type="text" name="address_of_contractor" id="address_of_contractor"
-                                                class="form-control" placeholder="Enter Address of Contractor"
-                                                value="<?php echo $contractor['address_of_contractor']; ?>">
+                                            <input type="text" name="name_of_contractor_english"
+                                                id="name_of_contractor_english" class="form-control"
+                                                placeholder="Enter Name of Contractor in English" required=""
+                                                value="<?php echo $contractor['name_of_contractor_english']; ?>">
                                         </div>
                                     </div>
+
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="contractor_representative">Name and Mobile number of Contractor
+                                            <label> Name of Contractor (Marathi) <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" name="name_of_contractor_marathi"
+                                                id="name_of_contractor_marathi" class="form-control"
+                                                placeholder="Enter Name of Contractor in Marathi" required=""
+                                                value="<?php echo $contractor['name_of_contractor_marathi']; ?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Address of Contractor (English) <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" name="address_of_contractor_english"
+                                                id="address_of_contractor_english" class="form-control"
+                                                placeholder="Enter Address of Contractor in English" required=""
+                                                value="<?php echo $contractor['address_of_contractor_english']; ?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label> Address of Contractor (Marathi) <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" name="address_of_contractor_marathi"
+                                                id="address_of_contractor_marathi" class="form-control"
+                                                placeholder="Enter Address of Contractor in Marathi"
+                                                oninput="validateMarathiInput(this)" required=""
+                                                value="<?php echo $contractor['address_of_contractor_marathi']; ?>">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="contractor_representative_name">Name of Contractor
                                                 Representative<span class="text-danger">*</span></label>
-                                            <input type="text" name="contractor_representative"
-                                                id="contractor_representative" class="form-control"
-                                                placeholder="Enter Name and Mobile Number(e.g., John Doe - 123-456-7890)"
-                                                required
-                                                value="<?php echo $contractor['contractor_representative']; ?>">
+                                            <input type="text" name="contractor_representative_name"
+                                                id="contractor_representative_name" class="form-control"
+                                                placeholder="Enter Name of Contractor Representative" required
+                                                value="<?php echo $contractor['contractor_representative_name']; ?>">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="group">PWD-Registration No and Valid Date Upto<span
+                                            <label for="contractor_representative_mobile">Mobile Number of Contractor
+                                                Representative<span class="text-danger">*</span></label>
+                                            <input type="text" name="contractor_representative_mobile"
+                                                id="contractor_representative_mobile" class="form-control"
+                                                placeholder="Enter Mobile Number of Contractor Representative" required
+                                                value="<?php echo $contractor['contractor_representative_mobile']; ?>">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="pwd_registration_no">PWD Registration No <span
                                                     class="text-danger">*</span></label>
-                                            <input class="form-control" type="file" accept=".pdf/*" id="formFile"
-                                                name="pwd" value="<?php echo $contractor['pwd'] ?>">
-                                            <input class="form-control" type="hidden" accept=".pdf/*" id="formFile"
-                                                name="pwd_old" value="<?php echo $contractor['pwd'] ?>">
+                                            <input type="text" name="pwd_registration_no" id="pwd_registration_no"
+                                                class="form-control" placeholder="Enter PWD Registration No" required=""
+                                                value="<?php echo $contractor['pwd_registration_no']; ?>">
+                                        </div>
+                                    </div>
 
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="pwd_valid_date">PWD Valid Date Upto <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="date" name="pwd_valid_date" id="pwd_valid_date" class="form-control"
+                                                required="" value="<?php echo $contractor['pwd_valid_date']; ?>">
+                                        </div>
+                                    </div>
 
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="pwd_document">Upload PWD Document <span
+                                                    class="text-danger">*</span></label>
+                                            <input class="form-control" type="file" accept=".pdf" id="pwd_document"
+                                                name="pwd_document" value="Upload PDF File"> <input class="form-control"
+                                                type="hidden" accept=".pdf" id="pwd_document" name="pwd_document"
+                                                value="<?php echo $contractor['pwd_document']; ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -115,6 +174,27 @@ if (isset($_GET['c_id']) && is_numeric($_GET['c_id'])) {
                                                 value="<?php echo $contractor['mobile_number']; ?>">
                                         </div>
                                     </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="group">Alternate Number 1</label>
+                                            <input type="number" name="alternate_number_1" id="alternate_number_1"
+                                                class="form-control" pattern="[0-9]{10}"
+                                                placeholder="Enter alternate mobile number 1"
+                                                value="<?php echo $contractor['alternate_number_1']; ?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="group">Alternate Number 2</label>
+                                            <input type="number" name="alternate_number_2" id="alternate_number_2"
+                                                class="form-control" pattern="[0-9]{10}"
+                                                placeholder="Enter alternate mobile number 2"
+                                                value="<?php echo $contractor['alternate_number_2']; ?>">
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="group">Landline Number<span class="text-danger">*</span></label>
@@ -123,35 +203,64 @@ if (isset($_GET['c_id']) && is_numeric($_GET['c_id'])) {
                                                 value="<?php echo $contractor['landline_number']; ?>">
                                         </div>
                                     </div>
+
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="group">Pan Card Number<span class="text-danger">*</span></label>
-                                            <input class="form-control" type="file" accept=".pdf/*" id="formFile"
-                                                name="pancard_number">
-                                            <input class="form-control" type="hidden" accept=".pdf/*" id="formFile"
-                                                name="pancard_number_old"
-                                                value="<?php echo $contractor['pancard_number'] ?>">
-
+                                            <label for="group">Alternate Landline Number</label>
+                                            <input type="number" name="alternate_landline_number"
+                                                id="alternate_landline_number" class="form-control"
+                                                placeholder="Enter Alternate Landline Number"
+                                                value="<?php echo $contractor['alternate_landline_number']; ?>">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="group">Good Service Tax Number(GST No) <span
+                                            <label for="pancard_number">Pan Card Number<span
                                                     class="text-danger">*</span></label>
-                                            <input class="form-control" type="file" accept=".pdf/*" id="formFile"
-                                                name="gst_number" >
-                                            <input class="form-control" type="hidden" accept=".pdf/*" id="formFile"
-                                                name="gst_number_old" value="<?php echo $contractor['gst_number'] ?>">
-
-
+                                            <input type="text" name="pancard_number" id="pancard_number"
+                                                class="form-control" placeholder="Enter Pan Card Number" required
+                                                value="<?php echo $contractor['pancard_number']; ?>">
                                         </div>
                                     </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="pancard_document">Upload Pan Card Document<span
+                                                    class="text-danger">*</span></label>
+                                            <input class="form-control" type="file" accept=".pdf" id="pancard_document"
+                                                name="pancard_document" > <input class="form-control"
+                                                type="hidden" accept=".pdf" id="pancard_document" name="pancard_document"
+                                               
+                                                value="<?php echo $contractor['pancard_document']; ?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="gst_number">Good Service Tax Number (GST No)<span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" name="gst_number" id="gst_number" class="form-control"
+                                                placeholder="Enter GST No" required
+                                                value="<?php echo $contractor['gst_number']; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="gst_document">Upload GST Document<span
+                                                    class="text-danger">*</span></label>
+                                            <input class="form-control" type="file" accept=".pdf" id="gst_document"
+                                                name="gst_document">
+                                            <input class="form-control" type="hidden" accept=".pdf"
+                                                id="gst_document" name="gst_document"
+                                                value="<?php echo $contractor['gst_document']; ?>">
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="group">Bank Name<span class="text-danger">*</span></label>
                                             <input type="text" name="bank_name" id="bank_name" class="form-control"
-                                                placeholder="Enter Bank Name" 
+                                                placeholder="Enter Bank Name" required=""
                                                 value="<?php echo $contractor['bank_name']; ?>">
                                         </div>
                                     </div>
@@ -159,7 +268,7 @@ if (isset($_GET['c_id']) && is_numeric($_GET['c_id'])) {
                                         <div class="form-group">
                                             <label for="group">Account Number<span class="text-danger">*</span></label>
                                             <input type="number" name="account_number" id="account_number"
-                                                class="form-control" placeholder="Enter Account Number"
+                                                class="form-control" placeholder="Enter Account Number" required=""
                                                 value="<?php echo $contractor['account_number']; ?>">
                                         </div>
                                     </div>
@@ -167,15 +276,16 @@ if (isset($_GET['c_id']) && is_numeric($_GET['c_id'])) {
                                         <div class="form-group">
                                             <label for="group">IFSC Code<span class="text-danger">*</span></label>
                                             <input type="text" name="ifsc_code" id="ifsc_code" class="form-control"
-                                                placeholder="Enter IFSC Code"
+                                                placeholder="Enter IFSC Code" required=""
                                                 value="<?php echo $contractor['ifsc_code']; ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="group">Account Type<span class="text-danger">*</span></label>
-                                            <select class="form-control" name="account_type" id="account_type" 
+                                            <select class="form-control" id="account_type" name="account_type" required
                                                 value="<?php echo $contractor['account_type']; ?>">
+
                                                 <option value="current">Current</option>
                                                 <option value="saving">Saving</option>
                                             </select>
@@ -185,7 +295,7 @@ if (isset($_GET['c_id']) && is_numeric($_GET['c_id'])) {
                                         <div class="form-group">
                                             <label for="group">Branch Address<span class="text-danger">*</span></label>
                                             <input type="text" name="branch_address" id="branch_address"
-                                                class="form-control" placeholder="Enter Branch Address"
+                                                class="form-control" placeholder="Enter Branch Address" required=""
                                                 value="<?php echo $contractor['branch_address']; ?>">
                                         </div>
                                     </div>
@@ -195,9 +305,8 @@ if (isset($_GET['c_id']) && is_numeric($_GET['c_id'])) {
                                                     class="text-danger">*</span></label>
                                             <input type="number" name="branch_telephone_number"
                                                 id="branch_telephone_number" class="form-control"
-                                                placeholder="Enter Branch Telephone Number" 
+                                                placeholder="Enter Branch Telephone Number" required=""
                                                 value="<?php echo $contractor['branch_telephone_number']; ?>">
-
                                         </div>
                                     </div>
                                 </div>
@@ -205,7 +314,8 @@ if (isset($_GET['c_id']) && is_numeric($_GET['c_id'])) {
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <input type="submit" value="submit" name="submit" class="btn btn-primary mb-4">
+                                <input type="submit" value="submit" name="submit" class="btn btn-primary mb-4">&nbsp;&nbsp;&nbsp;
+                                <a href="contractor-view.php"><button type="button" class="btn btn-danger mb-4 text-white">Cancel</button></a>
                             </div>
                         </div>
                     </div>
