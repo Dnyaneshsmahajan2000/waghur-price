@@ -222,16 +222,24 @@ function getallMonths($givenDate)
                                 number_format($labourAvg,2) ?>
                             </th>
                             <th>
-                                <?php echo number_format($materialAvg,2); ?>
+                                <?php 
+                                $Material_B=$materialAvg;
+                                echo number_format($materialAvg,2); ?>
                             </th>
                             <th>
-                                <?php echo number_format($polAvg,2); ?>
+                                <?php 
+                                $Pol_B=$polAvg;
+                                echo number_format($polAvg,2); ?>
                             </th>
                             <th>
-                                <?php echo number_format($steelAvg,2); ?>
+                                <?php 
+                                $Steel_B=$steelAvg;
+                                echo number_format($steelAvg,2); ?>
                             </th>
                             <th>
-                                <?php echo number_format($cementAvg,2); ?>
+                                <?php 
+                                $Cement_B=$cementAvg;
+                                echo number_format($cementAvg,2); ?>
                             </th>
 
                         </tr>
@@ -243,10 +251,15 @@ function getallMonths($givenDate)
                                 echo $project["labour"] ?>
                             </th>
                             <th>
-                                <?php echo $project["material"] ?>
+                                <?php 
+                                $Material_D=$project['material']/100;
+                                echo $project["material"] ?>
                             </th>
                             <th>
-                                <?php echo $project["pol"] ?>
+                                <?php 
+                                
+                                $Pol_D=$project['pol']/100;
+                                echo $project["pol"] ?>
                             </th>
                             <th></th>
                             <th></th>
@@ -257,11 +270,6 @@ function getallMonths($givenDate)
 
         </div>
     </div>
-
-    <center>
-        <h6>R.A. BILL No. & FINAL</h6>
-    </center>
-    <table class="margin mt-5">
     <?php
                 $c = 0;
                 $projectdata = $database->select(
@@ -272,13 +280,22 @@ function getallMonths($givenDate)
                 $count=1;
                 $totalSum=0;
                 $netTotalSum=0;
+               $totalMaterial=0;
+               $totalSteel=0;
+               $totalCement=0;
+               $totalPol=0;
+               $totalLabour=0;
+               
                 foreach ($projectdata as $data) {
                     ?>
+   
+    <center>
+        <h6>R.A. BILL No. & FINAL</h6>
+    </center>
+    <table class="margin mt-5">
                      
     <tbody>
-           <td></td>
             
-           <tr>
     <table class="margin mt-5 ">
         <tbody>
             <tr>
@@ -404,7 +421,7 @@ function getallMonths($givenDate)
                     </td>
                     <td>
                         <?php $netamount = $data['total_amount'] - $total_amount;
-$Labour_C=$netamount;
+                        $C=$netamount;
                       echo  ($netamount);
                         ?>
                     </td>
@@ -443,9 +460,9 @@ $Labour_C=$netamount;
                 
                     $Labour_P = ($Labour_A - $Labour_B) / $Labour_B;
                       
-                    $labour = $Labour_P * 0.85 * $Labour_C * $Labour_D;
-                                        
-                      echo($labour);
+                    $labour = $Labour_P * 0.85 * $C * $Labour_D;
+                    $totalLabour += $labour;
+                    echo number_format($labour,3);
                       ?>
                     </td>
                     <td>
@@ -462,11 +479,20 @@ $Labour_C=$netamount;
                     <td>
                         <?php
                         $averagematerialAmount = ($materialcount > 0) ? $totalmaterialAmount / $materialcount : 0;
+                       $Material_A=$averagematerialAmount;
                         echo
                         (number_format( $averagematerialAmount, 2));
                         ?>
                     </td>
-                    <td></td>
+                    <td><?php 
+                    $Material_P = ($Material_A - $Material_B) / $Material_B;
+                      
+                    $Material = $Material_P * 0.85 * $C * $Material_D;
+                    $totalMaterial+=$Material;                    
+                      echo number_format($Material,3);
+                     
+                    
+                    ?></td>
                     <td>
                         <?php
                         $polcount = 0;
@@ -481,13 +507,24 @@ $Labour_C=$netamount;
                     <td>
                         <?php
                         $averagepolAmount = ($polcount > 0) ? $totalpolAmount / $polcount : 0;
-                       
-                        echo 
+                      $Pol_A=$averagepolAmount; 
+                      echo 
                         (number_format( $averagepolAmount, 2));
   
                        ?>
                     </td>
-                    <td></td>
+                    <td>
+                        <?php 
+                         $Pol_P = ($Pol_A - $Pol_B) / $Pol_B;
+                      
+                         $Pol= $Pol_P * 0.85 * $C * $Pol_D;
+                         
+                         $totalPol=$Pol;
+                         
+                           echo number_format($Pol,3);
+                            
+                        ?>
+                    </td>
                     <td>
                         <?php
                         $steelcount = 0;
@@ -608,7 +645,7 @@ $Labour_C=$netamount;
             <?php
             $bill_start_date = $data['date_measurement'];
                         
-        } ?>
+         ?>
 
             <tr>
                 <td></td>
@@ -623,11 +660,11 @@ $Labour_C=$netamount;
                 <th><?php echo number_format($netTotalSum);?></th>
                 <th></th>
                 <th colspan="2" style="font-size: 14px;">G.T. of LABOUR</th>
-                <th>1545</th>
+                <th><?php echo number_format($totalLabour,3); ?></th>
                 <th colspan="2" style="font-size: 14px;">G.T. of MATERIAL</th>
-                <th>64545</th>
+                <th><?php echo number_format($totalMaterial,3);?></th>
                 <th colspan="2" style="font-size: 14px;">G.T. of POL</th>
-                <th>5454</th>
+                <th><?php echo number_format($totalPol,3);?></th>
                 <th colspan="2" style="font-size: 14px;">G.T. of STEEL</th>
                 <th>44545</th>
                 <th colspan="2" style="font-size: 14px;">G.T. of CEMENT</th>
@@ -731,6 +768,7 @@ $Labour_C=$netamount;
                     </tbody>
                 </table>
             </div>
+            <?php }?>
 
         </div>
     </div>
