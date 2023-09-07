@@ -36,11 +36,11 @@ $contractor = $database->select("contractors", "*", ['is_deleted' => 0]);
                                     <th class="sort" data-sort="c_id">Sr. No. &nbsp;&nbsp;&nbsp;&nbsp;</th>
                                     <th class="sort" data-sort="name_of_contractor">Name of Contractor(English)
                                         &nbsp;&nbsp;&nbsp;&nbsp; </th>
-                                        <th class="sort" data-sort="name_of_contractor">Name of Contractor(Marathi)
+                                    <th class="sort" data-sort="name_of_contractor">Name of Contractor(Marathi)
                                         &nbsp;&nbsp;&nbsp;&nbsp; </th>
                                     <th class="sort" data-sort="address_of_contractor">Address of Contractor(English)
                                         &nbsp;&nbsp;&nbsp;&nbsp;</th>
-                                        <th class="sort" data-sort="address_of_contractor">Address of Contractor(Marathi)
+                                    <th class="sort" data-sort="address_of_contractor">Address of Contractor(Marathi)
                                         &nbsp;&nbsp;&nbsp;&nbsp;</th>
                                     <th class="sort" data-sort="contractor_representative"> Name of
                                         Contractor Representative&nbsp;&nbsp;&nbsp;&nbsp;</th>
@@ -135,24 +135,29 @@ $contractor = $database->select("contractors", "*", ['is_deleted' => 0]);
 
                                         <td class="customer_name">
                                             <?php echo $value['mobile_number']; ?>
-                                        </td><td class="customer_name">
+                                        </td>
+                                        <td class="customer_name">
                                             <?php echo $value['alternate_number_1']; ?>
-                                        </td><td class="customer_name">
+                                        </td>
+                                        <td class="customer_name">
                                             <?php echo $value['alternate_number_2']; ?>
                                         </td>
                                         <td class="customer_name">
                                             <?php echo $value['landline_number']; ?>
-                                        </td><td class="customer_name">
+                                        </td>
+                                        <td class="customer_name">
                                             <?php echo $value['alternate_landline_number']; ?>
                                         </td>
                                         <td class="customer_name">
                                             <?php echo $value['pancard_number']; ?>
-                                        </td><td class="customer_name">
+                                        </td>
+                                        <td class="customer_name">
                                             <?php echo $value['pancard_document']; ?>
                                         </td>
                                         <td class="customer_name">
                                             <?php echo $value['gst_number']; ?>
-                                        </td><td class="customer_name">
+                                        </td>
+                                        <td class="customer_name">
                                             <?php echo $value['gst_document']; ?>
                                         </td>
                                         <td class="customer_name">

@@ -3,7 +3,7 @@
 include './inc/database.php';
 
 $database= new Database();
-$data['month'] = $_REQUEST['month']."-00";
+$data['month'] = $_REQUEST['month']."-01";
 $data['labour'] = $_REQUEST['labour'];
 $data['material'] = $_REQUEST['material'];
 $data['pol'] = $_REQUEST['pol'];

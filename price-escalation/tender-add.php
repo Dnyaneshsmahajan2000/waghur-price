@@ -46,7 +46,7 @@
 
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="group">Amount Estimated<span
+                                            <label for="group">Name of Contractor<span
                                                     class="text-danger">*</span></label>
                                             <input type="text" name="name_of_contractor" id="name_of_contractor"
                                                 class="form-control" placeholder="Enter Name of Contractor" required="">
@@ -55,34 +55,83 @@
 
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="group">Tender Amount<span class="text-danger">*</span></label>
-                                            <input type="number" name="tender_amount" id="tender_amount"
-                                                class="form-control" placeholder="Enter Tender Amount" required="">
+                                            <label for="group">Amount Estimated<span class="text-danger">*</span></label>
+                                            <input type="number" name="amount_estimated" id="amount_estimated"
+                                                class="form-control" placeholder="Enter Amount Estimated" required="">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="group">Accepted Tender Rate (Low/High)<span
+                                            <label for="group">Above or Bellow <span
                                                     class="text-danger">*</span></label>
-                                            <input type="text" name="tender_rate" id="tender_rate" class="form-control"
+                                            <input type="text" name="above_or_bellow" id="above_or_bellow" class="form-control"
                                                 placeholder="Enter Accepted Tender Rate" required="">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="group">Tender Updated Price<span
+                                            <label for="group">Accepted Tender Value<span
                                                     class="text-danger">*</span></label>
-                                            <input type="number" name="tender_updated_price" id="tender_updated_price"
-                                                class="form-control" placeholder="Enter Tender Updated Price"
+                                            <input type="text" name="tender_value" id="tender_value" class="form-control"
+                                                placeholder="Enter Accepted Tender Value" required="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="group">Outward No (Authority of contact)<span
+                                                    class="text-danger">*</span></label>
+                                            <input type="number" name="outward_no" id="outward_no"
+                                                class="form-control" placeholder="Enter Outward No (Authority of contact)"
                                                 required="">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="group">Type of Tender/Tender NO./Proceedings Order No.<span
+                                            <label for="group">Agreement No.<span
                                                     class="text-danger">*</span></label>
-                                            <input type="text" name="type_of_tender" id="type_of_tender"
+                                            <input type="text" name="agreement_no" id="agreement_no"
                                                 class="form-control" placeholder="Enter Agreement No." required="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="group">Date of Commencement (Work Order PDF)<span
+                                                    class="text-danger">*</span></label>
+                                            <input type="file" name="date_of_commencement"
+                                                id="date_of_commencement" class="form-control"
+                                                placeholder="Enter Date of Commencement" required="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="group">Date of Completion<span
+                                                    class="text-danger">*</span></label>
+                                            <input type="date" name="date_of_completion"
+                                                id="date_of_completion" class="form-control"
+                                                placeholder="Enter Date of Completion" required="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="group">Date of Actual Completion<span
+                                                    class="text-danger">*</span></label>
+                                            <input type="date" name="date_actual_completion"
+                                                id="date_actual_completion" class="form-control"
+                                                placeholder="Enter Date of Actual Completion" required="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="group">Remark<span class="text-danger">*</span></label>
+                                            <input type="text" name="remark" id="remark"
+                                                class="form-control" placeholder="Enter Remark" required="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="group">Tender<span class="text-danger">*</span></label>
+                                            <input type="file" accept=".pdf" name="tender" id="tender" class="form-control"
+                                                 required="">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -90,57 +139,6 @@
                                             <label for="group">Tender Code<span class="text-danger">*</span></label>
                                             <input type="text" name="tender_code" id="tender_code" class="form-control"
                                                 placeholder="Enter Tender Code" required="">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="group">As Per Tender Updated Price Proposal<span
-                                                    class="text-danger">*</span></label>
-                                            <input type="number" step="0.01" name="tender_price_proposal"
-                                                id="tender_price_proposal" class="form-control"
-                                                placeholder="Enter As Per Tender Updated Price Proposal" required="">
-                                        </div>
-                                    </div>
-                                    <hr>
-
-                                    <center><label> Expenditure incurred on the Tender</label></center>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="group">At Work<span class="text-danger">*</span></label>
-                                            <input type="number" step="0.01" name="at_work" id="at_work"
-                                                class="form-control" placeholder="Enter At Work" required="">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="group">Price Increase <span class="text-danger">*</span></label>
-                                            <input type="number" step="0.01" name="price_increase" id="price_increase"
-                                                class="form-control" placeholder="Enter Price increase" required="">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="group"> Goods And Service Tax <span
-                                                    class="text-danger">*</span></label>
-                                            <input type="number" step="0.01" name="goods_service_tax"
-                                                id="goods_service_tax" class="form-control"
-                                                placeholder="Enter Goods And Service Tax" required="">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="group"> Total<span class="text-danger">*</span></label>
-                                            <input type="number" step="0.01" name="total" id="total"
-                                                class="form-control" placeholder="Enter Total" required="">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="group"> Grace Period<span class="text-danger">*</span></label>
-                                            <input type="text" step="0.01" name="grace_period" id="grace_period"
-                                                class="form-control" placeholder="Enter Grace Period" required="">
                                         </div>
                                     </div>
                                 </div>

@@ -50,7 +50,7 @@ if (isset($_GET['pe_id']) && is_numeric($_GET['pe_id'])) {
                                                 <label for="placeholderInput" class="form-label"> Month <span
                                                         class="text-danger">*</span></label>
                                                 <input type="month" class="form-control" name="month"
-                                                    value="<?php echo date('Y-m'); ?>" placeholder="Enter month-year"
+                                                    value="<?php echo date($price_escalation['month']) ?>" placeholder="Enter month-year"
                                                     required>
                                             </div>
                                         </div>
